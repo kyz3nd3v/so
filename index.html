@@ -1524,6 +1524,26 @@
                 groups[cat].push({ name, ...item });
             }
 
+            // Urutkan item di setiap kategori secara abjad (A-Z), dengan prioritas untuk "Coffe Beans" dan "Fresh Milk"
+            for (const cat in groups) {
+                groups[cat].sort((a, b) => {
+                    // Definisikan daftar item prioritas
+                    const priorityItems = ['Coffe Beans', 'Fresh Milk'];
+                    const aIsPriority = priorityItems.includes(a.name);
+                    const bIsPriority = priorityItems.includes(b.name);
+
+                    // Jika keduanya prioritas atau keduanya bukan prioritas, urutkan abjad
+                    if (aIsPriority === bIsPriority) {
+                        return a.name.localeCompare(b.name);
+                    }
+
+                    // Jika 'a' prioritas dan 'b' bukan, 'a' harus di atas
+                    if (aIsPriority) return -1;
+                    // Jika 'b' prioritas dan 'a' bukan, 'b' harus di atas
+                    return 1;
+                });
+            }
+
             let html = '';
             const categoryOrder = ['Urgent Stock', 'FIND', 'SYRUP', 'EQUIPMENT', 'Umum'];
             const sortedCats = Object.keys(groups).sort((a, b) => {
@@ -1895,6 +1915,22 @@
                 const cat = item.category || 'Umum';
                 if (!groups[cat]) groups[cat] = [];
                 groups[cat].push({ name, qty: item.qty || '1' });
+            }
+
+            // Urutkan item di setiap kategori secara abjad (A-Z), dengan prioritas untuk "Coffe Beans" dan "Fresh Milk"
+            for (const cat in groups) {
+                groups[cat].sort((a, b) => {
+                    const priorityItems = ['Coffe Beans', 'Fresh Milk'];
+                    const aIsPriority = priorityItems.includes(a.name);
+                    const bIsPriority = priorityItems.includes(b.name);
+
+                    if (aIsPriority === bIsPriority) {
+                        return a.name.localeCompare(b.name);
+                    }
+
+                    if (aIsPriority) return -1;
+                    return 1;
+                });
             }
 
             const categoryOrder = ['Urgent Stock', 'FIND', 'SYRUP', 'EQUIPMENT', 'Umum'];
