@@ -1349,10 +1349,10 @@
         }
 
         .order-image-paper {
-            background: var(--card);
+            background: #ffffff;
             padding: 16px 16px;
             border-radius: 12px;
-            box-shadow: inset 0 0 0 1px var(--divider);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
             margin-bottom: 10px;
             font-family: var(--font);
             transition: var(--theme-transition);
@@ -1362,36 +1362,54 @@
             max-height: 500px;
             width: 100%;
             border-radius: 16px;
+            color: #1c1c1e;
+        }
+
+        body.dark .order-image-paper {
+            background: #2c2c2e;
+            color: #f5f5f7;
         }
 
         .order-image-paper .order-header {
             text-align: center;
-            border-bottom: 2px solid var(--text);
+            border-bottom: 2px solid #1c1c1e;
             padding-bottom: 6px;
             margin-bottom: 8px;
+        }
+
+        body.dark .order-image-paper .order-header {
+            border-bottom-color: #f5f5f7;
         }
 
         .order-image-paper .order-header h3 {
             font-size: 16px;
             font-weight: 700;
-            color: var(--text);
+            color: #1c1c1e;
             letter-spacing: 0.5px;
+        }
+
+        body.dark .order-image-paper .order-header h3 {
+            color: #f5f5f7;
         }
 
         .order-image-paper .order-header .date {
             font-size: 11px;
-            color: var(--muted);
+            color: #8e8e93;
         }
 
         .order-image-paper .order-cat {
             font-size: 10px;
             font-weight: 700;
-            color: var(--muted);
+            color: #8e8e93;
             text-transform: uppercase;
-            border-bottom: 0.5px solid var(--divider);
+            border-bottom: 0.5px solid rgba(0,0,0,0.06);
             padding: 4px 0 2px;
             margin-top: 4px;
             letter-spacing: 0.5px;
+        }
+
+        body.dark .order-image-paper .order-cat {
+            border-bottom-color: rgba(255,255,255,0.08);
         }
 
         .order-image-paper .order-item-print {
@@ -1399,7 +1417,11 @@
             justify-content: space-between;
             padding: 4px 0;
             font-size: 13px;
-            border-bottom: 0.5px solid var(--divider);
+            border-bottom: 0.5px solid rgba(0,0,0,0.06);
+        }
+
+        body.dark .order-image-paper .order-item-print {
+            border-bottom-color: rgba(255,255,255,0.08);
         }
 
         .order-image-paper .order-item-print:last-child {
@@ -1408,36 +1430,35 @@
 
         .order-image-paper .order-item-print .name {
             font-weight: 500;
-            color: var(--text);
+            color: #1c1c1e;
+        }
+
+        body.dark .order-image-paper .order-item-print .name {
+            color: #f5f5f7;
         }
 
         .order-image-paper .order-item-print .qty {
             font-weight: 600;
-            color: var(--muted);
+            color: #8e8e93;
         }
 
         .order-image-paper .order-empty {
             text-align: center;
-            color: var(--muted);
+            color: #8e8e93;
             padding: 30px 0;
         }
 
         .order-image-paper .order-footer {
             text-align: center;
             font-size: 8px;
-            color: var(--muted);
-            border-top: 1px solid var(--divider);
+            color: #8e8e93;
+            border-top: 1px solid rgba(0,0,0,0.06);
             padding-top: 6px;
             margin-top: 8px;
         }
 
-        /* dynamic font size for order image */
-        .order-image-paper .order-item-print .name {
-            font-size: 13px;
-        }
-
-        .order-image-paper .order-item-print .qty {
-            font-size: 13px;
+        body.dark .order-image-paper .order-footer {
+            border-top-color: rgba(255,255,255,0.08);
         }
 
         /* ===== CONFIRM TIMER ===== */
@@ -2119,11 +2140,11 @@
                 return;
             }
 
-            // Filter out EQUIPMENT
-            const filteredItems = items.filter(item => item.category !== 'EQUIPMENT');
+            // Show all items including EQUIPMENT
+            const filteredItems = items;
 
             if (!filteredItems.length) {
-                container.innerHTML = `<div class="empty-state" id="orderEmptyState"><span class="big">—</span>Tidak ada item order (EQUIPMENT tidak ditampilkan).</div>`;
+                container.innerHTML = `<div class="empty-state" id="orderEmptyState"><span class="big">—</span>Tidak ada item order.</div>`;
                 return;
             }
 
@@ -2439,9 +2460,9 @@
             const items = getOrderItems();
             if (!items.length) return 'Tidak ada item order.';
 
-            // Filter out EQUIPMENT
-            const filteredItems = items.filter(item => item.category !== 'EQUIPMENT');
-            if (!filteredItems.length) return 'Tidak ada item order (EQUIPMENT tidak ditampilkan).';
+            // Show all items including EQUIPMENT
+            const filteredItems = items;
+            if (!filteredItems.length) return 'Tidak ada item order.';
 
             const now = new Date();
             const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
@@ -2506,11 +2527,11 @@
             const items = getOrderItems();
             const container = document.getElementById('orderImageContent');
 
-            // Filter out EQUIPMENT
-            const filteredItems = items.filter(item => item.category !== 'EQUIPMENT');
+            // Show all items including EQUIPMENT
+            const filteredItems = items;
 
             if (!filteredItems.length) {
-                container.innerHTML = `<div class="order-empty">Tidak ada item order (EQUIPMENT tidak ditampilkan).</div>`;
+                container.innerHTML = `<div class="order-empty">Tidak ada item order.</div>`;
                 document.getElementById('orderImageModal').classList.add('open');
                 return;
             }
@@ -2599,7 +2620,7 @@
                 const canvas = await html2canvas(paper, {
                     scale: 2,
                     useCORS: true,
-                    backgroundColor: getTheme() === 'dark' ? '#2c2c2e' : '#ffffff',
+                    backgroundColor: '#ffffff',
                     logging: false,
                     allowTaint: true,
                     width: paper.scrollWidth,
@@ -2619,6 +2640,11 @@
                 roundedCanvas.width = w;
                 roundedCanvas.height = h;
 
+                // Draw white background first
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, w, h);
+
+                // Clip rounded rect
                 ctx.beginPath();
                 ctx.moveTo(radius, 0);
                 ctx.lineTo(w - radius, 0);
@@ -2652,8 +2678,7 @@
 
         function saveOrderAsImage() {
             const items = getOrderItems();
-            const filtered = items.filter(item => item.category !== 'EQUIPMENT');
-            if (!filtered.length) {
+            if (!items.length) {
                 showToast('Tidak ada item order untuk disimpan.', 'error');
                 return;
             }
