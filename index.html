@@ -3,54 +3,33 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
-    <title>KafeBot · Stock</title>
+    <title>KafeBot · Cetak</title>
     <style>
-        /* ===== RESET & ROOT ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
 
         :root {
             --bg: #f5f5f7;
             --card: #ffffff;
-            --card-border: rgba(60, 60, 67, 0.08);
             --text: #1c1c1e;
-            --text-secondary: #3a3a3c;
             --muted: #8e8e93;
             --accent: #007aff;
-            --accent-pressed: #0066d9;
-            --danger: #ff3b30;
-            --success: #34c759;
-            --gold: #ff9500;
+            --divider: rgba(0,0,0,0.06);
             --radius: 14px;
             --shadow: 0 1px 6px rgba(0,0,0,0.04), 0 2px 16px rgba(0,0,0,0.04);
             --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
             --safe-bottom: env(safe-area-inset-bottom, 16px);
-            --input-bg: #f8f8fc;
-            --modal-bg: #ffffff;
-            --badge-bg: #f2f2f7;
-            --divider: rgba(0,0,0,0.06);
-            --hover-bg: rgba(0,0,0,0.04);
         }
 
         body.dark {
             --bg: #1c1c1e;
             --card: #2c2c2e;
-            --card-border: rgba(255,255,255,0.08);
             --text: #f5f5f7;
-            --text-secondary: #e5e5ea;
             --muted: #8e8e93;
-            --accent: #0a84ff;
-            --accent-pressed: #409cff;
-            --shadow: 0 1px 6px rgba(0,0,0,0.3), 0 2px 16px rgba(0,0,0,0.2);
-            --input-bg: #3a3a3c;
-            --modal-bg: #2c2c2e;
-            --badge-bg: #3a3a3c;
             --divider: rgba(255,255,255,0.08);
-            --hover-bg: rgba(255,255,255,0.06);
         }
 
         body {
@@ -58,7 +37,7 @@
             color: var(--text);
             font-family: var(--font);
             min-height: 100vh;
-            padding: 0 12px 20px;
+            padding: 16px;
             display: flex;
             justify-content: center;
             -webkit-font-smoothing: antialiased;
@@ -67,7 +46,6 @@
         .app {
             max-width: 480px;
             width: 100%;
-            padding-top: 6px;
         }
 
         /* ===== HEADER ===== */
@@ -75,8 +53,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 0 12px;
-            margin-bottom: 14px;
+            padding: 12px 0 16px;
+            margin-bottom: 8px;
         }
 
         .header-left {
@@ -97,15 +75,12 @@
             font-weight: 600;
             color: #fff;
             flex-shrink: 0;
-            letter-spacing: -0.2px;
-            box-shadow: 0 2px 10px rgba(0,122,255,0.18);
         }
 
         .header-info h1 {
             font-size: 20px;
             font-weight: 700;
             letter-spacing: -0.3px;
-            line-height: 1.2;
             color: var(--text);
         }
 
@@ -118,31 +93,25 @@
         .header-right {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .clock {
             font-size: 14px;
             font-weight: 500;
             color: var(--text);
-            letter-spacing: 0.2px;
-            font-variant-numeric: tabular-nums;
-            background: var(--badge-bg);
+            background: rgba(60,60,67,0.08);
             padding: 4px 12px;
             border-radius: 999px;
-            border: 0.5px solid var(--divider);
         }
 
-        /* ===== THEME TOGGLE ===== */
         .theme-toggle {
             width: 52px;
             height: 30px;
             border-radius: 999px;
-            background: var(--badge-bg);
+            background: rgba(60,60,67,0.08);
             border: 0.5px solid var(--divider);
             cursor: pointer;
-            position: relative;
-            flex-shrink: 0;
             padding: 2px;
         }
 
@@ -155,9 +124,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
             color: #fff;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            font-size: 13px;
         }
 
         .theme-toggle.dark .thumb {
@@ -174,12 +142,12 @@
 
         /* ===== CARD ===== */
         .card {
-            padding: 18px 16px 18px;
-            margin-bottom: 14px;
             background: var(--card);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            border: 0.5px solid var(--card-border);
+            border: 0.5px solid var(--divider);
+            padding: 16px;
+            margin-bottom: 12px;
         }
 
         .card-title {
@@ -190,92 +158,24 @@
             gap: 8px;
             margin-bottom: 2px;
             color: var(--text);
-            letter-spacing: -0.2px;
-        }
-
-        .card-title .badge-count {
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--muted);
-            background: var(--badge-bg);
-            padding: 0 10px;
-            border-radius: 999px;
-            border: 0.5px solid var(--divider);
-            line-height: 20px;
         }
 
         .card-desc {
             font-size: 13px;
             color: var(--muted);
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             line-height: 1.5;
-            font-weight: 400;
         }
 
-        .card-desc strong {
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        /* ===== FORM ===== */
-        .field {
-            margin-bottom: 10px;
-        }
-
-        .field label {
-            display: block;
+        .badge {
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--muted);
-            margin-bottom: 4px;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-        }
-
-        .input,
-        .select {
-            width: 100%;
-            padding: 11px 14px;
-            border: 1.5px solid var(--divider);
-            border-radius: 10px;
-            background: var(--input-bg);
-            font-size: 15px;
-            color: var(--text);
-            outline: none;
-            font-family: var(--font);
-            -webkit-appearance: none;
-            appearance: none;
-        }
-
-        .input:focus,
-        .select:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(0,122,255,0.1);
-            background: var(--card);
-        }
-
-        .input::placeholder {
-            color: #b0b0b8;
-        }
-
-        .select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238e8e93' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 14px center;
-            padding-right: 36px;
-        }
-
-        body.dark .select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238e8e93' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-        }
-
-        .row {
-            display: flex;
-            gap: 10px;
-        }
-
-        .row .btn {
-            flex: 1;
+            background: rgba(60,60,67,0.08);
+            padding: 0 10px;
+            border-radius: 999px;
+            border: 0.5px solid var(--divider);
+            line-height: 20px;
         }
 
         /* ===== BUTTONS ===== */
@@ -291,10 +191,8 @@
             font-weight: 600;
             font-family: var(--font);
             cursor: pointer;
-            transition: transform 0.12s, background 0.2s, box-shadow 0.2s;
+            transition: transform 0.12s, background 0.2s;
             width: 100%;
-            letter-spacing: 0.1px;
-            line-height: 1.4;
         }
 
         .btn:active {
@@ -307,54 +205,15 @@
             box-shadow: 0 2px 10px rgba(0,122,255,0.2);
         }
 
-        .btn-primary:hover {
-            background: var(--accent-pressed);
-        }
-
         .btn-secondary {
-            background: var(--badge-bg);
+            background: rgba(60,60,67,0.08);
             color: var(--text);
             border: 0.5px solid var(--divider);
         }
 
-        .btn-secondary:hover {
-            background: var(--hover-bg);
-        }
-
         .btn-success {
-            background: var(--success);
+            background: #34c759;
             color: #fff;
-            box-shadow: 0 2px 10px rgba(52,199,89,0.2);
-        }
-
-        .btn-success:hover {
-            background: #28a745;
-        }
-
-        .btn-danger {
-            background: var(--danger);
-            color: #fff;
-            box-shadow: 0 2px 10px rgba(255,59,48,0.15);
-        }
-
-        .btn-danger:hover {
-            background: #d63031;
-        }
-
-        .btn-danger:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .btn-whatsapp {
-            background: #25d366;
-            color: #fff;
-            box-shadow: 0 2px 10px rgba(37,211,102,0.2);
-        }
-
-        .btn-whatsapp:hover {
-            background: #1da851;
         }
 
         .btn-sm {
@@ -362,400 +221,244 @@
             font-size: 12px;
             width: auto;
             border-radius: 8px;
-            font-weight: 500;
         }
 
-        .btn-block {
-            width: 100%;
-        }
-
-        .btn:disabled {
-            opacity: 0.45;
-            pointer-events: none;
-        }
-
-        /* ===== CAFE NAME ===== */
-        .cafe-name-display {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text);
-            background: var(--badge-bg);
-            padding: 6px 16px;
-            border-radius: 999px;
-            display: inline-block;
-            border: 0.5px solid var(--divider);
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .cafe-name-display:hover {
-            background: var(--hover-bg);
-        }
-
-        .cafe-name-display .edit-hint {
-            font-size: 10px;
-            font-weight: 400;
-            color: var(--muted);
-            margin-left: 4px;
-            opacity: 0.5;
-        }
-
-        .cafe-actions {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .cafe-actions .btn {
-            flex: 0 1 auto;
-            padding: 6px 14px;
-            font-size: 12px;
-            font-weight: 500;
-            border-radius: 8px;
-        }
-
-        .btn-save-cafe {
-            background: #5856d6;
-            color: #fff;
-            box-shadow: 0 2px 8px rgba(88,86,214,0.16);
-        }
-
-        .btn-save-cafe:hover {
-            background: #4a49b8;
-        }
-
-        .btn-load-cafe {
-            background: #ff9f0a;
-            color: #fff;
-            box-shadow: 0 2px 8px rgba(255,159,10,0.16);
-        }
-
-        .btn-load-cafe:hover {
-            background: #e68a00;
-        }
-
-        /* ===== CATEGORY TABS ===== */
-        .category-tabs {
-            display: flex;
-            gap: 6px;
-            overflow-x: auto;
-            padding: 4px 0 10px;
-            margin-bottom: 4px;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-
-        .category-tabs::-webkit-scrollbar {
-            display: none;
-        }
-
-        .category-tabs .tab-btn {
-            flex: 0 0 auto;
-            padding: 6px 16px;
-            border-radius: 20px;
-            border: 1px solid var(--divider);
-            background: var(--badge-bg);
-            color: var(--muted);
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
-            font-family: var(--font);
-        }
-
-        .category-tabs .tab-btn.active {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-            box-shadow: 0 2px 8px rgba(0,122,255,0.2);
-        }
-
-        .category-tabs .tab-btn .count {
-            font-size: 10px;
-            opacity: 0.6;
-            margin-left: 4px;
-        }
-
-        .category-tabs .tab-btn:active {
-            transform: scale(0.94);
-        }
-
-        /* ===== SEARCH BAR ===== */
-        .search-bar {
+        .row {
             display: flex;
             gap: 8px;
-            margin-bottom: 10px;
         }
+        .row .btn { flex: 1; }
 
-        .search-bar .input {
-            flex: 1;
-            padding: 8px 12px;
-            font-size: 13px;
-        }
-
-        .search-bar .btn {
-            flex: 0 0 auto;
-            padding: 8px 14px;
-            font-size: 13px;
-            width: auto;
-        }
-
-        .search-bar .btn-clear {
-            background: none;
-            border: 1px solid var(--divider);
-            color: var(--muted);
-            padding: 8px 10px;
-            font-size: 14px;
-        }
-
-        .search-bar .btn-clear:hover {
-            background: var(--hover-bg);
-        }
-
-        /* ===== STOCK LIST ===== */
-        .stock-group {
-            margin-top: 4px;
-        }
-
-        .stock-group:first-child {
-            margin-top: 0;
-        }
-
-        .stock-group-header {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            padding: 4px 0 6px;
-            border-bottom: 0.5px solid var(--divider);
-            margin-bottom: 4px;
-        }
-
-        .stock-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 9px 0;
-            border-bottom: 0.5px solid var(--divider);
-        }
-
-        .stock-item:last-child {
-            border-bottom: 0;
-        }
-
-        .stock-item .name {
-            flex: 1;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text);
-            letter-spacing: -0.1px;
-        }
-
-        .stock-item .qty-badge {
-            font-size: 13px;
-            font-weight: 600;
-            padding: 2px 14px;
-            border-radius: 999px;
-            background: var(--badge-bg);
-            color: var(--text);
-            cursor: pointer;
-            transition: background 0.2s, transform 0.12s;
-            border: 0.5px solid var(--divider);
-            min-width: 40px;
-            text-align: center;
-            user-select: none;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .stock-item .qty-badge:active {
-            transform: scale(0.92);
-            background: rgba(0,122,255,0.08);
-        }
-
-        .stock-item .qty-badge.quarter {
-            background: rgba(255,149,0,0.10);
-            color: var(--gold);
-            border-color: rgba(255,149,0,0.08);
-        }
-
-        .stock-item .qty-badge.empty-stock {
-            background: rgba(255,59,48,0.12);
-            color: var(--danger);
-            border-color: rgba(255,59,48,0.15);
-            text-decoration: line-through;
-        }
-
-        body.dark .stock-item .qty-badge.quarter {
-            background: rgba(255,149,0,0.15);
-        }
-
-        body.dark .stock-item .qty-badge.empty-stock {
-            background: rgba(255,59,48,0.2);
-        }
-
-        .stock-item .actions {
-            display: flex;
-            gap: 2px;
-            align-items: center;
-        }
-
-        .stock-item .actions .del {
-            background: none;
-            border: 0;
-            color: var(--muted);
-            font-size: 16px;
-            cursor: pointer;
-            padding: 0 4px;
-            transition: color 0.15s, transform 0.12s;
-            line-height: 1;
-            font-weight: 300;
-        }
-
-        .stock-item .actions .del:active {
-            transform: scale(0.88);
-        }
-
-        .stock-item .actions .del:hover {
-            color: var(--danger);
-        }
-
-        .stock-item .actions .quick-empty {
-            background: none;
-            border: 1px solid var(--divider);
-            border-radius: 4px;
-            padding: 0 6px;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--muted);
-            cursor: pointer;
-            transition: all 0.15s;
-            line-height: 18px;
-        }
-
-        .stock-item .actions .quick-empty:hover {
-            border-color: var(--danger);
-            color: var(--danger);
-            background: rgba(255,59,48,0.05);
-        }
-
-        .stock-item .actions .quick-empty:active {
-            transform: scale(0.92);
-        }
-
-        .stock-item .actions .quick-empty.empty-active {
-            border-color: var(--danger);
-            color: var(--danger);
-            background: rgba(255,59,48,0.08);
-        }
-
-        .stock-item .actions .priority-btn {
-            background: none;
-            border: 1px solid var(--divider);
-            border-radius: 4px;
-            padding: 0 6px;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--muted);
-            cursor: pointer;
-            transition: all 0.15s;
-            line-height: 18px;
-        }
-
-        .stock-item .actions .priority-btn.priority-active {
-            border-color: var(--gold);
-            color: var(--gold);
-            background: rgba(255,149,0,0.08);
-        }
-
-        .stock-item .actions .priority-btn:active {
-            transform: scale(0.92);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 28px 10px;
-            color: var(--muted);
-            font-size: 14px;
-            font-weight: 400;
-        }
-
-        .empty-state .big {
-            font-size: 30px;
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 300;
-            opacity: 0.4;
-        }
-
-        /* ===== ORDER LIST ===== */
-        .order-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 4px 0;
-            border-bottom: 0.5px solid var(--divider);
-        }
-
-        .order-item:last-child {
-            border-bottom: 0;
-        }
-
-        .order-item .name {
-            flex: 1;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text);
-            letter-spacing: -0.1px;
-        }
-
-        .order-item .qty {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--muted);
-            background: var(--badge-bg);
-            padding: 2px 14px;
-            border-radius: 999px;
-            font-variant-numeric: tabular-nums;
-            flex-shrink: 0;
-            margin-left: 8px;
-        }
-
-        .order-item .qty.empty-order {
-            background: rgba(255,59,48,0.12);
-            color: var(--danger);
-        }
-
-        #orderListContainer .scroll-area {
-            max-height: 320px;
+        /* ===== PRINT PAPER ===== */
+        .print-paper {
+            background: var(--card);
+            padding: 20px 16px;
+            border-radius: 12px;
+            box-shadow: inset 0 0 0 1px var(--divider);
+            margin-bottom: 12px;
+            font-family: var(--font);
+            min-height: 300px;
+            max-height: 520px;
             overflow-y: auto;
-            padding-right: 4px;
         }
 
-        #orderListContainer .scroll-area::-webkit-scrollbar {
+        .print-paper::-webkit-scrollbar {
             width: 4px;
         }
-
-        #orderListContainer .scroll-area::-webkit-scrollbar-track {
-            background: var(--badge-bg);
+        .print-paper::-webkit-scrollbar-track {
+            background: rgba(60,60,67,0.06);
             border-radius: 99px;
         }
-
-        #orderListContainer .scroll-area::-webkit-scrollbar-thumb {
+        .print-paper::-webkit-scrollbar-thumb {
             background: var(--muted);
             border-radius: 99px;
             opacity: 0.3;
         }
 
-        #orderListContainer .many-items .order-item .name {
-            font-size: 12px;
+        /* ===== STOCK PRINT STYLE ===== */
+        .stock-print-header {
+            text-align: center;
+            border-bottom: 2px solid var(--text);
+            padding-bottom: 6px;
+            margin-bottom: 10px;
         }
 
-        #orderListContainer .many-items .order-item .qty {
-            font-size: 11px;
-            padding: 1px 10px;
+        .stock-print-header h2 {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text);
+            text-transform: uppercase;
         }
+
+        .stock-print-header .date {
+            font-size: 11px;
+            color: var(--muted);
+            font-weight: 500;
+            margin-top: 2px;
+            letter-spacing: 0.3px;
+        }
+
+        .stock-print-category {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 6px 0 3px;
+            border-bottom: 0.5px solid var(--divider);
+            margin-top: 6px;
+        }
+
+        .stock-print-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 13px;
+            border-bottom: 0.5px solid var(--divider);
+        }
+
+        .stock-print-item:last-child {
+            border-bottom: 0;
+        }
+
+        .stock-print-item .name {
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .stock-print-item .qty {
+            font-weight: 600;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stock-print-item .qty.empty {
+            color: #ff3b30;
+            text-decoration: line-through;
+        }
+
+        .stock-print-footer {
+            text-align: center;
+            font-size: 8px;
+            color: var(--muted);
+            border-top: 1px solid var(--divider);
+            padding-top: 6px;
+            margin-top: 10px;
+            opacity: 0.5;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== ORDER PRINT STYLE ===== */
+        .order-print-header {
+            text-align: center;
+            border-bottom: 2px solid var(--text);
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+        }
+
+        .order-print-header h2 {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text);
+            text-transform: uppercase;
+        }
+
+        .order-print-header .date {
+            font-size: 11px;
+            color: var(--muted);
+            font-weight: 500;
+            margin-top: 2px;
+            letter-spacing: 0.3px;
+        }
+
+        .order-print-category {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 6px 0 3px;
+            border-bottom: 0.5px solid var(--divider);
+            margin-top: 6px;
+        }
+
+        .order-print-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 13px;
+            border-bottom: 0.5px solid var(--divider);
+        }
+
+        .order-print-item:last-child {
+            border-bottom: 0;
+        }
+
+        .order-print-item .name {
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .order-print-item .qty {
+            font-weight: 600;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .order-print-item .qty.empty-order {
+            color: #ff3b30;
+        }
+
+        .order-print-footer {
+            text-align: center;
+            font-size: 8px;
+            color: var(--muted);
+            border-top: 1px solid var(--divider);
+            padding-top: 6px;
+            margin-top: 10px;
+            opacity: 0.5;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            border: 0.5px solid var(--divider);
+            max-height: 94vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-box .title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 2px;
+            color: var(--text);
+            flex-shrink: 0;
+        }
+
+        .modal-box .desc {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 12px;
+            line-height: 1.5;
+            flex-shrink: 0;
+        }
+
+        .modal-box .row {
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        .modal-box .row .btn { flex: 1; }
 
         /* ===== TOAST ===== */
         .toast {
@@ -785,540 +488,48 @@
             pointer-events: auto;
         }
 
-        .toast.success {
-            background: rgba(52,199,89,0.92);
-        }
+        .toast.success { background: rgba(52,199,89,0.92); }
+        .toast.error { background: rgba(255,59,48,0.92); }
 
-        .toast.error {
-            background: rgba(255,59,48,0.92);
-        }
-
-        /* ===== MODAL ===== */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.25);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            z-index: 100;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-
-        .modal-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-box {
-            background: var(--modal-bg);
-            border-radius: 20px;
-            padding: 24px 20px 20px;
-            max-width: 480px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-            transform: translateY(24px) scale(0.96);
-            transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-            border: 0.5px solid var(--card-border);
-            max-height: 94vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .modal-overlay.open .modal-box {
-            transform: translateY(0) scale(1);
-        }
-
-        .modal-box .title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 2px;
-            color: var(--text);
-            letter-spacing: -0.2px;
-            flex-shrink: 0;
-        }
-
-        .modal-box .desc {
-            font-size: 14px;
-            color: var(--muted);
-            margin-bottom: 12px;
-            line-height: 1.5;
-            flex-shrink: 0;
-        }
-
-        .modal-box .field {
-            margin-bottom: 12px;
-        }
-
-        .modal-box .row {
-            margin-top: 4px;
-            flex-shrink: 0;
-        }
-
-        .modal-box .row .btn {
-            flex: 1;
-        }
-
-        .qty-quick {
-            display: flex;
-            gap: 6px;
-            margin-top: 4px;
-        }
-
-        .qty-quick .btn {
-            flex: 1;
-            padding: 5px 10px;
-            font-size: 13px;
-            background: var(--badge-bg);
-            color: var(--text);
-            border: 0.5px solid var(--divider);
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .qty-quick .btn:active {
-            transform: scale(0.94);
-            background: var(--hover-bg);
-        }
-
-        /* ===== MISC ===== */
-        .hidden {
-            display: none !important;
-        }
-
-        .subtle-divider {
-            height: 0.5px;
-            background: var(--divider);
-            margin: 10px 0 12px;
-        }
-
-        .action-row {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        .action-row .btn {
-            flex: 1;
-            min-width: 70px;
-        }
-
-        .order-action-row {
-            display: flex;
-            gap: 6px;
-            margin-top: 10px;
-            justify-content: flex-end;
-            flex-wrap: wrap;
-        }
-
-        .order-action-row .btn {
-            flex: 0 1 auto;
-            min-width: 70px;
-        }
-
-        .badge-order {
-            background: var(--accent);
-            color: #fff;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 1px 10px;
-            border-radius: 999px;
-            margin-left: 4px;
-            line-height: 20px;
-        }
-
-        .card-title .badge-stock {
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--muted);
-            background: var(--badge-bg);
-            padding: 0 10px;
-            border-radius: 999px;
-            border: 0.5px solid var(--divider);
-            line-height: 20px;
-        }
-
-        .cafe-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .cafe-row .cafe-name-display {
-            flex: 0 1 auto;
-        }
-
-        .cafe-row .cafe-actions {
-            flex: 1;
-            justify-content: flex-end;
-        }
-
-        .footer {
-            text-align: center;
-            color: var(--muted);
-            font-size: 11px;
-            margin-top: 16px;
-            padding-bottom: calc(4px + var(--safe-bottom));
-            opacity: 0.5;
-            letter-spacing: 0.2px;
-        }
-
-        .confirm-timer {
-            font-size: 40px;
-            font-weight: 700;
-            color: var(--danger);
-            text-align: center;
-            padding: 6px 0;
-            letter-spacing: -1px;
-        }
-
-        .reset-confirm-desc {
-            font-size: 14px;
-            color: var(--muted);
-            margin-bottom: 8px;
-            line-height: 1.5;
-        }
-
-        .reset-confirm-desc strong {
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        #fileInput {
-            display: none;
-        }
-
-        .btn-save-image {
-            background: #34c759;
-            color: #fff;
-            box-shadow: 0 2px 10px rgba(52,199,89,0.2);
-        }
-
-        .btn-save-image:hover {
-            background: #28a745;
-        }
-
-        .print-paper {
-            background: var(--card);
-            padding: 16px 14px;
-            border-radius: 8px;
-            box-shadow: inset 0 0 0 1px var(--divider);
-            margin-bottom: 10px;
-            font-family: var(--font);
-            flex: 1;
-            overflow: hidden;
-            position: relative;
-            min-height: 300px;
-            max-height: 500px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .print-paper .paper-header {
-            text-align: center;
-            border-bottom: 2px solid var(--text);
-            padding-bottom: 4px;
-            margin-bottom: 6px;
-            flex-shrink: 0;
-        }
-
-        .print-paper .paper-header h2 {
-            font-size: 17px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            color: var(--text);
-            text-transform: uppercase;
-        }
-
-        .print-paper .paper-header .date {
-            font-size: 11px;
-            color: var(--muted);
-            font-weight: 500;
-            margin-top: 1px;
-            letter-spacing: 0.3px;
-        }
-
-        .print-paper .paper-content {
-            overflow: hidden;
-            position: relative;
-            flex: 1;
-            min-height: 0;
-        }
-
-        .print-paper .paper-content .slide-wrapper {
-            display: flex;
-            transition: transform 0.3s ease;
-            height: 100%;
-        }
-
-        .print-paper .slide-page {
-            min-width: 100%;
-            padding: 2px 0;
-            overflow-y: auto;
-            height: 100%;
-        }
-
-        .print-paper .slide-page::-webkit-scrollbar {
-            width: 3px;
-        }
-
-        .print-paper .slide-page::-webkit-scrollbar-thumb {
-            background: var(--muted);
-            border-radius: 99px;
-        }
-
-        .print-paper .paper-item {
-            display: flex;
-            align-items: center;
-            padding: 3px 0;
-            font-size: 13px;
-            border-bottom: 0.5px solid var(--divider);
-        }
-
-        .print-paper .paper-item:last-child {
-            border-bottom: 0;
-        }
-
-        .print-paper .paper-item .num {
-            font-weight: 600;
-            color: var(--muted);
-            margin-right: 8px;
-            font-size: 12px;
-            min-width: 28px;
-            opacity: 0.6;
-            flex-shrink: 0;
-        }
-
-        .print-paper .paper-item .name {
-            font-weight: 500;
-            color: var(--text);
-            font-size: 13px;
-            flex: 1;
-        }
-
-        .print-paper .paper-item .qty {
-            font-weight: 600;
-            color: var(--muted);
-            font-size: 13px;
-            min-width: 30px;
-            text-align: right;
-            flex-shrink: 0;
-        }
-
-        .print-paper .paper-item .qty.empty-print {
-            color: var(--muted);
-            text-decoration: line-through;
-        }
-
-        .print-paper .paper-empty {
-            text-align: center;
-            color: var(--muted);
-            padding: 20px 0;
-            font-size: 14px;
-        }
-
-        .print-paper .paper-footer {
-            text-align: center;
-            font-size: 8px;
-            color: var(--muted);
-            border-top: 1px solid var(--divider);
-            padding-top: 4px;
-            margin-top: 4px;
-            opacity: 0.6;
-            flex-shrink: 0;
-        }
-
-        .print-paper .slide-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            padding: 6px 0 2px;
-            flex-shrink: 0;
-        }
-
-        .print-paper .slide-indicators .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--divider);
-            cursor: pointer;
-            border: none;
-            padding: 0;
-            flex-shrink: 0;
-        }
-
-        .print-paper .slide-indicators .dot.active {
-            background: var(--accent);
-            width: 20px;
-            border-radius: 4px;
-        }
-
-        .print-paper .slide-nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 8px 0 2px;
-            gap: 12px;
-            border-top: 1px solid var(--divider);
-            margin-top: 4px;
-            flex-shrink: 0;
-        }
-
-        .print-paper .slide-nav .nav-btn {
-            background: var(--accent);
-            border: none;
-            border-radius: 10px;
-            padding: 8px 16px;
-            font-size: 14px;
-            font-weight: 700;
-            color: #fff;
-            cursor: pointer;
-            flex-shrink: 0;
-            min-width: 60px;
-            box-shadow: 0 2px 8px rgba(0,122,255,0.25);
-        }
-
-        .print-paper .slide-nav .nav-btn:active {
-            transform: scale(0.94);
-        }
-
-        .print-paper .slide-nav .nav-btn:disabled {
-            opacity: 0.35;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .print-paper .slide-nav .page-info {
-            font-size: 14px;
-            color: var(--text);
-            font-weight: 700;
-            background: var(--badge-bg);
-            padding: 4px 18px;
-            border-radius: 12px;
-            border: 0.5px solid var(--divider);
-            min-width: 60px;
-            text-align: center;
-        }
-
-        .order-image-paper {
-            background: var(--card);
-            padding: 16px 16px;
-            border-radius: 12px;
-            box-shadow: inset 0 0 0 1px var(--divider);
-            margin-bottom: 10px;
-            font-family: var(--font);
-            flex: 1;
-            overflow-y: auto;
-            min-height: 200px;
-            max-height: 500px;
-            width: 100%;
-            border-radius: 16px;
-        }
-
-        .order-image-paper .order-header {
-            text-align: center;
-            border-bottom: 2px solid var(--text);
-            padding-bottom: 6px;
-            margin-bottom: 8px;
-        }
-
-        .order-image-paper .order-header h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: 0.5px;
-        }
-
-        .order-image-paper .order-header .date {
-            font-size: 11px;
-            color: var(--muted);
-        }
-
-        .order-image-paper .order-cat {
-            font-size: 10px;
-            font-weight: 700;
-            color: var(--muted);
-            text-transform: uppercase;
-            border-bottom: 0.5px solid var(--divider);
-            padding: 4px 0 2px;
-            margin-top: 4px;
-            letter-spacing: 0.5px;
-        }
-
-        .order-image-paper .order-item-print {
-            display: flex;
-            justify-content: space-between;
-            padding: 4px 0;
-            font-size: 13px;
-            border-bottom: 0.5px solid var(--divider);
-        }
-
-        .order-image-paper .order-item-print:last-child {
-            border-bottom: 0;
-        }
-
-        .order-image-paper .order-item-print .name {
-            font-weight: 500;
-            color: var(--text);
-        }
-
-        .order-image-paper .order-item-print .qty {
-            font-weight: 600;
-            color: var(--muted);
-        }
-
-        .order-image-paper .order-empty {
-            text-align: center;
-            color: var(--muted);
-            padding: 30px 0;
-        }
-
-        .order-image-paper .order-footer {
-            text-align: center;
-            font-size: 8px;
-            color: var(--muted);
-            border-top: 1px solid var(--divider);
-            padding-top: 6px;
-            margin-top: 8px;
-        }
+        .hidden { display: none !important; }
 
         @media (max-width: 480px) {
             .header-info h1 { font-size: 18px; }
-            .card { padding: 14px 14px 16px; }
-            .btn { font-size: 13px; padding: 9px 12px; }
-            .row { flex-wrap: wrap; }
-            .row .btn { flex: 1 1 100%; }
-            .modal-box { padding: 16px 14px 14px; }
+            .card { padding: 14px; }
+            .modal-box { padding: 16px; }
             .clock { font-size: 12px; padding: 3px 10px; }
-            .stock-item .name { font-size: 13px; }
-            .stock-item .qty-badge { font-size: 12px; padding: 2px 10px; min-width: 34px; }
-            .category-tabs .tab-btn { font-size: 11px; padding: 5px 12px; }
-            .cafe-row { flex-direction: column; align-items: stretch; gap: 8px; }
-            .cafe-row .cafe-actions { justify-content: center; }
-            .cafe-row .cafe-actions .btn { flex: 1; }
         }
 
-        .print-modal .modal-box {
-            max-width: 480px;
-            padding: 16px 16px 16px;
-            max-height: 92vh;
+        /* Tabs */
+        .tab-group {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
         }
 
-        .print-modal .row .btn {
+        .tab-group .tab-btn {
             flex: 1;
+            padding: 8px 12px;
+            border: 1px solid var(--divider);
+            border-radius: 10px;
+            background: transparent;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font);
+            transition: all 0.2s;
         }
 
-        .order-image-modal .modal-box {
-            max-width: 480px;
-            padding: 16px 16px 16px;
-            max-height: 92vh;
+        .tab-group .tab-btn.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            box-shadow: 0 2px 8px rgba(0,122,255,0.2);
+        }
+
+        .tab-group .tab-btn:active {
+            transform: scale(0.96);
         }
     </style>
 </head>
@@ -1331,12 +542,12 @@
             <div class="header-icon">K</div>
             <div class="header-info">
                 <h1 id="cafeHeaderName">KafeBot</h1>
-                <div class="sub" id="headerSub">Manajemen Stok</div>
+                <div class="sub" id="headerSub">Cetak Stok &amp; Order</div>
             </div>
         </div>
         <div class="header-right">
             <span class="clock" id="clockDisplay">00:00</span>
-            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
                 <span class="thumb" id="themeThumb">
                     <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.41 5.41 0 0 1-4.4 2.26 5.5 5.5 0 0 1-5.5-5.5c0-2.4 1.52-4.45 3.7-5.2A9.04 9.04 0 0 0 12 3z"/></svg>
                 </span>
@@ -1344,1086 +555,388 @@
         </div>
     </header>
 
-    <!-- TOAST -->
-    <div class="toast" id="toast"></div>
-
-    <!-- CAFE NAME -->
-    <div class="card">
-        <div class="card-title">Kafe</div>
-        <div class="card-desc">Nama kafe untuk identitas. Klik nama untuk mengubah.</div>
-        <div class="cafe-row">
-            <span class="cafe-name-display" id="cafeNameDisplay" onclick="openCafeNameModal()">
-                Kafe Saya <span class="edit-hint">✎</span>
-            </span>
-            <div class="cafe-actions">
-                <button class="btn btn-save-cafe" onclick="exportStockToFile()"><span class="sym">⬇</span> Simpan Stok</button>
-                <button class="btn btn-load-cafe" onclick="importStockFromFile()"><span class="sym">⬆</span> Muat Stok</button>
-            </div>
-        </div>
-        <div class="text-muted" style="text-align:center; font-size:10px; opacity:0.4; margin-top:6px;">simpan &amp; muat semua item ke/dari file .txt</div>
-        <input type="file" id="fileInput" accept=".txt" onchange="handleFileLoad(event)" />
-    </div>
-
-    <!-- STOCK MANAGEMENT -->
     <div class="card">
         <div class="card-title">
-            Stok Barang
-            <span class="badge-stock" id="stockCountBadge">0</span>
+            Cetak Stok &amp; Order
+            <span class="badge" id="itemCount">0 item</span>
         </div>
-        <div class="card-desc">Tambahkan item dengan <strong>kategori</strong> dan <strong>jumlah</strong>. Klik <strong>−</strong> untuk tandai habis.</div>
+        <div class="card-desc">Lihat daftar stok dan order dalam format cetak yang rapi.</div>
 
-        <div class="field">
-            <label>Nama Barang</label>
-            <input id="stockNameInput" class="input" placeholder="Coffe, Susu, Monin…" />
-        </div>
-        <div class="row" style="gap:8px;">
-            <div class="field" style="flex:1; margin-bottom:0;">
-                <label>Kategori</label>
-                <select id="stockCategoryInput" class="select">
-                    <option value="Umum">Umum</option>
-                    <option value="Urgent Stock">Urgent Stock</option>
-                    <option value="FIND">FIND</option>
-                    <option value="SYRUP">SYRUP</option>
-                    <option value="EQUIPMENT">EQUIPMENT</option>
-                </select>
-            </div>
-            <div class="field" style="flex:1; margin-bottom:0;">
-                <label>Jumlah</label>
-                <input id="stockQtyInput" class="input" placeholder="1, 1/2, 1/4" value="1" />
-            </div>
-        </div>
-        <div class="qty-quick">
-            <button class="btn" onclick="setQty('1')">1</button>
-            <button class="btn" onclick="setQty('1/2')">1/2</button>
-            <button class="btn" onclick="setQty('1/4')">1/4</button>
-        </div>
-        <button class="btn btn-primary btn-block" onclick="addStockItem()" style="margin-top:8px;">+ Tambah Stok</button>
-
-        <div class="subtle-divider"></div>
-
-        <div class="search-bar">
-            <input id="searchInput" class="input" placeholder="Cari item..." oninput="filterStock()" />
-            <button class="btn btn-secondary btn-sm btn-clear" onclick="clearSearch()" title="Hapus pencarian">✕</button>
+        <div class="tab-group">
+            <button class="tab-btn active" id="tabStock" onclick="switchTab('stock')">Stok</button>
+            <button class="tab-btn" id="tabOrder" onclick="switchTab('order')">Order</button>
         </div>
 
-        <div class="category-tabs" id="categoryTabs"></div>
-
-        <div id="stockListContainer">
-            <div class="empty-state"><span class="big">—</span>Tidak ada stok.<br />Tambahkan barang di atas.</div>
+        <div id="printContainer">
+            <div class="print-paper" id="printPaper"></div>
         </div>
 
-        <div class="action-row">
-            <button class="btn btn-sm btn-secondary" onclick="refreshStockList()">⟳ Segarkan</button>
-            <button class="btn btn-sm btn-secondary" onclick="openPrintModal()">⌕ Cetak</button>
-            <button class="btn btn-sm btn-danger" id="clearAllBtn" onclick="confirmClearAll()">✕ Hapus Semua</button>
+        <div class="row">
+            <button class="btn btn-primary btn-sm" onclick="saveAsImage()">⬇ Simpan Gambar</button>
+            <button class="btn btn-secondary btn-sm" onclick="refreshPrint()">⟳ Segarkan</button>
         </div>
     </div>
 
-    <!-- ORDER -->
-    <div class="card">
-        <div class="card-title">
-            Order
-            <span class="badge-order" id="orderCountBadge">0</span>
-        </div>
-        <div class="card-desc">Item yang <strong>habis</strong> (—) atau <strong>1/4</strong> otomatis masuk ke daftar order.</div>
-
-        <div id="orderListContainer">
-            <div class="empty-state" id="orderEmptyState"><span class="big">—</span>Tidak ada item order.</div>
-        </div>
-
-        <div class="order-action-row">
-            <button class="btn btn-sm btn-secondary" onclick="copyOrderText()">⌘ Salin</button>
-            <button class="btn btn-sm btn-whatsapp" onclick="shareToWhatsApp()">◆ WhatsApp</button>
-            <button class="btn btn-sm btn-save-image" onclick="saveOrderAsImage()">⬇ Simpan Gambar</button>
-        </div>
-    </div>
-
-    <div class="footer">KafeBot · built with care</div>
-
-    <!-- MODALS -->
-    <div id="cafeNameModal" class="modal-overlay">
-        <div class="modal-box">
-            <div class="title">Nama Kafe</div>
-            <div class="desc">Masukkan nama kafe baru.</div>
-            <div class="field">
-                <label>Nama Kafe</label>
-                <input id="cafeNameInput" class="input" placeholder="Kafe Saya" />
-            </div>
-            <div class="row">
-                <button class="btn btn-secondary" onclick="closeCafeNameModal()">Batal</button>
-                <button class="btn btn-primary" onclick="saveCafeName()">Simpan</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="editItemModal" class="modal-overlay">
-        <div class="modal-box">
-            <div class="title" id="editItemTitle">Edit Item</div>
-            <div class="desc" id="editItemDesc">Ubah nama, kategori, dan jumlah stok.</div>
-            <div class="field">
-                <label>Nama Barang</label>
-                <input id="editItemNameInput" class="input" placeholder="Nama barang" />
-            </div>
-            <div class="field">
-                <label>Kategori</label>
-                <select id="editItemCategory" class="select">
-                    <option value="Umum">Umum</option>
-                    <option value="Urgent Stock">Urgent Stock</option>
-                    <option value="FIND">FIND</option>
-                    <option value="SYRUP">SYRUP</option>
-                    <option value="EQUIPMENT">EQUIPMENT</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>Jumlah</label>
-                <input id="editItemQty" class="input" placeholder="1, 1/2, 1/4" />
-            </div>
-            <div class="qty-quick">
-                <button class="btn" onclick="setEditQty('1')">1</button>
-                <button class="btn" onclick="setEditQty('1/2')">1/2</button>
-                <button class="btn" onclick="setEditQty('1/4')">1/4</button>
-            </div>
-            <div class="row" style="margin-top:12px;">
-                <button class="btn btn-secondary" onclick="closeEditItemModal()">Batal</button>
-                <button class="btn btn-primary" onclick="saveEditItem()">Simpan</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="confirmDeleteModal" class="modal-overlay">
-        <div class="modal-box">
-            <div class="title">Hapus Item?</div>
-            <div class="desc" id="confirmDeleteDesc">Item akan dihapus permanen. Tekan tombol hapus setelah 5 detik untuk konfirmasi.</div>
-            <div class="confirm-timer" id="confirmDeleteTimer">5</div>
-            <div class="row" style="margin-top:8px;">
-                <button class="btn btn-secondary" onclick="cancelDelete()">Batal</button>
-                <button class="btn btn-danger" id="confirmDeleteBtn" disabled>Hapus</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="confirmResetStockModal" class="modal-overlay">
-        <div class="modal-box">
-            <div class="title">Hapus Semua Stok?</div>
-            <div class="reset-confirm-desc" id="resetStockDesc">Semua item stok akan dihapus permanen. Tekan tombol hapus setelah 5 detik untuk konfirmasi.</div>
-            <div class="confirm-timer" id="resetStockTimer">5</div>
-            <div class="row" style="margin-top:8px;">
-                <button class="btn btn-secondary" onclick="cancelResetStock()">Batal</button>
-                <button class="btn btn-danger" id="resetStockConfirmBtn" disabled>Hapus Semua</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="printModal" class="modal-overlay print-modal">
-        <div class="modal-box">
-            <div class="title">Cetak Stok</div>
-            <div class="desc">Maksimal 15 baris per slide. Gunakan navigasi untuk melihat semua.</div>
-            <div class="print-paper" id="printPaper">
-                <div class="paper-content" id="paperContent">
-                    <div class="slide-wrapper" id="slideWrapper"></div>
-                </div>
-                <div class="slide-indicators" id="slideIndicators"></div>
-                <div class="slide-nav" id="slideNav">
-                    <button class="nav-btn" id="prevSlideBtn" onclick="prevSlide()">◀</button>
-                    <span class="page-info" id="pageInfo">1 / 1</span>
-                    <button class="nav-btn" id="nextSlideBtn" onclick="nextSlide()">▶</button>
-                </div>
-            </div>
-            <div class="row" style="gap:6px;">
-                <button class="btn btn-secondary btn-sm" onclick="closePrintModal()">Tutup</button>
-                <button class="btn btn-save-image btn-sm" onclick="savePrintAsImage()">⬇ Simpan Gambar</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="orderImageModal" class="modal-overlay order-image-modal">
-        <div class="modal-box">
-            <div class="title">Order</div>
-            <div class="desc">Simpan daftar order sebagai gambar.</div>
-            <div class="order-image-paper" id="orderImagePaper">
-                <div id="orderImageContent"></div>
-            </div>
-            <div class="row" style="gap:6px;">
-                <button class="btn btn-secondary btn-sm" onclick="closeOrderImageModal()">Tutup</button>
-                <button class="btn btn-save-image btn-sm" onclick="saveOrderImageNow()">⬇ Simpan Gambar</button>
-            </div>
-        </div>
+    <div class="footer" style="text-align:center;color:var(--muted);font-size:11px;opacity:0.5;padding-bottom:16px;">
+        KafeBot · built with care
     </div>
 </div>
 
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script>
-// ================================================================
-// THEME TOGGLE
-// ================================================================
+    // ================================================================
+    // THEME TOGGLE
+    // ================================================================
 
-function getTheme() {
-    return localStorage.getItem('kafebot_theme') || 'light';
-}
-
-function setTheme(theme) {
-    localStorage.setItem('kafebot_theme', theme);
-    if (theme === 'dark') {
-        document.body.classList.add('dark');
-        document.getElementById('themeToggle').classList.add('dark');
-        document.getElementById('themeThumb').innerHTML =
-            `<svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.41 5.41 0 0 1-4.4 2.26 5.5 5.5 0 0 1-5.5-5.5c0-2.4 1.52-4.45 3.7-5.2A9.04 9.04 0 0 0 12 3z"/></svg>`;
-    } else {
-        document.body.classList.remove('dark');
-        document.getElementById('themeToggle').classList.remove('dark');
-        document.getElementById('themeThumb').innerHTML =
-            `<svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.41 5.41 0 0 1-4.4 2.26 5.5 5.5 0 0 1-5.5-5.5c0-2.4 1.52-4.45 3.7-5.2A9.04 9.04 0 0 0 12 3z"/></svg>`;
+    function getTheme() {
+        return localStorage.getItem('kafebot_theme') || 'light';
     }
-}
 
-function toggleTheme() {
-    const current = getTheme();
-    setTheme(current === 'light' ? 'dark' : 'light');
-}
-
-setTheme(getTheme());
-
-// ================================================================
-// DATA LAYER
-// ================================================================
-
-let emptyItems = new Set();
-let priorityItems = new Set();
-
-function loadEmptyItems() {
-    try { const d = JSON.parse(localStorage.getItem('cafe_empty_items') || '[]'); emptyItems = new Set(d); } catch { emptyItems = new Set(); }
-}
-function saveEmptyItems() { localStorage.setItem('cafe_empty_items', JSON.stringify([...emptyItems])); }
-function loadPriorityItems() {
-    try { const d = JSON.parse(localStorage.getItem('cafe_priority_items') || '[]'); priorityItems = new Set(d); } catch { priorityItems = new Set(); }
-}
-function savePriorityItems() { localStorage.setItem('cafe_priority_items', JSON.stringify([...priorityItems])); }
-
-function getStock() {
-    try {
-        const raw = localStorage.getItem('cafe_stock') || '{}';
-        const data = JSON.parse(raw);
-        for (const key in data) {
-            if (typeof data[key] === 'string') data[key] = { qty: data[key], category: 'Umum' };
-            if (!data[key].category) data[key].category = 'Umum';
-            if (!data[key].qty) data[key].qty = '1';
-        }
-        return data;
-    } catch { return {}; }
-}
-function saveStock(stock) { localStorage.setItem('cafe_stock', JSON.stringify(stock)); }
-
-function getCafeName() { return localStorage.getItem('cafe_name') || 'Kafe Saya'; }
-function setCafeName(name) { localStorage.setItem('cafe_name', name); }
-
-loadEmptyItems();
-loadPriorityItems();
-
-function getOrderItems() {
-    const stock = getStock();
-    const items = [];
-    for (const [name, data] of Object.entries(stock)) {
-        const isEmpty = emptyItems.has(name);
-        if (isEmpty || data.qty === '1/4') {
-            items.push({
-                name,
-                qty: isEmpty ? '—' : data.qty,
-                category: data.category || 'Umum',
-                isEmpty,
-                isPriority: priorityItems.has(name)
-            });
+    function setTheme(theme) {
+        localStorage.setItem('kafebot_theme', theme);
+        if (theme === 'dark') {
+            document.body.classList.add('dark');
+            document.getElementById('themeToggle').classList.add('dark');
+            document.getElementById('themeThumb').innerHTML =
+                `<svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.41 5.41 0 0 1-4.4 2.26 5.5 5.5 0 0 1-5.5-5.5c0-2.4 1.52-4.45 3.7-5.2A9.04 9.04 0 0 0 12 3z"/></svg>`;
+        } else {
+            document.body.classList.remove('dark');
+            document.getElementById('themeToggle').classList.remove('dark');
+            document.getElementById('themeThumb').innerHTML =
+                `<svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.41 5.41 0 0 1-4.4 2.26 5.5 5.5 0 0 1-5.5-5.5c0-2.4 1.52-4.45 3.7-5.2A9.04 9.04 0 0 0 12 3z"/></svg>`;
         }
     }
-    return items;
-}
 
-// ================================================================
-// RENDER
-// ================================================================
-
-let selectedCategory = 'all';
-let searchQuery = '';
-
-function renderStockList() {
-    const stock = getStock();
-    saveStock(stock);
-    const container = document.getElementById('stockListContainer');
-    const keys = Object.keys(stock);
-    document.getElementById('stockCountBadge').textContent = keys.length;
-
-    if (!keys.length) {
-        container.innerHTML = `<div class="empty-state"><span class="big">—</span>Tidak ada stok.<br />Tambahkan barang di atas.</div>`;
-        document.getElementById('categoryTabs').innerHTML = '';
-        renderOrderList();
-        return;
+    function toggleTheme() {
+        const current = getTheme();
+        setTheme(current === 'light' ? 'dark' : 'light');
     }
 
-    const groups = {};
-    for (const name of keys) {
-        const item = stock[name];
-        const cat = item.category || 'Umum';
-        if (!groups[cat]) groups[cat] = [];
-        groups[cat].push({ name, ...item, isEmpty: emptyItems.has(name), isPriority: priorityItems.has(name) });
+    setTheme(getTheme());
+
+    // ================================================================
+    // DATA LAYER
+    // ================================================================
+
+    let emptyItems = new Set();
+    let priorityItems = new Set();
+
+    function loadEmptyItems() {
+        try { const d = JSON.parse(localStorage.getItem('cafe_empty_items') || '[]'); emptyItems = new Set(d); } catch { emptyItems = new Set(); }
     }
-    for (const cat in groups) {
-        groups[cat].sort((a,b) => {
-            if (a.isPriority && !b.isPriority) return -1;
-            if (!a.isPriority && b.isPriority) return 1;
-            return a.name.localeCompare(b.name);
+    function loadPriorityItems() {
+        try { const d = JSON.parse(localStorage.getItem('cafe_priority_items') || '[]'); priorityItems = new Set(d); } catch { priorityItems = new Set(); }
+    }
+
+    function getStock() {
+        try {
+            const raw = localStorage.getItem('cafe_stock') || '{}';
+            const data = JSON.parse(raw);
+            for (const key in data) {
+                if (typeof data[key] === 'string') data[key] = { qty: data[key], category: 'Umum' };
+                if (!data[key].category) data[key].category = 'Umum';
+                if (!data[key].qty) data[key].qty = '1';
+            }
+            return data;
+        } catch { return {}; }
+    }
+
+    function getCafeName() { return localStorage.getItem('cafe_name') || 'Kafe Saya'; }
+
+    loadEmptyItems();
+    loadPriorityItems();
+
+    function getOrderItems() {
+        const stock = getStock();
+        const items = [];
+        for (const [name, data] of Object.entries(stock)) {
+            const isEmpty = emptyItems.has(name);
+            if (isEmpty || data.qty === '1/4') {
+                items.push({
+                    name,
+                    qty: isEmpty ? '—' : data.qty,
+                    category: data.category || 'Umum',
+                    isEmpty
+                });
+            }
+        }
+        return items;
+    }
+
+    function escapeHtml(str) {
+        const d = document.createElement('div');
+        d.textContent = str;
+        return d.innerHTML;
+    }
+
+    // ================================================================
+    // RENDER PRINT
+    // ================================================================
+
+    let currentTab = 'stock';
+
+    function switchTab(tab) {
+        currentTab = tab;
+        document.getElementById('tabStock').classList.toggle('active', tab === 'stock');
+        document.getElementById('tabOrder').classList.toggle('active', tab === 'order');
+        renderPrint();
+    }
+
+    function renderPrint() {
+        const container = document.getElementById('printPaper');
+        const cafeName = getCafeName();
+
+        const now = new Date();
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = monthNames[now.getMonth()];
+        const year = now.getFullYear();
+        const dateStr = `${day} ${month} ${year}`;
+
+        if (currentTab === 'stock') {
+            container.innerHTML = renderStockPrint(cafeName, dateStr);
+        } else {
+            container.innerHTML = renderOrderPrint(cafeName, dateStr);
+        }
+
+        // Update badge
+        const stock = getStock();
+        const keys = Object.keys(stock);
+        const orderItems = getOrderItems();
+        document.getElementById('itemCount').textContent = currentTab === 'stock' ?
+            `${keys.length} item` :
+            `${orderItems.length} order`;
+    }
+
+    function renderStockPrint(cafeName, dateStr) {
+        const stock = getStock();
+        const keys = Object.keys(stock);
+
+        if (!keys.length) {
+            return `<div style="text-align:center;padding:40px 0;color:var(--muted);">Tidak ada stok untuk dicetak.</div>`;
+        }
+
+        // Group by category
+        const groups = {};
+        for (const name of keys) {
+            const item = stock[name];
+            const cat = item.category || 'Umum';
+            if (!groups[cat]) groups[cat] = [];
+            groups[cat].push({ name, qty: item.qty || '1', isEmpty: emptyItems.has(name) });
+        }
+
+        const categoryOrder = ['Urgent Stock', 'FIND', 'SYRUP', 'EQUIPMENT', 'Umum'];
+        const sortedCats = Object.keys(groups).sort((a, b) => {
+            const ia = categoryOrder.indexOf(a);
+            const ib = categoryOrder.indexOf(b);
+            if (ia === -1 && ib === -1) return a.localeCompare(b);
+            if (ia === -1) return 1;
+            if (ib === -1) return -1;
+            return ia - ib;
         });
-    }
 
-    const categoryOrder = ['Urgent Stock', 'FIND', 'SYRUP', 'EQUIPMENT', 'Umum'];
-    const sortedCats = Object.keys(groups).sort((a,b) => {
-        const ia = categoryOrder.indexOf(a);
-        const ib = categoryOrder.indexOf(b);
-        if (ia === -1 && ib === -1) return a.localeCompare(b);
-        if (ia === -1) return 1;
-        if (ib === -1) return -1;
-        return ia - ib;
-    });
+        let html = `
+            <div class="stock-print-header">
+                <h2>STOCK BAR</h2>
+                <div class="date">${cafeName} · ${dateStr}</div>
+            </div>
+        `;
 
-    let tabsHtml = `<button class="tab-btn ${selectedCategory === 'all' ? 'active' : ''}" onclick="selectCategory('all')">Semua <span class="count">(${keys.length})</span></button>`;
-    for (const cat of sortedCats) {
-        const count = groups[cat].length;
-        tabsHtml += `<button class="tab-btn ${selectedCategory === cat ? 'active' : ''}" onclick="selectCategory('${cat}')">${cat} <span class="count">(${count})</span></button>`;
-    }
-    document.getElementById('categoryTabs').innerHTML = tabsHtml;
-
-    const searchLower = searchQuery.toLowerCase().trim();
-    let html = '';
-    let hasItems = false;
-
-    if (selectedCategory === 'all') {
         for (const cat of sortedCats) {
-            let catItems = groups[cat];
-            if (searchLower) catItems = catItems.filter(item => item.name.toLowerCase().includes(searchLower));
-            if (catItems.length > 0) {
-                hasItems = true;
-                html += `<div class="stock-group"><div class="stock-group-header">${escapeHtml(cat)}</div>`;
-                for (const item of catItems) html += renderStockItem(item);
-                html += `</div>`;
+            const items = groups[cat];
+            html += `<div class="stock-print-category">${cat}</div>`;
+            for (const item of items) {
+                const displayQty = item.isEmpty ? '—' : item.qty;
+                html += `
+                    <div class="stock-print-item">
+                        <span class="name">${escapeHtml(item.name)}</span>
+                        <span class="qty ${item.isEmpty ? 'empty' : ''}">${escapeHtml(displayQty)}</span>
+                    </div>
+                `;
             }
         }
-    } else {
-        if (groups[selectedCategory]) {
-            let catItems = groups[selectedCategory];
-            if (searchLower) catItems = catItems.filter(item => item.name.toLowerCase().includes(searchLower));
-            if (catItems.length > 0) {
-                hasItems = true;
-                html += `<div class="stock-group">`;
-                for (const item of catItems) html += renderStockItem(item);
-                html += `</div>`;
-            }
+
+        html += `<div class="stock-print-footer">${cafeName} · ${dateStr}</div>`;
+
+        return html;
+    }
+
+    function renderOrderPrint(cafeName, dateStr) {
+        const items = getOrderItems();
+
+        if (!items.length) {
+            return `<div style="text-align:center;padding:40px 0;color:var(--muted);">Tidak ada item order.</div>`;
         }
-    }
 
-    if (!hasItems) {
-        html = `<div class="empty-state"><span class="big">—</span>${searchLower ? 'Tidak ada item yang cocok dengan pencarian.' : 'Tidak ada item di kategori ini.'}</div>`;
-    }
+        // Filter out EQUIPMENT
+        const filtered = items.filter(item => item.category !== 'EQUIPMENT');
 
-    container.innerHTML = html;
-    renderOrderList();
-}
-
-function renderStockItem(item) {
-    const qty = item.qty || '1';
-    const isQuarter = qty === '1/4';
-    const isEmpty = item.isEmpty;
-    const displayQty = isEmpty ? '—' : qty;
-    const isPriority = item.isPriority;
-    return `<div class="stock-item">
-              <span class="name">${escapeHtml(item.name)}</span>
-              <span class="qty-badge ${isQuarter ? 'quarter' : ''} ${isEmpty ? 'empty-stock' : ''}" onclick="openEditItemModal('${escapeHtml(item.name)}')">${escapeHtml(displayQty)}</span>
-              <div class="actions">
-                <button class="priority-btn ${isPriority ? 'priority-active' : ''}" onclick="togglePriority('${escapeHtml(item.name)}')" title="Prioritaskan">★</button>
-                <button class="quick-empty ${isEmpty ? 'empty-active' : ''}" onclick="toggleEmptyItem('${escapeHtml(item.name)}')" title="Tandai habis / pulihkan">${isEmpty ? '↻' : '−'}</button>
-                <button class="del" onclick="confirmDeleteItem('${escapeHtml(item.name)}')" title="Hapus">✕</button>
-              </div>
-            </div>`;
-}
-
-function selectCategory(category) { selectedCategory = category; renderStockList(); }
-function filterStock() { searchQuery = document.getElementById('searchInput').value; renderStockList(); }
-function clearSearch() { document.getElementById('searchInput').value = ''; searchQuery = ''; renderStockList(); }
-
-function renderOrderList() {
-    const items = getOrderItems();
-    const container = document.getElementById('orderListContainer');
-    const badge = document.getElementById('orderCountBadge');
-    badge.textContent = items.length;
-
-    if (!items.length) {
-        container.innerHTML = `<div class="empty-state" id="orderEmptyState"><span class="big">—</span>Tidak ada item order.</div>`;
-        return;
-    }
-
-    const filteredItems = items;
-
-    if (!filteredItems.length) {
-        container.innerHTML = `<div class="empty-state" id="orderEmptyState"><span class="big">—</span>Tidak ada item order.</div>`;
-        return;
-    }
-
-    const manyItems = filteredItems.length > 10;
-    let html = `<div class="scroll-area ${manyItems ? 'many-items' : ''}">`;
-    filteredItems.forEach(item => {
-        html += `<div class="order-item"><span class="name">${escapeHtml(item.name)}</span><span class="qty ${item.isEmpty ? 'empty-order' : ''}">${escapeHtml(item.qty)}</span></div>`;
-    });
-    html += '</div>';
-    container.innerHTML = html;
-}
-
-function updateCafeNameDisplay() {
-    const name = getCafeName();
-    document.getElementById('cafeNameDisplay').innerHTML = escapeHtml(name) + ' <span class="edit-hint">✎</span>';
-    document.getElementById('cafeHeaderName').textContent = name;
-}
-function refreshUI() { renderStockList(); updateCafeNameDisplay(); }
-
-function escapeHtml(str) { const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
-
-// ================================================================
-// ACTIONS
-// ================================================================
-
-function togglePriority(name) {
-    if (priorityItems.has(name)) priorityItems.delete(name);
-    else priorityItems.add(name);
-    savePriorityItems();
-    renderStockList();
-    showToast(`${name} ${priorityItems.has(name) ? 'ditandai prioritas' : 'dihapus dari prioritas'}`, 'success');
-}
-function toggleEmptyItem(name) {
-    if (emptyItems.has(name)) emptyItems.delete(name);
-    else emptyItems.add(name);
-    saveEmptyItems();
-    renderStockList();
-    showToast(`${name} ${emptyItems.has(name) ? 'ditandai habis (—)' : 'dipulihkan'}`, 'success');
-}
-function setQty(val) { document.getElementById('stockQtyInput').value = val; }
-function setEditQty(val) { document.getElementById('editItemQty').value = val; }
-
-function addStockItem() {
-    const nameInput = document.getElementById('stockNameInput');
-    const catInput = document.getElementById('stockCategoryInput');
-    const qtyInput = document.getElementById('stockQtyInput');
-    let name = nameInput.value.trim();
-    let category = catInput.value;
-    let qty = qtyInput.value.trim();
-    if (!name) { showToast('Masukkan nama barang.', 'error'); return; }
-    if (!qty) { showToast('Masukkan jumlah.', 'error'); return; }
-    if (!/^\d+$|^\d+\/\d+$/.test(qty)) { showToast('Jumlah harus angka atau pecahan (1/2, 1/4).', 'error'); return; }
-    const stock = getStock();
-    stock[name] = { qty, category };
-    saveStock(stock);
-    if (emptyItems.has(name)) { emptyItems.delete(name); saveEmptyItems(); }
-    nameInput.value = '';
-    qtyInput.value = '1';
-    renderStockList();
-    showToast(`✓ ${name} → ${qty}`, 'success');
-}
-
-function deleteStockItem(name) {
-    const stock = getStock();
-    if (!stock[name]) return;
-    delete stock[name];
-    saveStock(stock);
-    if (emptyItems.has(name)) { emptyItems.delete(name); saveEmptyItems(); }
-    if (priorityItems.has(name)) { priorityItems.delete(name); savePriorityItems(); }
-    renderStockList();
-    showToast(`✕ ${name} dihapus.`, 'success');
-}
-
-// ================================================================
-// EDIT ITEM MODAL
-// ================================================================
-
-let editTargetName = '';
-function openEditItemModal(name) {
-    const stock = getStock();
-    if (!stock[name]) { showToast('Item tidak ditemukan.', 'error'); return; }
-    editTargetName = name;
-    const item = stock[name];
-    document.getElementById('editItemTitle').textContent = `Edit: ${name}`;
-    document.getElementById('editItemDesc').textContent = 'Ubah nama, kategori, dan jumlah stok.';
-    document.getElementById('editItemNameInput').value = name;
-    document.getElementById('editItemCategory').value = item.category || 'Umum';
-    document.getElementById('editItemQty').value = item.qty || '1';
-    document.getElementById('editItemModal').classList.add('open');
-}
-function closeEditItemModal() { document.getElementById('editItemModal').classList.remove('open'); editTargetName = ''; }
-function saveEditItem() {
-    if (!editTargetName) { showToast('Error: tidak ada item yang dipilih.', 'error'); return; }
-    let newName = document.getElementById('editItemNameInput').value.trim();
-    let newCategory = document.getElementById('editItemCategory').value;
-    let newQty = document.getElementById('editItemQty').value.trim();
-    if (!newName) { showToast('Nama tidak boleh kosong.', 'error'); return; }
-    if (!newQty) { showToast('Jumlah tidak boleh kosong.', 'error'); return; }
-    if (!/^\d+$|^\d+\/\d+$/.test(newQty)) { showToast('Jumlah harus angka atau pecahan (1/2, 1/4).', 'error'); return; }
-    const stock = getStock();
-    if (!stock[editTargetName]) { showToast('Item tidak ditemukan.', 'error'); return; }
-    if (newName !== editTargetName) {
-        if (stock[newName]) { showToast(`Nama "${newName}" sudah digunakan.`, 'error'); return; }
-        stock[newName] = { qty: newQty, category: newCategory };
-        delete stock[editTargetName];
-        if (emptyItems.has(editTargetName)) { emptyItems.delete(editTargetName); emptyItems.add(newName); saveEmptyItems(); }
-        if (priorityItems.has(editTargetName)) { priorityItems.delete(editTargetName); priorityItems.add(newName); savePriorityItems(); }
-    } else {
-        stock[newName].qty = newQty;
-        stock[newName].category = newCategory;
-    }
-    saveStock(stock);
-    closeEditItemModal();
-    renderStockList();
-    showToast(`✓ ${newName} diperbarui.`, 'success');
-}
-
-// ================================================================
-// CONFIRM DELETE
-// ================================================================
-
-let deleteTargetName = '';
-let deleteTimerInterval = null;
-let deleteCountdown = 5;
-function confirmDeleteItem(name) {
-    deleteTargetName = name;
-    deleteCountdown = 5;
-    document.getElementById('confirmDeleteDesc').textContent = `Hapus "${name}"? Tekan tombol hapus setelah 5 detik untuk konfirmasi.`;
-    document.getElementById('confirmDeleteTimer').textContent = '5';
-    document.getElementById('confirmDeleteBtn').disabled = true;
-    document.getElementById('confirmDeleteBtn').textContent = 'Hapus';
-    document.getElementById('confirmDeleteModal').classList.add('open');
-    if (deleteTimerInterval) clearInterval(deleteTimerInterval);
-    deleteTimerInterval = setInterval(() => {
-        deleteCountdown--;
-        if (deleteCountdown <= 0) {
-            clearInterval(deleteTimerInterval);
-            deleteTimerInterval = null;
-            document.getElementById('confirmDeleteTimer').textContent = '✓';
-            document.getElementById('confirmDeleteBtn').disabled = false;
-            document.getElementById('confirmDeleteBtn').textContent = 'Hapus Sekarang';
-        } else {
-            document.getElementById('confirmDeleteTimer').textContent = deleteCountdown;
+        if (!filtered.length) {
+            return `<div style="text-align:center;padding:40px 0;color:var(--muted);">Tidak ada item order.</div>`;
         }
-    }, 1000);
-}
-function cancelDelete() {
-    clearInterval(deleteTimerInterval);
-    deleteTimerInterval = null;
-    document.getElementById('confirmDeleteModal').classList.remove('open');
-    deleteTargetName = '';
-    document.getElementById('confirmDeleteBtn').disabled = true;
-    document.getElementById('confirmDeleteBtn').textContent = 'Hapus';
-}
-function executeDelete() { if (deleteTargetName) { deleteStockItem(deleteTargetName); cancelDelete(); } }
 
-// ================================================================
-// CONFIRM RESET
-// ================================================================
-
-let resetStockTimerInterval = null;
-let resetStockCountdown = 5;
-function confirmClearAll() {
-    const stock = getStock();
-    const keys = Object.keys(stock);
-    if (!keys.length) { showToast('Tidak ada stok untuk dihapus.', 'error'); return; }
-    resetStockCountdown = 5;
-    document.getElementById('resetStockDesc').textContent = `Semua item stok (${keys.length} item) akan dihapus permanen. Tekan tombol hapus setelah 5 detik untuk konfirmasi.`;
-    document.getElementById('resetStockTimer').textContent = '5';
-    document.getElementById('resetStockConfirmBtn').disabled = true;
-    document.getElementById('resetStockConfirmBtn').textContent = 'Hapus Semua';
-    document.getElementById('confirmResetStockModal').classList.add('open');
-    if (resetStockTimerInterval) clearInterval(resetStockTimerInterval);
-    resetStockTimerInterval = setInterval(() => {
-        resetStockCountdown--;
-        if (resetStockCountdown <= 0) {
-            clearInterval(resetStockTimerInterval);
-            resetStockTimerInterval = null;
-            document.getElementById('resetStockTimer').textContent = '✓';
-            document.getElementById('resetStockConfirmBtn').disabled = false;
-            document.getElementById('resetStockConfirmBtn').textContent = 'Hapus Sekarang';
-        } else {
-            document.getElementById('resetStockTimer').textContent = resetStockCountdown;
+        // Group by category
+        const groups = {};
+        for (const item of filtered) {
+            const cat = item.category || 'Umum';
+            if (!groups[cat]) groups[cat] = [];
+            groups[cat].push(item);
         }
-    }, 1000);
-}
-function cancelResetStock() {
-    clearInterval(resetStockTimerInterval);
-    resetStockTimerInterval = null;
-    document.getElementById('confirmResetStockModal').classList.remove('open');
-    document.getElementById('resetStockConfirmBtn').disabled = true;
-    document.getElementById('resetStockConfirmBtn').textContent = 'Hapus Semua';
-}
-function executeResetStock() {
-    saveStock({});
-    emptyItems.clear(); saveEmptyItems();
-    priorityItems.clear(); savePriorityItems();
-    renderStockList();
-    cancelResetStock();
-    showToast('✕ Semua stok dihapus.', 'success');
-}
 
-// ================================================================
-// EXPORT / SHARE
-// ================================================================
-
-function formatOrderForExport() {
-    const items = getOrderItems();
-    if (!items.length) return 'Tidak ada item order.';
-    const filteredItems = items;
-    if (!filteredItems.length) return 'Tidak ada item order.';
-    const now = new Date();
-    const monthNames = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
-    const day = String(now.getDate()).padStart(2,'0');
-    const month = monthNames[now.getMonth()];
-    const year = now.getFullYear();
-    const dateStr = `${day} ${month} ${year}`;
-    let txt = `ORDER BAR\n${getCafeName()} · ${dateStr}\n\n`;
-    const groups = {};
-    for (const item of filteredItems) {
-        const cat = item.category || 'Umum';
-        if (!groups[cat]) groups[cat] = [];
-        groups[cat].push(item);
-    }
-    const categoryOrder = ['Urgent Stock','FIND','SYRUP','EQUIPMENT','Umum'];
-    const sortedCats = Object.keys(groups).sort((a,b) => {
-        const ia = categoryOrder.indexOf(a);
-        const ib = categoryOrder.indexOf(b);
-        if (ia === -1 && ib === -1) return a.localeCompare(b);
-        if (ia === -1) return 1;
-        if (ib === -1) return -1;
-        return ia - ib;
-    });
-    for (const cat of sortedCats) {
-        txt += `${cat}\n`;
-        for (const item of groups[cat]) txt += `- ${item.name} — ${item.qty}\n`;
-        txt += '\n';
-    }
-    return txt.trim();
-}
-function copyOrderText() {
-    const text = formatOrderForExport();
-    if (!text || text.includes('Tidak ada item')) { showToast('Tidak ada item order untuk disalin.', 'error'); return; }
-    copyText(text);
-    showToast('⌘ Order disalin ke clipboard.', 'success');
-}
-function shareToWhatsApp() {
-    const text = formatOrderForExport();
-    if (!text || text.includes('Tidak ada item')) { showToast('Tidak ada item order untuk dibagikan.', 'error'); return; }
-    const msg = `${text}\n\n— ${getCafeName()}`;
-    const encoded = encodeURIComponent(msg);
-    window.open(`https://wa.me/?text=${encoded}`, '_blank');
-}
-function copyText(text) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
-    } else { fallbackCopy(text); }
-}
-function fallbackCopy(text) {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.left = '-9999px';
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    ta.remove();
-}
-
-// ================================================================
-// SAVE ORDER AS IMAGE
-// ================================================================
-
-function openOrderImageModal() {
-    const items = getOrderItems();
-    const container = document.getElementById('orderImageContent');
-    const filteredItems = items;
-    if (!filteredItems.length) {
-        container.innerHTML = `<div class="order-empty">Tidak ada item order.</div>`;
-        document.getElementById('orderImageModal').classList.add('open');
-        return;
-    }
-    const now = new Date();
-    const monthNames = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
-    const day = String(now.getDate()).padStart(2,'0');
-    const month = monthNames[now.getMonth()];
-    const year = now.getFullYear();
-    const dateStr = `${day} ${month} ${year}`;
-    const cafeName = getCafeName();
-    let html = `<div class="order-header"><h3>ORDER BAR</h3><div class="date">${cafeName} · ${dateStr}</div></div>`;
-    const groups = {};
-    for (const item of filteredItems) {
-        const cat = item.category || 'Umum';
-        if (!groups[cat]) groups[cat] = [];
-        groups[cat].push(item);
-    }
-    const categoryOrder = ['Urgent Stock','FIND','SYRUP','EQUIPMENT','Umum'];
-    const sortedCats = Object.keys(groups).sort((a,b) => {
-        const ia = categoryOrder.indexOf(a);
-        const ib = categoryOrder.indexOf(b);
-        if (ia === -1 && ib === -1) return a.localeCompare(b);
-        if (ia === -1) return 1;
-        if (ib === -1) return -1;
-        return ia - ib;
-    });
-    const totalItems = filteredItems.length;
-    for (const cat of sortedCats) {
-        html += `<div class="order-cat">${cat}</div>`;
-        for (const item of groups[cat]) {
-            html += `<div class="order-item-print"><span class="name">${escapeHtml(item.name)}</span><span class="qty">${escapeHtml(item.qty)}</span></div>`;
-        }
-    }
-    html += `<div class="order-footer">${cafeName} · ${dateStr}</div>`;
-    container.innerHTML = html;
-    const paper = document.getElementById('orderImagePaper');
-    if (totalItems > 15) paper.style.fontSize = '11px';
-    else if (totalItems > 10) paper.style.fontSize = '12px';
-    else paper.style.fontSize = '';
-    document.getElementById('orderImageModal').classList.add('open');
-}
-function closeOrderImageModal() { document.getElementById('orderImageModal').classList.remove('open'); }
-async function saveOrderImageNow() {
-    const paper = document.getElementById('orderImagePaper');
-    showToast('⏳ Menyiapkan gambar order...', '');
-    try {
-        const originalMaxHeight = paper.style.maxHeight;
-        paper.style.maxHeight = 'none';
-        await new Promise(r => setTimeout(r, 200));
-        const canvas = await html2canvas(paper, {
-            scale: 2,
-            useCORS: true,
-            backgroundColor: getTheme() === 'dark' ? '#2c2c2e' : '#ffffff',
-            logging: false,
-            allowTaint: true,
-            width: paper.scrollWidth,
-            height: paper.scrollHeight,
-            borderRadius: '16px'
+        const categoryOrder = ['Urgent Stock', 'FIND', 'SYRUP', 'EQUIPMENT', 'Umum'];
+        const sortedCats = Object.keys(groups).sort((a, b) => {
+            const ia = categoryOrder.indexOf(a);
+            const ib = categoryOrder.indexOf(b);
+            if (ia === -1 && ib === -1) return a.localeCompare(b);
+            if (ia === -1) return 1;
+            if (ib === -1) return -1;
+            return ia - ib;
         });
-        paper.style.maxHeight = originalMaxHeight;
-        const roundedCanvas = document.createElement('canvas');
-        const ctx = roundedCanvas.getContext('2d');
-        const w = canvas.width, h = canvas.height, radius = 32;
-        roundedCanvas.width = w; roundedCanvas.height = h;
-        ctx.beginPath();
-        ctx.moveTo(radius,0); ctx.lineTo(w-radius,0); ctx.quadraticCurveTo(w,0,w,radius);
-        ctx.lineTo(w,h-radius); ctx.quadraticCurveTo(w,h,w-radius,h);
-        ctx.lineTo(radius,h); ctx.quadraticCurveTo(0,h,0,h-radius);
-        ctx.lineTo(0,radius); ctx.quadraticCurveTo(0,0,radius,0);
-        ctx.closePath(); ctx.clip();
-        ctx.drawImage(canvas, 0, 0, w, h);
-        const link = document.createElement('a');
-        const now = new Date();
-        const dateStr = now.toISOString().slice(0,10);
-        link.download = `order_${getCafeName().replace(/[^a-zA-Z0-9]/g, '_')}_${dateStr}.png`;
-        link.href = roundedCanvas.toDataURL('image/png');
-        link.click();
-        showToast('✅ Gambar order berhasil disimpan!', 'success');
-        closeOrderImageModal();
-    } catch (err) {
-        console.error(err);
-        showToast('❌ Gagal menyimpan gambar order.', 'error');
-        paper.style.maxHeight = '';
-    }
-}
-function saveOrderAsImage() {
-    const items = getOrderItems();
-    const filtered = items;
-    if (!filtered.length) { showToast('Tidak ada item order untuk disimpan.', 'error'); return; }
-    openOrderImageModal();
-}
 
-// ================================================================
-// PRINT STOCK
-// ================================================================
+        let html = `
+            <div class="order-print-header">
+                <h2>ORDER BAR</h2>
+                <div class="date">${cafeName} · ${dateStr}</div>
+            </div>
+        `;
 
-let currentSlide = 0, totalSlides = 0, slideData = [];
-function buildSlideData() {
-    const stock = getStock();
-    const keys = Object.keys(stock);
-    if (!keys.length) return [];
-    const allItems = [];
-    for (const name of keys) {
-        const item = stock[name];
-        allItems.push({ name, qty: item.qty || '1', isEmpty: emptyItems.has(name), category: item.category || 'Umum', isPriority: priorityItems.has(name) });
-    }
-    allItems.sort((a,b) => {
-        if (a.isPriority && !b.isPriority) return -1;
-        if (!a.isPriority && b.isPriority) return 1;
-        return a.name.localeCompare(b.name);
-    });
-    const ITEMS_PER_SLIDE = 15;
-    const slides = [];
-    for (let i = 0; i < allItems.length; i += ITEMS_PER_SLIDE) {
-        slides.push(allItems.slice(i, i + ITEMS_PER_SLIDE));
-    }
-    return slides;
-}
-function renderPrintSlides() {
-    const slides = buildSlideData();
-    slideData = slides;
-    totalSlides = slides.length;
-    currentSlide = 0;
-    const wrapper = document.getElementById('slideWrapper');
-    const indicators = document.getElementById('slideIndicators');
-    const pageInfo = document.getElementById('pageInfo');
-    if (totalSlides === 0) {
-        wrapper.innerHTML = `<div class="paper-empty">Tidak ada stok untuk dicetak.</div>`;
-        indicators.innerHTML = '';
-        pageInfo.textContent = '0 / 0';
-        document.getElementById('prevSlideBtn').disabled = true;
-        document.getElementById('nextSlideBtn').disabled = true;
-        return;
-    }
-    const now = new Date();
-    const monthNames = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
-    const day = String(now.getDate()).padStart(2,'0');
-    const month = monthNames[now.getMonth()];
-    const year = now.getFullYear();
-    const dateStr = `${day} ${month} ${year}`;
-    const cafeName = getCafeName();
-    let html = '';
-    for (let i = 0; i < totalSlides; i++) {
-        html += `<div class="slide-page">`;
-        html += `<div class="paper-header"><h2>STOCK BAR</h2><div class="date">${cafeName} · ${dateStr}</div></div>`;
-        const slide = slides[i];
-        let num = i * 15 + 1;
-        for (const item of slide) {
-            const displayQty = item.isEmpty ? '—' : item.qty;
-            html += `<div class="paper-item"><span class="num">${num}.</span><span class="name">${escapeHtml(item.name)}</span><span class="qty ${item.isEmpty ? 'empty-print' : ''}">${escapeHtml(displayQty)}</span></div>`;
-            num++;
-        }
-        html += `<div class="paper-footer">${cafeName} · ${dateStr}</div></div>`;
-    }
-    wrapper.innerHTML = html;
-    updateSlideIndicators();
-    updateSlidePosition();
-    document.getElementById('prevSlideBtn').disabled = totalSlides <= 1;
-    document.getElementById('nextSlideBtn').disabled = totalSlides <= 1;
-}
-function updateSlideIndicators() {
-    const indicators = document.getElementById('slideIndicators');
-    if (totalSlides <= 1) { indicators.innerHTML = ''; return; }
-    let html = '';
-    for (let i = 0; i < totalSlides; i++) {
-        html += `<button class="dot ${i === currentSlide ? 'active' : ''}" onclick="goToSlide(${i})"></button>`;
-    }
-    indicators.innerHTML = html;
-    document.getElementById('pageInfo').textContent = `${currentSlide + 1} / ${totalSlides}`;
-}
-function updateSlidePosition() {
-    const wrapper = document.getElementById('slideWrapper');
-    wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-    document.getElementById('pageInfo').textContent = `${currentSlide + 1} / ${totalSlides}`;
-    document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
-    document.getElementById('prevSlideBtn').disabled = currentSlide === 0;
-    document.getElementById('nextSlideBtn').disabled = currentSlide >= totalSlides - 1;
-}
-function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlidePosition(); } }
-function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlidePosition(); } }
-function goToSlide(index) { if (index >= 0 && index < totalSlides) { currentSlide = index; updateSlidePosition(); } }
-function openPrintModal() { renderPrintSlides(); document.getElementById('printModal').classList.add('open'); }
-function closePrintModal() { document.getElementById('printModal').classList.remove('open'); }
-
-async function savePrintAsImage() {
-    const paper = document.getElementById('printPaper');
-    showToast('⏳ Menyiapkan gambar...', '');
-    try {
-        const nav = paper.querySelector('.slide-nav');
-        const indicators = paper.querySelector('.slide-indicators');
-        const navHidden = nav.style.display, indicatorsHidden = indicators.style.display;
-        nav.style.display = 'none';
-        indicators.style.display = 'none';
-        const wrapper = document.getElementById('slideWrapper');
-        const transform = wrapper.style.transform;
-        wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-        await new Promise(r => setTimeout(r, 100));
-        const canvas = await html2canvas(paper, {
-            scale: 2,
-            useCORS: true,
-            backgroundColor: getTheme() === 'dark' ? '#2c2c2e' : '#ffffff',
-            logging: false,
-            allowTaint: true,
-            width: paper.scrollWidth,
-            height: paper.scrollHeight
-        });
-        nav.style.display = navHidden || '';
-        indicators.style.display = indicatorsHidden || '';
-        wrapper.style.transform = transform;
-        const link = document.createElement('a');
-        const now = new Date();
-        const dateStr = now.toISOString().slice(0,10);
-        link.download = `stockbar_${getCafeName().replace(/[^a-zA-Z0-9]/g, '_')}_${dateStr}_${currentSlide + 1}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        showToast('✅ Gambar berhasil disimpan!', 'success');
-    } catch (err) {
-        console.error(err);
-        showToast('❌ Gagal menyimpan gambar. Coba lagi.', 'error');
-        const nav = paper.querySelector('.slide-nav');
-        const indicators = paper.querySelector('.slide-indicators');
-        nav.style.display = '';
-        indicators.style.display = '';
-    }
-}
-
-// ================================================================
-// CAFE NAME MODAL
-// ================================================================
-
-function openCafeNameModal() {
-    document.getElementById('cafeNameInput').value = getCafeName();
-    document.getElementById('cafeNameModal').classList.add('open');
-}
-function closeCafeNameModal() { document.getElementById('cafeNameModal').classList.remove('open'); }
-function saveCafeName() {
-    const name = document.getElementById('cafeNameInput').value.trim();
-    if (!name) { showToast('Nama kafe tidak boleh kosong.', 'error'); return; }
-    setCafeName(name);
-    updateCafeNameDisplay();
-    closeCafeNameModal();
-    showToast(`✓ Nama kafe: ${name}`, 'success');
-}
-
-// ================================================================
-// CLOCK
-// ================================================================
-
-function updateClock() {
-    const now = new Date();
-    const h = String(now.getHours()).padStart(2,'0');
-    const m = String(now.getMinutes()).padStart(2,'0');
-    document.getElementById('clockDisplay').textContent = `${h}:${m}`;
-}
-setInterval(updateClock, 10000);
-updateClock();
-
-// ================================================================
-// TOAST
-// ================================================================
-
-let toastTimer = null;
-function showToast(msg, type = '') {
-    const el = document.getElementById('toast');
-    el.textContent = msg;
-    el.className = 'toast show' + (type ? ' ' + type : '');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
-}
-
-// ================================================================
-// SAVE / LOAD STOCK
-// ================================================================
-
-function exportStockToFile() {
-    const stock = getStock();
-    const keys = Object.keys(stock);
-    if (!keys.length) { showToast('Tidak ada stok untuk disimpan.', 'error'); return; }
-    const cafeName = getCafeName();
-    const now = new Date();
-    const dateStr = now.toLocaleString('id-ID', { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit' });
-    let content = '# KafeBot Stock Export\n';
-    content += `# Cafe: ${cafeName}\n# Date: ${dateStr}\n#\n# Format: nama_item|kategori|jumlah|prioritas|habis\n#\n`;
-    for (const name of keys) {
-        const item = stock[name];
-        const cat = item.category || 'Umum';
-        const qty = item.qty || '1';
-        const isPriority = priorityItems.has(name) ? '1' : '0';
-        const isEmpty = emptyItems.has(name) ? '1' : '0';
-        content += `${name}|${cat}|${qty}|${isPriority}|${isEmpty}\n`;
-    }
-    const fileDate = now.toISOString().slice(0,10);
-    const safeCafeName = cafeName.replace(/[^a-zA-Z0-9]/g, '_').substring(0,30);
-    downloadFile(content, `stock_${safeCafeName}_${fileDate}.txt`, 'text/plain');
-    showToast(`⬇ ${keys.length} item disimpan.`, 'success');
-}
-function importStockFromFile() { document.getElementById('fileInput').click(); }
-function handleFileLoad(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    event.target.value = '';
-    const reader = new FileReader();
-    reader.onload = (e) => { parseAndLoadStock(e.target.result); };
-    reader.onerror = () => { showToast('Gagal membaca file.', 'error'); };
-    reader.readAsText(file, 'UTF-8');
-}
-function parseAndLoadStock(content) {
-    const lines = content.split(/\r?\n/);
-    const stock = {};
-    const emptyNames = [], priorityNames = [];
-    let cafeName = null;
-    let dataCount = 0;
-    for (const line of lines) {
-        const trimmed = line.trim();
-        if (!trimmed) continue;
-        if (trimmed.startsWith('#')) {
-            if (trimmed.startsWith('# Cafe:')) { const val = trimmed.substring(7).trim(); if (val) cafeName = val; }
-            continue;
-        }
-        const parts = trimmed.split('|');
-        if (parts.length >= 3) {
-            const name = parts[0].trim();
-            const category = parts[1].trim();
-            const qty = parts[2].trim();
-            const isPriority = parts.length > 3 ? parts[3].trim() === '1' : false;
-            const isEmpty = parts.length > 4 ? parts[4].trim() === '1' : false;
-            if (name && category && qty && /^\d+$|^\d+\/\d+$/.test(qty)) {
-                stock[name] = { category, qty };
-                if (isEmpty) emptyNames.push(name);
-                if (isPriority) priorityNames.push(name);
-                dataCount++;
+        for (const cat of sortedCats) {
+            const itemsCat = groups[cat];
+            html += `<div class="order-print-category">${cat}</div>`;
+            for (const item of itemsCat) {
+                html += `
+                    <div class="order-print-item">
+                        <span class="name">${escapeHtml(item.name)}</span>
+                        <span class="qty ${item.isEmpty ? 'empty-order' : ''}">${escapeHtml(item.qty)}</span>
+                    </div>
+                `;
             }
         }
+
+        html += `<div class="order-print-footer">${cafeName} · ${dateStr}</div>`;
+
+        return html;
     }
-    if (!dataCount) { showToast('Tidak ada data valid dalam file. Format: nama|kategori|jumlah|prioritas|habis', 'error'); return; }
-    const currentCount = Object.keys(getStock()).length;
-    let confirmMsg = `Muat ${dataCount} item dari file.`;
-    if (currentCount > 0) confirmMsg += `\n\nStok saat ini (${currentCount} item) akan DIGANTI seluruhnya. Lanjutkan?`;
-    if (!confirm(confirmMsg)) { showToast('Muat stok dibatalkan.', 'error'); return; }
-    saveStock(stock);
-    emptyItems = new Set(emptyNames); saveEmptyItems();
-    priorityItems = new Set(priorityNames); savePriorityItems();
-    if (cafeName) { setCafeName(cafeName); updateCafeNameDisplay(); }
-    renderStockList();
-    showToast(`⬆ ${dataCount} item berhasil dimuat.${cafeName ? ` (Kafe: ${cafeName})` : ''}`, 'success');
-}
-function downloadFile(content, fileName, mimeType = 'text/plain') {
-    const blob = new Blob([content], { type: `${mimeType};charset=utf-8` });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url; link.download = fileName;
-    document.body.appendChild(link); link.click(); document.body.removeChild(link);
-    setTimeout(() => URL.revokeObjectURL(url), 5000);
-}
 
-// ================================================================
-// KEYBOARD SHORTCUT
-// ================================================================
+    function refreshPrint() {
+        renderPrint();
+        showToast('⟳ Diperbarui', 'success');
+    }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const nameInput = document.getElementById('stockNameInput');
-    nameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); addStockItem(); } });
-    refreshUI();
-    document.getElementById('confirmDeleteBtn').addEventListener('click', executeDelete);
-    document.getElementById('resetStockConfirmBtn').addEventListener('click', executeResetStock);
-});
+    // ================================================================
+    // SAVE AS IMAGE
+    // ================================================================
 
-// ================================================================
-// CLOSE MODAL ON OVERLAY
-// ================================================================
+    async function saveAsImage() {
+        const paper = document.getElementById('printPaper');
 
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) {
-            overlay.classList.remove('open');
-            if (overlay.id === 'confirmDeleteModal') cancelDelete();
-            if (overlay.id === 'confirmResetStockModal') cancelResetStock();
-            if (overlay.id === 'orderImageModal') closeOrderImageModal();
+        if (!paper.innerHTML || paper.innerHTML.includes('Tidak ada')) {
+            showToast('Tidak ada data untuk disimpan.', 'error');
+            return;
         }
-    });
-});
 
-function refreshStockList() { renderStockList(); showToast('⟳ Stok diperbarui.', 'success'); }
+        showToast('⏳ Menyiapkan gambar...', '');
+
+        try {
+            // Temporarily remove max-height for full capture
+            const originalMaxHeight = paper.style.maxHeight;
+            paper.style.maxHeight = 'none';
+
+            await new Promise(r => setTimeout(r, 200));
+
+            const canvas = await html2canvas(paper, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: getTheme() === 'dark' ? '#2c2c2e' : '#ffffff',
+                logging: false,
+                allowTaint: true,
+                width: paper.scrollWidth,
+                height: paper.scrollHeight,
+                borderRadius: '12px'
+            });
+
+            paper.style.maxHeight = originalMaxHeight;
+
+            // Round corners
+            const roundedCanvas = document.createElement('canvas');
+            const ctx = roundedCanvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+            const radius = 24;
+
+            roundedCanvas.width = w;
+            roundedCanvas.height = h;
+
+            ctx.beginPath();
+            ctx.moveTo(radius, 0);
+            ctx.lineTo(w - radius, 0);
+            ctx.quadraticCurveTo(w, 0, w, radius);
+            ctx.lineTo(w, h - radius);
+            ctx.quadraticCurveTo(w, h, w - radius, h);
+            ctx.lineTo(radius, h);
+            ctx.quadraticCurveTo(0, h, 0, h - radius);
+            ctx.lineTo(0, radius);
+            ctx.quadraticCurveTo(0, 0, radius, 0);
+            ctx.closePath();
+            ctx.clip();
+
+            ctx.drawImage(canvas, 0, 0, w, h);
+
+            const link = document.createElement('a');
+            const now = new Date();
+            const dateStr = now.toISOString().slice(0, 10);
+            const tabName = currentTab === 'stock' ? 'stock' : 'order';
+            const cafeName = getCafeName().replace(/[^a-zA-Z0-9]/g, '_').substring(0, 20);
+            link.download = `${tabName}_${cafeName}_${dateStr}.png`;
+            link.href = roundedCanvas.toDataURL('image/png');
+            link.click();
+
+            showToast('✅ Gambar berhasil disimpan!', 'success');
+        } catch (err) {
+            console.error(err);
+            showToast('❌ Gagal menyimpan gambar.', 'error');
+            paper.style.maxHeight = '';
+        }
+    }
+
+    // ================================================================
+    // CLOCK
+    // ================================================================
+
+    function updateClock() {
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        document.getElementById('clockDisplay').textContent = `${h}:${m}`;
+    }
+    setInterval(updateClock, 10000);
+    updateClock();
+
+    // ================================================================
+    // TOAST
+    // ================================================================
+
+    let toastTimer = null;
+
+    function showToast(msg, type = '') {
+        const el = document.getElementById('toast');
+        el.textContent = msg;
+        el.className = 'toast show' + (type ? ' ' + type : '');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+    }
+
+    // ================================================================
+    // INIT
+    // ================================================================
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderPrint();
+    });
 </script>
+
 </body>
 </html>
