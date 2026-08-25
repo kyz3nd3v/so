@@ -497,9 +497,60 @@
             margin-right: 2px;
         }
 
+        /* ===== CATEGORY TABS ===== */
+        .category-tabs {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding: 4px 0 10px;
+            margin-bottom: 4px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .category-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-tabs .tab-btn {
+            flex: 0 0 auto;
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--divider);
+            background: var(--badge-bg);
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-family: var(--font);
+        }
+
+        .category-tabs .tab-btn.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.2);
+        }
+
+        .category-tabs .tab-btn .count {
+            font-size: 10px;
+            opacity: 0.6;
+            margin-left: 4px;
+        }
+
+        .category-tabs .tab-btn.active .count {
+            opacity: 0.8;
+        }
+
+        .category-tabs .tab-btn:active {
+            transform: scale(0.94);
+        }
+
         /* ===== STOCK LIST ===== */
         .stock-group {
-            margin-top: 14px;
+            margin-top: 4px;
         }
 
         .stock-group:first-child {
@@ -516,6 +567,7 @@
             border-bottom: 0.5px solid var(--divider);
             margin-bottom: 4px;
             transition: var(--theme-transition);
+            display: none;
         }
 
         .stock-item {
@@ -568,8 +620,19 @@
             border-color: rgba(255, 149, 0, 0.08);
         }
 
+        .stock-item .qty-badge.empty-stock {
+            background: rgba(255, 59, 48, 0.12);
+            color: var(--danger);
+            border-color: rgba(255, 59, 48, 0.15);
+            text-decoration: line-through;
+        }
+
         body.dark .stock-item .qty-badge.quarter {
             background: rgba(255, 149, 0, 0.15);
+        }
+
+        body.dark .stock-item .qty-badge.empty-stock {
+            background: rgba(255, 59, 48, 0.2);
         }
 
         .stock-item .actions {
@@ -597,6 +660,35 @@
 
         .stock-item .actions .del:hover {
             color: var(--danger);
+        }
+
+        .stock-item .actions .quick-empty {
+            background: none;
+            border: 1px solid var(--divider);
+            border-radius: 4px;
+            padding: 0 6px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.15s;
+            line-height: 18px;
+        }
+
+        .stock-item .actions .quick-empty:hover {
+            border-color: var(--danger);
+            color: var(--danger);
+            background: rgba(255, 59, 48, 0.05);
+        }
+
+        .stock-item .actions .quick-empty:active {
+            transform: scale(0.92);
+        }
+
+        .stock-item .actions .quick-empty.empty-active {
+            border-color: var(--danger);
+            color: var(--danger);
+            background: rgba(255, 59, 48, 0.08);
         }
 
         .empty-state {
@@ -648,6 +740,11 @@
             border-radius: 999px;
             transition: var(--theme-transition);
             font-variant-numeric: tabular-nums;
+        }
+
+        .order-item .qty.empty-order {
+            background: rgba(255, 59, 48, 0.12);
+            color: var(--danger);
         }
 
         /* ===== TOAST ===== */
@@ -854,6 +951,10 @@
                 font-size: 14px;
                 padding: 5px 12px;
             }
+            .category-tabs .tab-btn {
+                font-size: 11px;
+                padding: 5px 12px;
+            }
         }
 
         /* ===== DIVIDER ===== */
@@ -917,15 +1018,18 @@
         /* ===== PRINT STOCK MODAL ===== */
         .print-modal {
             align-items: center;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.5);
         }
 
         .print-modal .modal-box {
             max-width: 480px;
-            padding: 20px 20px 16px;
+            padding: 16px 16px 16px;
             background: var(--modal-bg);
             border-radius: 16px;
             transform: translateY(0) scale(0.96);
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .print-modal.open .modal-box {
@@ -934,42 +1038,61 @@
 
         .print-paper {
             background: var(--card);
-            padding: 24px 20px;
+            padding: 20px 16px;
             border-radius: 8px;
             box-shadow: inset 0 0 0 1px var(--divider);
-            margin-bottom: 16px;
-            max-height: 60vh;
-            overflow-y: auto;
+            margin-bottom: 12px;
             font-family: var(--font);
             transition: var(--theme-transition);
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            min-height: 300px;
         }
 
         .print-paper .paper-header {
             text-align: center;
             border-bottom: 2px solid var(--text);
-            padding-bottom: 8px;
-            margin-bottom: 12px;
+            padding-bottom: 6px;
+            margin-bottom: 10px;
             transition: var(--theme-transition);
         }
 
         .print-paper .paper-header h2 {
-            font-size: 17px;
-            font-weight: 700;
-            letter-spacing: 0.3px;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 1px;
             color: var(--text);
             transition: var(--theme-transition);
+            text-transform: uppercase;
         }
 
         .print-paper .paper-header .date {
             font-size: 12px;
             color: var(--muted);
-            font-weight: 400;
+            font-weight: 500;
             margin-top: 2px;
             transition: var(--theme-transition);
+            letter-spacing: 0.5px;
+        }
+
+        .print-paper .paper-content {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .print-paper .paper-content .slide-wrapper {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+
+        .print-paper .slide-page {
+            min-width: 100%;
+            padding: 4px 0;
         }
 
         .print-paper .paper-group {
-            margin-top: 12px;
+            margin-top: 6px;
         }
 
         .print-paper .paper-group:first-child {
@@ -977,22 +1100,22 @@
         }
 
         .print-paper .paper-group-title {
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             color: var(--muted);
             border-bottom: 1px solid var(--divider);
-            padding-bottom: 4px;
-            margin-bottom: 6px;
+            padding-bottom: 3px;
+            margin-bottom: 4px;
             transition: var(--theme-transition);
         }
 
         .print-paper .paper-item {
             display: flex;
             justify-content: space-between;
-            padding: 4px 0;
-            font-size: 14px;
+            padding: 3px 0;
+            font-size: 13px;
             border-bottom: 0.5px solid var(--divider);
             transition: var(--theme-transition);
         }
@@ -1013,6 +1136,11 @@
             transition: var(--theme-transition);
         }
 
+        .print-paper .paper-item .qty.empty-print {
+            color: var(--danger);
+            text-decoration: line-through;
+        }
+
         .print-paper .paper-empty {
             text-align: center;
             color: var(--muted);
@@ -1023,56 +1151,85 @@
 
         .print-paper .paper-footer {
             text-align: center;
-            font-size: 10px;
+            font-size: 9px;
             color: var(--muted);
             border-top: 1px solid var(--divider);
-            padding-top: 8px;
-            margin-top: 12px;
+            padding-top: 6px;
+            margin-top: 8px;
             transition: var(--theme-transition);
+        }
+
+        .print-paper .slide-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 6px 0 2px;
+        }
+
+        .print-paper .slide-indicators .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--divider);
+            transition: var(--theme-transition);
+            cursor: pointer;
+            border: none;
+            padding: 0;
+        }
+
+        .print-paper .slide-indicators .dot.active {
+            background: var(--accent);
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        .print-paper .slide-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0 0;
+        }
+
+        .print-paper .slide-nav .nav-btn {
+            background: var(--badge-bg);
+            border: 0.5px solid var(--divider);
+            border-radius: 6px;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: var(--theme-transition);
+        }
+
+        .print-paper .slide-nav .nav-btn:active {
+            transform: scale(0.94);
+        }
+
+        .print-paper .slide-nav .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .print-paper .slide-nav .page-info {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 500;
         }
 
         .print-modal .row .btn {
             flex: 1;
         }
 
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            .print-paper,
-            .print-paper * {
-                visibility: visible;
-            }
-            .print-paper {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                max-height: none;
-                overflow: visible;
-                padding: 30px 40px;
-                box-shadow: none;
-                border: none;
-                background: #fff;
-            }
-            .print-modal .modal-box,
-            .print-modal .row,
-            .print-modal .btn {
-                display: none !important;
-            }
-            .print-modal {
-                background: #fff !important;
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-                padding: 0 !important;
-            }
-            .print-modal.open {
-                opacity: 1 !important;
-                visibility: visible !important;
-                position: fixed;
-                inset: 0;
-                z-index: 9999;
-            }
+        .btn-save-image {
+            background: #34c759;
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(52, 199, 89, 0.2);
+            transition: var(--theme-transition), transform 0.12s;
+        }
+        .btn-save-image:hover {
+            background: #28a745;
         }
 
         /* ===== CONFIRM TIMER ===== */
@@ -1236,14 +1393,14 @@
             <div class="cafe-row">
                 <span class="cafe-name-display" id="cafeNameDisplay" onclick="openCafeNameModal()">
                     Kafe Saya
-                    <span class="edit-hint">✎</span>
+                    <span class="edit-hint"></span>
                 </span>
                 <div class="cafe-actions">
                     <button class="btn btn-save-cafe" onclick="exportStockToFile()">
-                        <span class="sym">⬇</span> Simpan Stok
+                        <span class="sym"></span> Simpan
                     </button>
                     <button class="btn btn-load-cafe" onclick="importStockFromFile()">
-                        <span class="sym">⬆</span> Muat Stok
+                        <span class="sym"></span> Muat
                     </button>
                 </div>
             </div>
@@ -1259,7 +1416,7 @@
                 Stok Barang
                 <span class="badge-stock" id="stockCountBadge">0</span>
             </div>
-            <div class="card-desc">Tambahkan item dengan <strong>kategori</strong> dan <strong>jumlah</strong>. Jumlah <strong>1/4</strong> tetap di kategori asalnya.</div>
+            <div class="card-desc">Tambahkan item dengan <strong>kategori</strong> dan <strong>jumlah</strong>. Klik <strong>−</strong> untuk tandai habis.</div>
 
             <!-- Form -->
             <div class="field">
@@ -1291,6 +1448,9 @@
 
             <div class="subtle-divider"></div>
 
+            <!-- ===== CATEGORY TABS ===== -->
+            <div class="category-tabs" id="categoryTabs"></div>
+
             <!-- ===== STOCK LIST ===== -->
             <div id="stockListContainer">
                 <div class="empty-state"><span class="big">—</span>Tidak ada stok.<br />Tambahkan barang di atas.</div>
@@ -1300,7 +1460,7 @@
             <!-- ===== ACTION ROW ===== -->
             <div class="action-row">
                 <button class="btn btn-sm btn-secondary" onclick="refreshStockList()">⟳ Segarkan</button>
-                <button class="btn btn-sm btn-secondary" onclick="openPrintModal()">⌕ Print</button>
+                <button class="btn btn-sm btn-secondary" onclick="openPrintModal()">⌕ Cetak</button>
                 <button class="btn btn-sm btn-danger" id="clearAllBtn" onclick="confirmClearAll()">✕ Hapus Semua</button>
             </div>
         </div>
@@ -1311,10 +1471,10 @@
                 Order
                 <span class="badge-order" id="orderCountBadge">0</span>
             </div>
-            <div class="card-desc">Item dengan stok <strong>1/4</strong> otomatis masuk ke daftar order.</div>
+            <div class="card-desc">Item yang <strong>habis</strong> (—) atau <strong>1/4</strong> otomatis masuk ke daftar order.</div>
 
             <div id="orderListContainer">
-                <div class="empty-state" id="orderEmptyState"><span class="big">—</span>Tidak ada item 1/4.</div>
+                <div class="empty-state" id="orderEmptyState"><span class="big">—</span>Tidak ada item order.</div>
             </div>
 
             <div class="order-action-row">
@@ -1403,21 +1563,32 @@
             </div>
         </div>
 
-        <!-- ===== MODAL: PRINT STOCK ===== -->
+        <!-- ===== MODAL: PRINT STOCK with SLIDES ===== -->
         <div id="printModal" class="modal-overlay print-modal">
             <div class="modal-box">
                 <div class="title">Cetak Stok</div>
-                <div class="desc">Tampilan kertas siap cetak. Gunakan fitur print browser untuk mencetak.</div>
-                <div class="print-paper" id="printPaper"></div>
-                <div class="row">
-                    <button class="btn btn-secondary" onclick="closePrintModal()">Tutup</button>
-                    <button class="btn btn-primary" onclick="window.print()">🖨 Print</button>
+                <div class="desc">Maksimal 20 baris per slide. Gunakan navigasi untuk melihat semua.</div>
+                <div class="print-paper" id="printPaper">
+                    <div class="paper-content" id="paperContent">
+                        <div class="slide-wrapper" id="slideWrapper"></div>
+                    </div>
+                    <div class="slide-indicators" id="slideIndicators"></div>
+                    <div class="slide-nav">
+                        <button class="nav-btn" id="prevSlideBtn" onclick="prevSlide()">◀ Sebelum</button>
+                        <span class="page-info" id="pageInfo">1 / 1</span>
+                        <button class="nav-btn" id="nextSlideBtn" onclick="nextSlide()">Selanjutnya ▶</button>
+                    </div>
+                </div>
+                <div class="row" style="gap:6px;">
+                    <button class="btn btn-secondary btn-sm" onclick="closePrintModal()">Tutup</button>
+                    <button class="btn btn-save-image btn-sm" onclick="savePrintAsImage()">Simpan</button>
                 </div>
             </div>
         </div>
 
     </div>
 
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
         // ================================================================
         //  THEME TOGGLE
@@ -1453,6 +1624,19 @@
         //  DATA LAYER
         // ================================================================
 
+        let emptyItems = new Set();
+
+        function loadEmptyItems() {
+            try {
+                const data = JSON.parse(localStorage.getItem('cafe_empty_items') || '[]');
+                emptyItems = new Set(data);
+            } catch { emptyItems = new Set(); }
+        }
+
+        function saveEmptyItems() {
+            localStorage.setItem('cafe_empty_items', JSON.stringify([...emptyItems]));
+        }
+
         function getStock() {
             try {
                 const raw = localStorage.getItem('cafe_stock') || '{}';
@@ -1480,16 +1664,24 @@
             localStorage.setItem('cafe_name', name);
         }
 
+        loadEmptyItems();
+
         // ================================================================
-        //  ORDER — generated from stock (items with qty 1/4)
+        //  ORDER — items with qty 1/4 OR marked as empty
         // ================================================================
 
         function getOrderItems() {
             const stock = getStock();
             const items = [];
             for (const [name, data] of Object.entries(stock)) {
-                if (data.qty === '1/4') {
-                    items.push({ name, qty: data.qty, category: data.category || 'Umum' });
+                const isEmpty = emptyItems.has(name);
+                if (isEmpty || data.qty === '1/4') {
+                    items.push({
+                        name,
+                        qty: isEmpty ? '—' : data.qty,
+                        category: data.category || 'Umum',
+                        isEmpty
+                    });
                 }
             }
             return items;
@@ -1499,9 +1691,10 @@
         //  RENDER
         // ================================================================
 
+        let selectedCategory = 'all';
+
         function renderStockList() {
             const stock = getStock();
-            // No automatic category change for 1/4
             saveStock(stock);
 
             const container = document.getElementById('stockListContainer');
@@ -1512,39 +1705,36 @@
             if (!keys.length) {
                 container.innerHTML =
                     `<div class="empty-state"><span class="big">—</span>Tidak ada stok.<br />Tambahkan barang di atas.</div>`;
+                document.getElementById('categoryTabs').innerHTML = '';
                 renderOrderList();
                 return;
             }
 
+            // Build groups
             const groups = {};
             for (const name of keys) {
                 const item = stock[name];
                 const cat = item.category || 'Umum';
                 if (!groups[cat]) groups[cat] = [];
-                groups[cat].push({ name, ...item });
+                groups[cat].push({ name, ...item, isEmpty: emptyItems.has(name) });
             }
 
-            // Urutkan item di setiap kategori secara abjad (A-Z), dengan prioritas untuk "Coffe Beans" dan "Fresh Milk"
+            // Sort items within each category
             for (const cat in groups) {
                 groups[cat].sort((a, b) => {
-                    // Definisikan daftar item prioritas
-                    const priorityItems = ['Coffe Beans', 'Fresh Milk'];
+                    const priorityItems = ['Coffe Beans', 'Fresh Milk', 'Creamer Milk', 'Whipping Cream'];
                     const aIsPriority = priorityItems.includes(a.name);
                     const bIsPriority = priorityItems.includes(b.name);
 
-                    // Jika keduanya prioritas atau keduanya bukan prioritas, urutkan abjad
                     if (aIsPriority === bIsPriority) {
                         return a.name.localeCompare(b.name);
                     }
-
-                    // Jika 'a' prioritas dan 'b' bukan, 'a' harus di atas
                     if (aIsPriority) return -1;
-                    // Jika 'b' prioritas dan 'a' bukan, 'b' harus di atas
                     return 1;
                 });
             }
 
-            let html = '';
+            // Build category tabs
             const categoryOrder = ['Urgent Stock', 'FIND', 'SYRUP', 'EQUIPMENT', 'Umum'];
             const sortedCats = Object.keys(groups).sort((a, b) => {
                 const ia = categoryOrder.indexOf(a);
@@ -1555,28 +1745,68 @@
                 return ia - ib;
             });
 
+            let tabsHtml = `<button class="tab-btn ${selectedCategory === 'all' ? 'active' : ''}" onclick="selectCategory('all')">Semua <span class="count">(${keys.length})</span></button>`;
             for (const cat of sortedCats) {
-                html += `<div class="stock-group"><div class="stock-group-header">${escapeHtml(cat)}</div>`;
-                for (const item of groups[cat]) {
-                    const qty = item.qty || '1';
-                    const isQuarter = qty === '1/4';
-                    html += `
-                            <div class="stock-item">
-                                <span class="name">${escapeHtml(item.name)}</span>
-                                <span class="qty-badge ${isQuarter ? 'quarter' : ''}" 
-                                      onclick="openEditItemModal('${escapeHtml(item.name)}')">
-                                    ${escapeHtml(qty)}
-                                </span>
-                                <div class="actions">
-                                    <button class="del" onclick="confirmDeleteItem('${escapeHtml(item.name)}')" title="Hapus">✕</button>
-                                </div>
-                            </div>
-                        `;
-                }
-                html += `</div>`;
+                const count = groups[cat].length;
+                tabsHtml +=
+                    `<button class="tab-btn ${selectedCategory === cat ? 'active' : ''}" onclick="selectCategory('${cat}')">${cat} <span class="count">(${count})</span></button>`;
             }
-            container.innerHTML = html;
+            document.getElementById('categoryTabs').innerHTML = tabsHtml;
+
+            // Render items based on selected category
+            let html = '';
+            if (selectedCategory === 'all') {
+                for (const cat of sortedCats) {
+                    html += `<div class="stock-group"><div class="stock-group-header">${escapeHtml(cat)}</div>`;
+                    for (const item of groups[cat]) {
+                        html += renderStockItem(item);
+                    }
+                    html += `</div>`;
+                }
+            } else {
+                if (groups[selectedCategory]) {
+                    html += `<div class="stock-group">`;
+                    for (const item of groups[selectedCategory]) {
+                        html += renderStockItem(item);
+                    }
+                    html += `</div>`;
+                } else {
+                    html =
+                        `<div class="empty-state"><span class="big">—</span>Tidak ada item di kategori ini.</div>`;
+                }
+            }
+
+            container.innerHTML = html || `<div class="empty-state"><span class="big">—</span>Tidak ada item.</div>`;
             renderOrderList();
+        }
+
+        function renderStockItem(item) {
+            const qty = item.qty || '1';
+            const isQuarter = qty === '1/4';
+            const isEmpty = item.isEmpty;
+            const displayQty = isEmpty ? '—' : qty;
+            return `
+                    <div class="stock-item">
+                        <span class="name">${escapeHtml(item.name)}</span>
+                        <span class="qty-badge ${isQuarter ? 'quarter' : ''} ${isEmpty ? 'empty-stock' : ''}" 
+                              onclick="openEditItemModal('${escapeHtml(item.name)}')">
+                            ${escapeHtml(displayQty)}
+                        </span>
+                        <div class="actions">
+                            <button class="quick-empty ${isEmpty ? 'empty-active' : ''}" 
+                                    onclick="toggleEmptyItem('${escapeHtml(item.name)}')" 
+                                    title="Tandai habis / pulihkan">
+                                ${isEmpty ? '↻' : '−'}
+                            </button>
+                            <button class="del" onclick="confirmDeleteItem('${escapeHtml(item.name)}')" title="Hapus">✕</button>
+                        </div>
+                    </div>
+                `;
+        }
+
+        function selectCategory(category) {
+            selectedCategory = category;
+            renderStockList();
         }
 
         function renderOrderList() {
@@ -1586,7 +1816,7 @@
             badge.textContent = items.length;
 
             if (!items.length) {
-                container.innerHTML = `<div class="empty-state" id="orderEmptyState"><span class="big">—</span>Tidak ada item 1/4.</div>`;
+                container.innerHTML = `<div class="empty-state" id="orderEmptyState"><span class="big">—</span>Tidak ada item order.</div>`;
                 return;
             }
 
@@ -1595,7 +1825,7 @@
                 html += `
                         <div class="order-item">
                             <span class="name">${escapeHtml(item.name)}</span>
-                            <span class="qty">${escapeHtml(item.qty)}</span>
+                            <span class="qty ${item.isEmpty ? 'empty-order' : ''}">${escapeHtml(item.qty)}</span>
                         </div>
                     `;
             });
@@ -1606,7 +1836,7 @@
         function updateCafeNameDisplay() {
             const name = getCafeName();
             document.getElementById('cafeNameDisplay').innerHTML = escapeHtml(name) +
-                ' <span class="edit-hint">✎</span>';
+                ' <span class="edit-hint"></span>';
             document.getElementById('cafeHeaderName').textContent = name;
         }
 
@@ -1619,6 +1849,25 @@
             const div = document.createElement('div');
             div.textContent = str;
             return div.innerHTML;
+        }
+
+        // ================================================================
+        //  TOGGLE EMPTY ITEM
+        // ================================================================
+
+        function toggleEmptyItem(name) {
+            if (emptyItems.has(name)) {
+                emptyItems.delete(name);
+            } else {
+                emptyItems.add(name);
+            }
+            saveEmptyItems();
+            renderStockList();
+            const stock = getStock();
+            const item = stock[name];
+            if (item) {
+                showToast(`${name} ${emptyItems.has(name) ? 'ditandai habis (—)' : 'dipulihkan'}`, 'success');
+            }
         }
 
         // ================================================================
@@ -1652,10 +1901,13 @@
                 return;
             }
 
-            // Tidak ada paksaan kategori untuk 1/4
             const stock = getStock();
             stock[name] = { qty, category };
             saveStock(stock);
+            if (emptyItems.has(name)) {
+                emptyItems.delete(name);
+                saveEmptyItems();
+            }
             nameInput.value = '';
             qtyInput.value = '1';
             renderStockList();
@@ -1667,6 +1919,10 @@
             if (!stock[name]) return;
             delete stock[name];
             saveStock(stock);
+            if (emptyItems.has(name)) {
+                emptyItems.delete(name);
+                saveEmptyItems();
+            }
             renderStockList();
             showToast(`✕ ${name} dihapus.`, 'success');
         }
@@ -1708,7 +1964,6 @@
                 return;
             }
 
-            // Tidak ada paksaan kategori untuk 1/4
             const stock = getStock();
             if (!stock[editTargetName]) { showToast('Item tidak ditemukan.', 'error'); return; }
 
@@ -1719,6 +1974,11 @@
                 }
                 stock[newName] = { qty: newQty, category: newCategory };
                 delete stock[editTargetName];
+                if (emptyItems.has(editTargetName)) {
+                    emptyItems.delete(editTargetName);
+                    emptyItems.add(newName);
+                    saveEmptyItems();
+                }
             } else {
                 stock[newName].qty = newQty;
                 stock[newName].category = newCategory;
@@ -1825,6 +2085,8 @@
 
         function executeResetStock() {
             saveStock({});
+            emptyItems.clear();
+            saveEmptyItems();
             renderStockList();
             cancelResetStock();
             showToast('✕ Semua stok dihapus.', 'success');
@@ -1836,7 +2098,7 @@
 
         function formatOrderForExport() {
             const items = getOrderItems();
-            if (!items.length) return 'Tidak ada item 1/4.';
+            if (!items.length) return 'Tidak ada item order.';
 
             const now = new Date();
             const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
@@ -1846,12 +2108,11 @@
             const dateStr = `${day} ${month} ${year}`;
 
             let txt = `ORDER BAR ${dateStr}\n\n`;
-            // Group by category
             const groups = {};
             for (const item of items) {
                 const cat = item.category || 'Umum';
                 if (!groups[cat]) groups[cat] = [];
-                groups[cat].push(item.name);
+                groups[cat].push({ name: item.name, qty: item.qty });
             }
             const categoryOrder = ['Urgent Stock', 'FIND', 'SYRUP', 'EQUIPMENT', 'Umum'];
             const sortedCats = Object.keys(groups).sort((a, b) => {
@@ -1864,8 +2125,8 @@
             });
             for (const cat of sortedCats) {
                 txt += `_${cat}_\n`;
-                for (const name of groups[cat]) {
-                    txt += `- ${name}\n`;
+                for (const item of groups[cat]) {
+                    txt += `- ${item.name} (${item.qty})\n`;
                 }
                 txt += '\n';
             }
@@ -1875,7 +2136,7 @@
         function copyOrderText() {
             const text = formatOrderForExport();
             if (!text || text.includes('Tidak ada item')) {
-                showToast('Tidak ada item 1/4 untuk disalin.', 'error');
+                showToast('Tidak ada item order untuk disalin.', 'error');
                 return;
             }
             copyText(text);
@@ -1885,7 +2146,7 @@
         function shareToWhatsApp() {
             const text = formatOrderForExport();
             if (!text || text.includes('Tidak ada item')) {
-                showToast('Tidak ada item 1/4 untuk dibagikan.', 'error');
+                showToast('Tidak ada item order untuk dibagikan.', 'error');
                 return;
             }
             const msg = `${text}\n\n— ${getCafeName()}`;
@@ -1895,54 +2156,67 @@
         }
 
         // ================================================================
-        //  PRINT STOCK
+        //  PRINT STOCK WITH SLIDES (max 20 items per slide, NO CATEGORY)
         // ================================================================
 
-        function openPrintModal() {
+        let currentSlide = 0;
+        let totalSlides = 0;
+        let slideData = [];
+
+        function buildSlideData() {
             const stock = getStock();
             const keys = Object.keys(stock);
-            const paper = document.getElementById('printPaper');
+            if (!keys.length) return [];
 
-            if (!keys.length) {
-                paper.innerHTML = `<div class="paper-empty">Tidak ada stok untuk dicetak.</div>`;
-                document.getElementById('printModal').classList.add('open');
+            // Flatten all items, sorted alphabetically with priority
+            const allItems = [];
+            for (const name of keys) {
+                const item = stock[name];
+                const isEmpty = emptyItems.has(name);
+                allItems.push({ name, qty: item.qty || '1', isEmpty, category: item.category || 'Umum' });
+            }
+
+            // Sort: priority items first, then alphabetical
+            allItems.sort((a, b) => {
+                const priorityItems = ['Coffe Beans', 'Fresh Milk', 'Creamer Milk', 'Whipping Cream'];
+                const aIsPriority = priorityItems.includes(a.name);
+                const bIsPriority = priorityItems.includes(b.name);
+
+                if (aIsPriority === bIsPriority) {
+                    return a.name.localeCompare(b.name);
+                }
+                if (aIsPriority) return -1;
+                return 1;
+            });
+
+            // Split into slides (max 20 items per slide)
+            const slides = [];
+            for (let i = 0; i < allItems.length; i += 20) {
+                slides.push(allItems.slice(i, i + 20));
+            }
+            return slides;
+        }
+
+        function renderPrintSlides() {
+            const slides = buildSlideData();
+            slideData = slides;
+            totalSlides = slides.length;
+            currentSlide = 0;
+
+            const wrapper = document.getElementById('slideWrapper');
+            const indicators = document.getElementById('slideIndicators');
+            const pageInfo = document.getElementById('pageInfo');
+
+            if (totalSlides === 0) {
+                wrapper.innerHTML = `<div class="paper-empty">Tidak ada stok untuk dicetak.</div>`;
+                indicators.innerHTML = '';
+                pageInfo.textContent = '0 / 0';
+                document.getElementById('prevSlideBtn').disabled = true;
+                document.getElementById('nextSlideBtn').disabled = true;
                 return;
             }
 
-            const groups = {};
-            for (const name of keys) {
-                const item = stock[name];
-                const cat = item.category || 'Umum';
-                if (!groups[cat]) groups[cat] = [];
-                groups[cat].push({ name, qty: item.qty || '1' });
-            }
-
-            // Urutkan item di setiap kategori secara abjad (A-Z), dengan prioritas untuk "Coffe Beans" dan "Fresh Milk"
-            for (const cat in groups) {
-                groups[cat].sort((a, b) => {
-                    const priorityItems = ['Coffe Beans', 'Fresh Milk'];
-                    const aIsPriority = priorityItems.includes(a.name);
-                    const bIsPriority = priorityItems.includes(b.name);
-
-                    if (aIsPriority === bIsPriority) {
-                        return a.name.localeCompare(b.name);
-                    }
-
-                    if (aIsPriority) return -1;
-                    return 1;
-                });
-            }
-
-            const categoryOrder = ['Urgent Stock', 'FIND', 'SYRUP', 'EQUIPMENT', 'Umum'];
-            const sortedCats = Object.keys(groups).sort((a, b) => {
-                const ia = categoryOrder.indexOf(a);
-                const ib = categoryOrder.indexOf(b);
-                if (ia === -1 && ib === -1) return a.localeCompare(b);
-                if (ia === -1) return 1;
-                if (ib === -1) return -1;
-                return ia - ib;
-            });
-
+            // Get current date
             const now = new Date();
             const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
             const day = String(now.getDate()).padStart(2, '0');
@@ -1951,33 +2225,146 @@
             const dateStr = `${day} ${month} ${year}`;
             const cafeName = getCafeName();
 
-            let html = `
-                    <div class="paper-header">
-                        <h2>DAFTAR STOK</h2>
-                        <div class="date">${cafeName} · ${dateStr}</div>
-                    </div>
-                `;
-
-            for (const cat of sortedCats) {
-                html += `<div class="paper-group"><div class="paper-group-title">${cat}</div>`;
-                for (const item of groups[cat]) {
+            let html = '';
+            for (let i = 0; i < totalSlides; i++) {
+                html += `<div class="slide-page">`;
+                // Add header with title and date
+                html += `
+                        <div class="paper-header">
+                            <h2>STOCK BAR</h2>
+                            <div class="date">${cafeName} · ${dateStr}</div>
+                        </div>
+                    `;
+                const slide = slides[i];
+                for (const item of slide) {
+                    const displayQty = item.isEmpty ? '—' : item.qty;
                     html += `
                             <div class="paper-item">
                                 <span class="name">${escapeHtml(item.name)}</span>
-                                <span class="qty">${escapeHtml(item.qty)}</span>
+                                <span class="qty ${item.isEmpty ? 'empty-print' : ''}">${escapeHtml(displayQty)}</span>
                             </div>
                         `;
                 }
+                html += `
+                        <div class="paper-footer">${cafeName} · ${dateStr}</div>
+                    `;
                 html += `</div>`;
             }
 
-            html += `<div class="paper-footer">Dicetak dari KafeBot · ${new Date().toLocaleString()}</div>`;
-            paper.innerHTML = html;
+            wrapper.innerHTML = html;
+            updateSlideIndicators();
+            updateSlidePosition();
+
+            document.getElementById('prevSlideBtn').disabled = totalSlides <= 1;
+            document.getElementById('nextSlideBtn').disabled = totalSlides <= 1;
+        }
+
+        function updateSlideIndicators() {
+            const indicators = document.getElementById('slideIndicators');
+            if (totalSlides <= 1) {
+                indicators.innerHTML = '';
+                return;
+            }
+            let html = '';
+            for (let i = 0; i < totalSlides; i++) {
+                html += `<button class="dot ${i === currentSlide ? 'active' : ''}" onclick="goToSlide(${i})"></button>`;
+            }
+            indicators.innerHTML = html;
+            document.getElementById('pageInfo').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function updateSlidePosition() {
+            const wrapper = document.getElementById('slideWrapper');
+            wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.getElementById('pageInfo').textContent = `${currentSlide + 1} / ${totalSlides}`;
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+            document.getElementById('prevSlideBtn').disabled = currentSlide === 0;
+            document.getElementById('nextSlideBtn').disabled = currentSlide >= totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlidePosition();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlidePosition();
+            }
+        }
+
+        function goToSlide(index) {
+            if (index >= 0 && index < totalSlides) {
+                currentSlide = index;
+                updateSlidePosition();
+            }
+        }
+
+        function openPrintModal() {
+            renderPrintSlides();
             document.getElementById('printModal').classList.add('open');
         }
 
         function closePrintModal() {
             document.getElementById('printModal').classList.remove('open');
+        }
+
+        // ================================================================
+        //  SAVE PRINT AS IMAGE
+        // ================================================================
+
+        async function savePrintAsImage() {
+            const paper = document.getElementById('printPaper');
+
+            showToast('⏳ Menyiapkan gambar...', '');
+
+            try {
+                const nav = paper.querySelector('.slide-nav');
+                const indicators = paper.querySelector('.slide-indicators');
+                const navHidden = nav.style.display;
+                const indicatorsHidden = indicators.style.display;
+                nav.style.display = 'none';
+                indicators.style.display = 'none';
+
+                const wrapper = document.getElementById('slideWrapper');
+                const transform = wrapper.style.transform;
+                wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+                await new Promise(resolve => setTimeout(resolve, 100));
+
+                const canvas = await html2canvas(paper, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: getTheme() === 'dark' ? '#2c2c2e' : '#ffffff',
+                    logging: false,
+                    allowTaint: true,
+                    width: paper.scrollWidth,
+                    height: paper.scrollHeight
+                });
+
+                nav.style.display = navHidden || '';
+                indicators.style.display = indicatorsHidden || '';
+                wrapper.style.transform = transform;
+
+                const link = document.createElement('a');
+                link.download = `stockbar_${getCafeName().replace(/[^a-zA-Z0-9]/g, '_')}_${currentSlide + 1}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                showToast('✅ Gambar berhasil disimpan!', 'success');
+            } catch (err) {
+                console.error(err);
+                showToast('❌ Gagal menyimpan gambar. Coba lagi.', 'error');
+                const nav = paper.querySelector('.slide-nav');
+                const indicators = paper.querySelector('.slide-indicators');
+                nav.style.display = '';
+                indicators.style.display = '';
+            }
         }
 
         // ================================================================
@@ -2090,7 +2477,8 @@
                 const item = stock[name];
                 const cat = item.category || 'Umum';
                 const qty = item.qty || '1';
-                content += `${name}|${cat}|${qty}\n`;
+                const isEmpty = emptyItems.has(name) ? '|habis' : '';
+                content += `${name}|${cat}|${qty}${isEmpty}\n`;
             }
 
             const fileDate = now.toISOString().slice(0, 10);
@@ -2125,6 +2513,7 @@
         function parseAndLoadStock(content) {
             const lines = content.split(/\r?\n/);
             const stock = {};
+            const emptyNames = [];
             let cafeName = null;
             let dataCount = 0;
 
@@ -2141,12 +2530,14 @@
                 }
 
                 const parts = trimmed.split('|');
-                if (parts.length === 3) {
+                if (parts.length >= 3) {
                     const name = parts[0].trim();
                     const category = parts[1].trim();
                     const qty = parts[2].trim();
+                    const isEmptyFlag = parts.length > 3 && parts[3].trim() === 'habis';
                     if (name && category && qty && /^\d+$|^\d+\/\d+$/.test(qty)) {
                         stock[name] = { category, qty };
+                        if (isEmptyFlag) emptyNames.push(name);
                         dataCount++;
                     }
                 }
@@ -2167,8 +2558,9 @@
                 return;
             }
 
-            // Tidak ada aturan urgent, biarkan kategori sesuai file
             saveStock(stock);
+            emptyItems = new Set(emptyNames);
+            saveEmptyItems();
 
             if (cafeName) {
                 setCafeName(cafeName);
