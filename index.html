@@ -2738,12 +2738,15 @@
             const slides = buildStockSlideData();
             stockSlideData = slides;
             stockTotalSlides = slides.length;
-            stockCurrentSlide = 0;
+            // Reset to first slide when re-rendering
+            if (stockCurrentSlide >= stockTotalSlides) {
+                stockCurrentSlide = 0;
+            }
 
             const container = document.getElementById('stockImageContent');
 
             if (stockTotalSlides === 0) {
-                container.innerHTML = `<div class="stock-empty">Tidak ada stok untuk dicetak.</div>`;
+                container.innerHTML = `<div class="stock-empty" style="text-align:center;color:var(--muted);padding:30px 0;">Tidak ada stok untuk dicetak.</div>`;
                 document.getElementById('stockPageInfo').textContent = '0 / 0';
                 document.getElementById('stockPrevBtn').disabled = true;
                 document.getElementById('stockNextBtn').disabled = true;
@@ -2767,6 +2770,9 @@
                 paper.classList.add('small-items');
             }
 
+            const slide = slides[stockCurrentSlide];
+            let num = stockCurrentSlide * 15 + 1;
+
             let html = `
                 <div class="stock-header">
                     <h3>STOCK BAR</h3>
@@ -2783,8 +2789,6 @@
                     <tbody>
             `;
 
-            const slide = slides[stockCurrentSlide];
-            let num = stockCurrentSlide * 15 + 1;
             for (const item of slide) {
                 const displayQty = item.isEmpty ? '—' : item.qty;
                 const priorityMark = item.isPriority ? ' ★' : '';
@@ -2806,8 +2810,8 @@
 
             container.innerHTML = html;
             document.getElementById('stockPageInfo').textContent = `${stockCurrentSlide + 1} / ${stockTotalSlides}`;
-            document.getElementById('stockPrevBtn').disabled = stockCurrentSlide === 0;
-            document.getElementById('stockNextBtn').disabled = stockCurrentSlide >= stockTotalSlides - 1;
+            document.getElementById('stockPrevBtn').disabled = stockTotalSlides <= 1 || stockCurrentSlide === 0;
+            document.getElementById('stockNextBtn').disabled = stockTotalSlides <= 1 || stockCurrentSlide >= stockTotalSlides - 1;
         }
 
         function nextStockSlide() {
@@ -2825,6 +2829,7 @@
         }
 
         function openStockImageModal() {
+            stockCurrentSlide = 0;
             renderStockSlides();
             document.getElementById('stockImageModal').classList.add('open');
         }
