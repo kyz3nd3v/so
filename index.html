@@ -1141,7 +1141,7 @@
 
         .print-paper .paper-item {
             display: flex;
-            justify-content: space-between;
+            align-items: center;
             padding: 3px 0;
             font-size: 13px;
             border-bottom: 0.5px solid var(--divider);
@@ -1157,8 +1157,9 @@
             color: var(--muted);
             margin-right: 8px;
             font-size: 12px;
-            min-width: 24px;
+            min-width: 28px;
             opacity: 0.6;
+            flex-shrink: 0;
         }
 
         .print-paper .paper-item .name {
@@ -1176,6 +1177,7 @@
             font-size: 13px;
             min-width: 30px;
             text-align: right;
+            flex-shrink: 0;
         }
 
         .print-paper .paper-item .qty.empty-print {
@@ -1309,8 +1311,9 @@
             transition: var(--theme-transition);
             flex: 1;
             overflow-y: auto;
-            min-height: 150px;
-            max-height: 450px;
+            min-height: 200px;
+            max-height: 500px;
+            width: 100%;
         }
 
         .order-image-paper .order-header {
@@ -1723,7 +1726,7 @@
         <div id="printModal" class="modal-overlay print-modal">
             <div class="modal-box">
                 <div class="title">Cetak Stok</div>
-                <div class="desc">Maksimal 20 baris per slide. Gunakan navigasi untuk melihat semua.</div>
+                <div class="desc">Maksimal 15 baris per slide. Gunakan navigasi untuk melihat semua.</div>
                 <div class="print-paper" id="printPaper">
                     <div class="paper-content" id="paperContent">
                         <div class="slide-wrapper" id="slideWrapper"></div>
@@ -2433,6 +2436,12 @@
             showToast('⏳ Menyiapkan gambar order...', '');
 
             try {
+                // Temporarily remove max-height for full capture
+                const originalMaxHeight = paper.style.maxHeight;
+                paper.style.maxHeight = 'none';
+
+                await new Promise(resolve => setTimeout(resolve, 200));
+
                 const canvas = await html2canvas(paper, {
                     scale: 2,
                     useCORS: true,
@@ -2442,6 +2451,8 @@
                     width: paper.scrollWidth,
                     height: paper.scrollHeight
                 });
+
+                paper.style.maxHeight = originalMaxHeight;
 
                 const link = document.createElement('a');
                 const now = new Date();
@@ -2455,6 +2466,7 @@
             } catch (err) {
                 console.error(err);
                 showToast('❌ Gagal menyimpan gambar order.', 'error');
+                paper.style.maxHeight = '';
             }
         }
 
@@ -2468,7 +2480,7 @@
         }
 
         // ================================================================
-        //  PRINT STOCK WITH SLIDES (max 20 items per slide, NO CATEGORY)
+        //  PRINT STOCK WITH SLIDES (max 15 items per slide)
         // ================================================================
 
         let currentSlide = 0;
@@ -2501,10 +2513,11 @@
                 return 1;
             });
 
-            // Split into slides (max 20 items per slide)
+            // Split into slides (max 15 items per slide)
+            const ITEMS_PER_SLIDE = 15;
             const slides = [];
-            for (let i = 0; i < allItems.length; i += 20) {
-                slides.push(allItems.slice(i, i + 20));
+            for (let i = 0; i < allItems.length; i += ITEMS_PER_SLIDE) {
+                slides.push(allItems.slice(i, i + ITEMS_PER_SLIDE));
             }
             return slides;
         }
@@ -2547,7 +2560,7 @@
                         </div>
                     `;
                 const slide = slides[i];
-                let num = i * 20 + 1;
+                let num = i * 15 + 1;
                 for (const item of slide) {
                     const displayQty = item.isEmpty ? '—' : item.qty;
                     html += `
