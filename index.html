@@ -1834,15 +1834,15 @@
             <div class="card-desc">Nama kafe untuk identitas. Klik nama untuk mengubah.</div>
             <div class="cafe-row">
                 <span class="cafe-name-display" id="cafeNameDisplay" onclick="openCafeNameModal()">
-                    Kafe Saya
+                    Element Caffe
                     <span class="edit-hint">✎</span>
                 </span>
                 <div class="cafe-actions">
                     <button class="btn btn-save-cafe" onclick="exportStockToFile()">
-                        <span class="sym">⬇</span> Simpan Stok
+                        <span class="sym"></span> Save
                     </button>
                     <button class="btn btn-load-cafe" onclick="importStockFromFile()">
-                        <span class="sym">⬆</span> Muat Stok
+                        <span class="sym"></span> Load
                     </button>
                 </div>
             </div>
@@ -1907,9 +1907,9 @@
 
             <!-- ===== ACTION ROW ===== -->
             <div class="action-row">
-                <button class="btn btn-sm btn-secondary" onclick="refreshStockList()">⟳ Segarkan</button>
-                <button class="btn btn-sm btn-secondary" onclick="openStockImageModal()">⌕ Cetak</button>
-                <button class="btn btn-sm btn-danger" id="clearAllBtn" onclick="confirmClearAll()">✕ Hapus Semua</button>
+                <button class="btn btn-sm btn-secondary" onclick="refreshStockList()">Refesh</button>
+                <button class="btn btn-sm btn-secondary" onclick="openStockImageModal()">View</button>
+                <button class="btn btn-sm btn-danger" id="clearAllBtn" onclick="confirmClearAll()">✕ Reset</button>
             </div>
         </div>
 
@@ -2792,7 +2792,7 @@
 
             for (const item of slide) {
                 const displayQty = item.isEmpty ? '—' : item.qty;
-                const priorityMark = item.isPriority ? ' ★' : '';
+                const priorityMark = item.isPriority ? ' ' : '';
                 html += `
                     <tr>
                         <td class="col-num">${num}.</td>
@@ -2914,10 +2914,10 @@
                 link.href = roundedCanvas.toDataURL('image/png');
                 link.click();
 
-                showToast('✅ Gambar stok berhasil disimpan!', 'success');
+                showToast('✓ Success', 'success');
             } catch (err) {
                 console.error(err);
-                showToast('❌ Gagal menyimpan gambar stok.', 'error');
+                showToast('❌ Error.', 'error');
                 paper.style.maxHeight = '';
             }
         }
@@ -3058,11 +3058,11 @@
                 link.href = roundedCanvas.toDataURL('image/png');
                 link.click();
 
-                showToast('✅ Gambar order berhasil disimpan!', 'success');
+                showToast('✓ Success', 'success');
                 closeOrderImageModal();
             } catch (err) {
                 console.error(err);
-                showToast('❌ Gagal menyimpan gambar order.', 'error');
+                showToast('❌ Error.', 'error');
                 paper.style.maxHeight = '';
             }
         }
