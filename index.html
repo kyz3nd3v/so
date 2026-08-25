@@ -1510,6 +1510,30 @@
             flex: 0 1 auto;
             min-width: 70px;
         }
+
+        /* ===== PRIORITY TOGGLE ===== */
+        .priority-btn {
+            background: none;
+            border: 1px solid var(--divider);
+            border-radius: 4px;
+            padding: 0 6px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.15s;
+            line-height: 18px;
+        }
+
+        .priority-btn.priority-active {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(255, 149, 0, 0.08);
+        }
+
+        .priority-btn:active {
+            transform: scale(0.92);
+        }
     </style>
 </head>
 <body>
@@ -1799,6 +1823,7 @@
         // ================================================================
 
         let emptyItems = new Set();
+        let priorityItems = new Set();
 
         function loadEmptyItems() {
             try {
@@ -1809,6 +1834,17 @@
 
         function saveEmptyItems() {
             localStorage.setItem('cafe_empty_items', JSON.stringify([...emptyItems]));
+        }
+
+        function loadPriorityItems() {
+            try {
+                const data = JSON.parse(localStorage.getItem('cafe_priority_items') || '[]');
+                priorityItems = new Set(data);
+            } catch { priorityItems = new Set(); }
+        }
+
+        function savePriorityItems() {
+            localStorage.setItem('cafe_priority_items', JSON.stringify([...priorityItems]));
         }
 
         function getStock() {
@@ -1839,6 +1875,7 @@
         }
 
         loadEmptyItems();
+        loadPriorityItems();
 
         // ================================================================
         //  ORDER — items with qty 1/4 OR marked as empty
@@ -1854,7 +1891,8 @@
                         name,
                         qty: isEmpty ? '—' : data.qty,
                         category: data.category || 'Umum',
-                        isEmpty
+                        isEmpty,
+                        isPriority: priorityItems.has(name)
                     });
                 }
             }
@@ -1891,21 +1929,15 @@
                 const item = stock[name];
                 const cat = item.category || 'Umum';
                 if (!groups[cat]) groups[cat] = [];
-                groups[cat].push({ name, ...item, isEmpty: emptyItems.has(name) });
+                groups[cat].push({ name, ...item, isEmpty: emptyItems.has(name), isPriority: priorityItems.has(name) });
             }
 
-            // Sort items within each category with new priority
-            const priorityItems = ['Coffe Beans', 'Fresh Milk', 'Creamer Milk', 'Whipping Cream'];
+            // Sort items: priority first, then alphabetical
             for (const cat in groups) {
                 groups[cat].sort((a, b) => {
-                    const aIsPriority = priorityItems.includes(a.name);
-                    const bIsPriority = priorityItems.includes(b.name);
-
-                    if (aIsPriority === bIsPriority) {
-                        return a.name.localeCompare(b.name);
-                    }
-                    if (aIsPriority) return -1;
-                    return 1;
+                    if (a.isPriority && !b.isPriority) return -1;
+                    if (!a.isPriority && b.isPriority) return 1;
+                    return a.name.localeCompare(b.name);
                 });
             }
 
@@ -1980,6 +2012,7 @@
             const isQuarter = qty === '1/4';
             const isEmpty = item.isEmpty;
             const displayQty = isEmpty ? '—' : qty;
+            const isPriority = item.isPriority;
             return `
                     <div class="stock-item">
                         <span class="name">${escapeHtml(item.name)}</span>
@@ -1988,6 +2021,9 @@
                             ${escapeHtml(displayQty)}
                         </span>
                         <div class="actions">
+                            <button class="priority-btn ${isPriority ? 'priority-active' : ''}" 
+                                    onclick="togglePriority('${escapeHtml(item.name)}')" 
+                                    title="Prioritaskan item ini">★</button>
                             <button class="quick-empty ${isEmpty ? 'empty-active' : ''}" 
                                     onclick="toggleEmptyItem('${escapeHtml(item.name)}')" 
                                     title="Tandai habis / pulihkan">
@@ -2026,8 +2062,16 @@
                 return;
             }
 
+            // Filter out EQUIPMENT
+            const filteredItems = items.filter(item => item.category !== 'EQUIPMENT');
+
+            if (!filteredItems.length) {
+                container.innerHTML = `<div class="empty-state" id="orderEmptyState"><span class="big">—</span>Tidak ada item order (EQUIPMENT tidak ditampilkan).</div>`;
+                return;
+            }
+
             let html = '<div class="scroll-area">';
-            items.forEach((item) => {
+            filteredItems.forEach((item) => {
                 html += `
                         <div class="order-item">
                             <span class="name">${escapeHtml(item.name)}</span>
@@ -2055,6 +2099,25 @@
             const div = document.createElement('div');
             div.textContent = str;
             return div.innerHTML;
+        }
+
+        // ================================================================
+        //  TOGGLE PRIORITY
+        // ================================================================
+
+        function togglePriority(name) {
+            if (priorityItems.has(name)) {
+                priorityItems.delete(name);
+            } else {
+                priorityItems.add(name);
+            }
+            savePriorityItems();
+            renderStockList();
+            const stock = getStock();
+            const item = stock[name];
+            if (item) {
+                showToast(`${name} ${priorityItems.has(name) ? 'ditandai prioritas' : 'dihapus dari prioritas'}`, 'success');
+            }
         }
 
         // ================================================================
@@ -2129,6 +2192,10 @@
                 emptyItems.delete(name);
                 saveEmptyItems();
             }
+            if (priorityItems.has(name)) {
+                priorityItems.delete(name);
+                savePriorityItems();
+            }
             renderStockList();
             showToast(`✕ ${name} dihapus.`, 'success');
         }
@@ -2184,6 +2251,11 @@
                     emptyItems.delete(editTargetName);
                     emptyItems.add(newName);
                     saveEmptyItems();
+                }
+                if (priorityItems.has(editTargetName)) {
+                    priorityItems.delete(editTargetName);
+                    priorityItems.add(newName);
+                    savePriorityItems();
                 }
             } else {
                 stock[newName].qty = newQty;
@@ -2293,6 +2365,8 @@
             saveStock({});
             emptyItems.clear();
             saveEmptyItems();
+            priorityItems.clear();
+            savePriorityItems();
             renderStockList();
             cancelResetStock();
             showToast('✕ Semua stok dihapus.', 'success');
@@ -2306,6 +2380,10 @@
             const items = getOrderItems();
             if (!items.length) return 'Tidak ada item order.';
 
+            // Filter out EQUIPMENT
+            const filteredItems = items.filter(item => item.category !== 'EQUIPMENT');
+            if (!filteredItems.length) return 'Tidak ada item order (EQUIPMENT tidak ditampilkan).';
+
             const now = new Date();
             const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
             const day = String(now.getDate()).padStart(2, '0');
@@ -2313,9 +2391,9 @@
             const year = now.getFullYear();
             const dateStr = `${day} ${month} ${year}`;
 
-            let txt = `ORDER BAR ${dateStr}\n\n`;
+            let txt = `ORDER BAR\n${getCafeName()} · ${dateStr}\n\n`;
             const groups = {};
-            for (const item of items) {
+            for (const item of filteredItems) {
                 const cat = item.category || 'Umum';
                 if (!groups[cat]) groups[cat] = [];
                 groups[cat].push({ name: item.name, qty: item.qty });
@@ -2330,9 +2408,9 @@
                 return ia - ib;
             });
             for (const cat of sortedCats) {
-                txt += `_${cat}_\n`;
+                txt += `${cat}\n`;
                 for (const item of groups[cat]) {
-                    txt += `- ${item.name} (${item.qty})\n`;
+                    txt += `- ${item.name} — ${item.qty}\n`;
                 }
                 txt += '\n';
             }
@@ -2369,8 +2447,11 @@
             const items = getOrderItems();
             const container = document.getElementById('orderImageContent');
 
-            if (!items.length) {
-                container.innerHTML = `<div class="order-empty">Tidak ada item order.</div>`;
+            // Filter out EQUIPMENT
+            const filteredItems = items.filter(item => item.category !== 'EQUIPMENT');
+
+            if (!filteredItems.length) {
+                container.innerHTML = `<div class="order-empty">Tidak ada item order (EQUIPMENT tidak ditampilkan).</div>`;
                 document.getElementById('orderImageModal').classList.add('open');
                 return;
             }
@@ -2392,7 +2473,7 @@
 
             // Group by category
             const groups = {};
-            for (const item of items) {
+            for (const item of filteredItems) {
                 const cat = item.category || 'Umum';
                 if (!groups[cat]) groups[cat] = [];
                 groups[cat].push(item);
@@ -2472,7 +2553,8 @@
 
         function saveOrderAsImage() {
             const items = getOrderItems();
-            if (!items.length) {
+            const filtered = items.filter(item => item.category !== 'EQUIPMENT');
+            if (!filtered.length) {
                 showToast('Tidak ada item order untuk disimpan.', 'error');
                 return;
             }
@@ -2494,23 +2576,18 @@
 
             // Flatten all items, sorted with priority
             const allItems = [];
-            const priorityItems = ['Coffe Beans', 'Fresh Milk', 'Creamer Milk', 'Whipping Cream'];
             for (const name of keys) {
                 const item = stock[name];
                 const isEmpty = emptyItems.has(name);
-                allItems.push({ name, qty: item.qty || '1', isEmpty, category: item.category || 'Umum' });
+                allItems.push({ name, qty: item.qty || '1', isEmpty, category: item.category || 'Umum', isPriority: priorityItems
+                        .has(name) });
             }
 
             // Sort: priority items first, then alphabetical
             allItems.sort((a, b) => {
-                const aIsPriority = priorityItems.includes(a.name);
-                const bIsPriority = priorityItems.includes(b.name);
-
-                if (aIsPriority === bIsPriority) {
-                    return a.name.localeCompare(b.name);
-                }
-                if (aIsPriority) return -1;
-                return 1;
+                if (a.isPriority && !b.isPriority) return -1;
+                if (!a.isPriority && b.isPriority) return 1;
+                return a.name.localeCompare(b.name);
             });
 
             // Split into slides (max 15 items per slide)
@@ -2563,10 +2640,11 @@
                 let num = i * 15 + 1;
                 for (const item of slide) {
                     const displayQty = item.isEmpty ? '—' : item.qty;
+                    const priorityMark = item.isPriority ? ' ★' : '';
                     html += `
                             <div class="paper-item">
                                 <span class="num">${num}.</span>
-                                <span class="name">${escapeHtml(item.name)}</span>
+                                <span class="name">${escapeHtml(item.name)}${priorityMark}</span>
                                 <span class="qty ${item.isEmpty ? 'empty-print' : ''}">${escapeHtml(displayQty)}</span>
                             </div>
                         `;
@@ -2799,15 +2877,16 @@
             content += `# Cafe: ${cafeName}\n`;
             content += `# Date: ${dateStr}\n`;
             content += '#\n';
-            content += '# Format: nama_item|kategori|jumlah\n';
+            content += '# Format: nama_item|kategori|jumlah|prioritas|habis\n';
             content += '#\n';
 
             for (const name of keys) {
                 const item = stock[name];
                 const cat = item.category || 'Umum';
                 const qty = item.qty || '1';
-                const isEmpty = emptyItems.has(name) ? '|habis' : '';
-                content += `${name}|${cat}|${qty}${isEmpty}\n`;
+                const isPriority = priorityItems.has(name) ? '1' : '0';
+                const isEmpty = emptyItems.has(name) ? '1' : '0';
+                content += `${name}|${cat}|${qty}|${isPriority}|${isEmpty}\n`;
             }
 
             const fileDate = now.toISOString().slice(0, 10);
@@ -2843,6 +2922,7 @@
             const lines = content.split(/\r?\n/);
             const stock = {};
             const emptyNames = [];
+            const priorityNames = [];
             let cafeName = null;
             let dataCount = 0;
 
@@ -2863,17 +2943,20 @@
                     const name = parts[0].trim();
                     const category = parts[1].trim();
                     const qty = parts[2].trim();
-                    const isEmptyFlag = parts.length > 3 && parts[3].trim() === 'habis';
+                    const isPriority = parts.length > 3 ? parts[3].trim() === '1' : false;
+                    const isEmpty = parts.length > 4 ? parts[4].trim() === '1' : false;
+
                     if (name && category && qty && /^\d+$|^\d+\/\d+$/.test(qty)) {
                         stock[name] = { category, qty };
-                        if (isEmptyFlag) emptyNames.push(name);
+                        if (isEmpty) emptyNames.push(name);
+                        if (isPriority) priorityNames.push(name);
                         dataCount++;
                     }
                 }
             }
 
             if (!dataCount) {
-                showToast('Tidak ada data valid dalam file. Format: nama|kategori|jumlah', 'error');
+                showToast('Tidak ada data valid dalam file. Format: nama|kategori|jumlah|prioritas|habis', 'error');
                 return;
             }
 
@@ -2890,6 +2973,8 @@
             saveStock(stock);
             emptyItems = new Set(emptyNames);
             saveEmptyItems();
+            priorityItems = new Set(priorityNames);
+            savePriorityItems();
 
             if (cafeName) {
                 setCafeName(cafeName);
