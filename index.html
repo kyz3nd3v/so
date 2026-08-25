@@ -548,6 +548,38 @@
             transform: scale(0.94);
         }
 
+        /* ===== SEARCH BAR ===== */
+        .search-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .search-bar .input {
+            flex: 1;
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        .search-bar .btn {
+            flex: 0 0 auto;
+            padding: 8px 14px;
+            font-size: 13px;
+            width: auto;
+        }
+
+        .search-bar .btn-clear {
+            background: none;
+            border: 1px solid var(--divider);
+            color: var(--muted);
+            padding: 8px 10px;
+            font-size: 14px;
+        }
+
+        .search-bar .btn-clear:hover {
+            background: var(--hover-bg);
+        }
+
         /* ===== STOCK LIST ===== */
         .stock-group {
             margin-top: 4px;
@@ -567,7 +599,6 @@
             border-bottom: 0.5px solid var(--divider);
             margin-bottom: 4px;
             transition: var(--theme-transition);
-            display: none;
         }
 
         .stock-item {
@@ -955,6 +986,13 @@
                 font-size: 11px;
                 padding: 5px 12px;
             }
+            .search-bar .input {
+                font-size: 12px;
+            }
+            .search-bar .btn {
+                font-size: 12px;
+                padding: 8px 10px;
+            }
         }
 
         /* ===== DIVIDER ===== */
@@ -1240,6 +1278,66 @@
             background: #28a745;
         }
 
+        /* ===== ORDER IMAGE SAVE ===== */
+        .order-image-paper {
+            background: var(--card);
+            padding: 16px 14px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 0 1px var(--divider);
+            margin-bottom: 10px;
+            font-family: var(--font);
+            transition: var(--theme-transition);
+            min-height: 100px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .order-image-paper .order-header {
+            text-align: center;
+            border-bottom: 2px solid var(--text);
+            padding-bottom: 6px;
+            margin-bottom: 8px;
+        }
+
+        .order-image-paper .order-header h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .order-image-paper .order-header .date {
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        .order-image-paper .order-item-print {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 12px;
+            border-bottom: 0.5px solid var(--divider);
+        }
+
+        .order-image-paper .order-item-print:last-child {
+            border-bottom: 0;
+        }
+
+        .order-image-paper .order-item-print .name {
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .order-image-paper .order-item-print .qty {
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        .order-image-paper .order-empty {
+            text-align: center;
+            color: var(--muted);
+            padding: 20px 0;
+        }
+
         /* ===== CONFIRM TIMER ===== */
         .confirm-timer {
             font-size: 40px;
@@ -1361,10 +1459,11 @@
             gap: 6px;
             margin-top: 10px;
             justify-content: flex-end;
+            flex-wrap: wrap;
         }
         .order-action-row .btn {
             flex: 0 1 auto;
-            min-width: 80px;
+            min-width: 70px;
         }
     </style>
 </head>
@@ -1456,6 +1555,12 @@
 
             <div class="subtle-divider"></div>
 
+            <!-- ===== SEARCH BAR ===== -->
+            <div class="search-bar">
+                <input id="searchInput" class="input" placeholder="🔍 Cari item..." oninput="filterStock()" />
+                <button class="btn btn-secondary btn-sm btn-clear" onclick="clearSearch()" title="Hapus pencarian">✕</button>
+            </div>
+
             <!-- ===== CATEGORY TABS ===== -->
             <div class="category-tabs" id="categoryTabs"></div>
 
@@ -1488,6 +1593,7 @@
             <div class="order-action-row">
                 <button class="btn btn-sm btn-secondary" onclick="copyOrderText()">⌘ Salin</button>
                 <button class="btn btn-sm btn-whatsapp" onclick="shareToWhatsApp()">◆ WhatsApp</button>
+                <button class="btn btn-sm btn-save-image" onclick="saveOrderAsImage()">⬇ Simpan Gambar</button>
             </div>
         </div>
 
@@ -1590,6 +1696,21 @@
                 <div class="row" style="gap:6px;">
                     <button class="btn btn-secondary btn-sm" onclick="closePrintModal()">Tutup</button>
                     <button class="btn btn-save-image btn-sm" onclick="savePrintAsImage()">⬇ Simpan Gambar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MODAL: ORDER IMAGE ===== -->
+        <div id="orderImageModal" class="modal-overlay print-modal">
+            <div class="modal-box">
+                <div class="title">Order</div>
+                <div class="desc">Simpan daftar order sebagai gambar.</div>
+                <div class="order-image-paper" id="orderImagePaper">
+                    <div id="orderImageContent"></div>
+                </div>
+                <div class="row" style="gap:6px;">
+                    <button class="btn btn-secondary btn-sm" onclick="closeOrderImageModal()">Tutup</button>
+                    <button class="btn btn-save-image btn-sm" onclick="saveOrderImageNow()">⬇ Simpan Gambar</button>
                 </div>
             </div>
         </div>
@@ -1700,6 +1821,7 @@
         // ================================================================
 
         let selectedCategory = 'all';
+        let searchQuery = '';
 
         function renderStockList() {
             const stock = getStock();
@@ -1727,10 +1849,10 @@
                 groups[cat].push({ name, ...item, isEmpty: emptyItems.has(name) });
             }
 
-            // Sort items within each category
+            // Sort items within each category with new priority
+            const priorityItems = ['Coffe Beans', 'Fresh Milk', 'Creamer Milk', 'Whipping Cream'];
             for (const cat in groups) {
                 groups[cat].sort((a, b) => {
-                    const priorityItems = ['Coffe Beans', 'Fresh Milk'];
                     const aIsPriority = priorityItems.includes(a.name);
                     const bIsPriority = priorityItems.includes(b.name);
 
@@ -1761,30 +1883,50 @@
             }
             document.getElementById('categoryTabs').innerHTML = tabsHtml;
 
-            // Render items based on selected category
+            // Filter by search
+            const searchLower = searchQuery.toLowerCase().trim();
+
+            // Render items based on selected category and search
             let html = '';
+            let hasItems = false;
+
             if (selectedCategory === 'all') {
                 for (const cat of sortedCats) {
-                    html += `<div class="stock-group"><div class="stock-group-header">${escapeHtml(cat)}</div>`;
-                    for (const item of groups[cat]) {
-                        html += renderStockItem(item);
+                    let catItems = groups[cat];
+                    if (searchLower) {
+                        catItems = catItems.filter(item => item.name.toLowerCase().includes(searchLower));
                     }
-                    html += `</div>`;
+                    if (catItems.length > 0) {
+                        hasItems = true;
+                        html += `<div class="stock-group"><div class="stock-group-header">${escapeHtml(cat)}</div>`;
+                        for (const item of catItems) {
+                            html += renderStockItem(item);
+                        }
+                        html += `</div>`;
+                    }
                 }
             } else {
                 if (groups[selectedCategory]) {
-                    html += `<div class="stock-group">`;
-                    for (const item of groups[selectedCategory]) {
-                        html += renderStockItem(item);
+                    let catItems = groups[selectedCategory];
+                    if (searchLower) {
+                        catItems = catItems.filter(item => item.name.toLowerCase().includes(searchLower));
                     }
-                    html += `</div>`;
-                } else {
-                    html =
-                        `<div class="empty-state"><span class="big">—</span>Tidak ada item di kategori ini.</div>`;
+                    if (catItems.length > 0) {
+                        hasItems = true;
+                        html += `<div class="stock-group">`;
+                        for (const item of catItems) {
+                            html += renderStockItem(item);
+                        }
+                        html += `</div>`;
+                    }
                 }
             }
 
-            container.innerHTML = html || `<div class="empty-state"><span class="big">—</span>Tidak ada item.</div>`;
+            if (!hasItems) {
+                html = `<div class="empty-state"><span class="big">—</span>${searchLower ? 'Tidak ada item yang cocok dengan pencarian.' : 'Tidak ada item di kategori ini.'}</div>`;
+            }
+
+            container.innerHTML = html;
             renderOrderList();
         }
 
@@ -1814,6 +1956,17 @@
 
         function selectCategory(category) {
             selectedCategory = category;
+            renderStockList();
+        }
+
+        function filterStock() {
+            searchQuery = document.getElementById('searchInput').value;
+            renderStockList();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            searchQuery = '';
             renderStockList();
         }
 
@@ -2164,6 +2317,114 @@
         }
 
         // ================================================================
+        //  SAVE ORDER AS IMAGE
+        // ================================================================
+
+        function openOrderImageModal() {
+            const items = getOrderItems();
+            const container = document.getElementById('orderImageContent');
+
+            if (!items.length) {
+                container.innerHTML = `<div class="order-empty">Tidak ada item order.</div>`;
+                document.getElementById('orderImageModal').classList.add('open');
+                return;
+            }
+
+            const now = new Date();
+            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = monthNames[now.getMonth()];
+            const year = now.getFullYear();
+            const dateStr = `${day} ${month} ${year}`;
+            const cafeName = getCafeName();
+
+            let html = `
+                    <div class="order-header">
+                        <h3>ORDER BAR</h3>
+                        <div class="date">${cafeName} · ${dateStr}</div>
+                    </div>
+                `;
+
+            // Group by category
+            const groups = {};
+            for (const item of items) {
+                const cat = item.category || 'Umum';
+                if (!groups[cat]) groups[cat] = [];
+                groups[cat].push(item);
+            }
+
+            const categoryOrder = ['Urgent Stock', 'FIND', 'SYRUP', 'EQUIPMENT', 'Umum'];
+            const sortedCats = Object.keys(groups).sort((a, b) => {
+                const ia = categoryOrder.indexOf(a);
+                const ib = categoryOrder.indexOf(b);
+                if (ia === -1 && ib === -1) return a.localeCompare(b);
+                if (ia === -1) return 1;
+                if (ib === -1) return -1;
+                return ia - ib;
+            });
+
+            for (const cat of sortedCats) {
+                html += `<div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;border-bottom:0.5px solid var(--divider);padding:4px 0 2px;margin-top:4px;">${cat}</div>`;
+                for (const item of groups[cat]) {
+                    html += `
+                            <div class="order-item-print">
+                                <span class="name">${escapeHtml(item.name)}</span>
+                                <span class="qty">${escapeHtml(item.qty)}</span>
+                            </div>
+                        `;
+                }
+            }
+
+            html += `<div style="text-align:center;font-size:8px;color:var(--muted);border-top:1px solid var(--divider);padding-top:4px;margin-top:6px;">${cafeName} · ${dateStr}</div>`;
+
+            container.innerHTML = html;
+            document.getElementById('orderImageModal').classList.add('open');
+        }
+
+        function closeOrderImageModal() {
+            document.getElementById('orderImageModal').classList.remove('open');
+        }
+
+        async function saveOrderImageNow() {
+            const paper = document.getElementById('orderImagePaper');
+
+            showToast('⏳ Menyiapkan gambar order...', '');
+
+            try {
+                const canvas = await html2canvas(paper, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: getTheme() === 'dark' ? '#2c2c2e' : '#ffffff',
+                    logging: false,
+                    allowTaint: true,
+                    width: paper.scrollWidth,
+                    height: paper.scrollHeight
+                });
+
+                const link = document.createElement('a');
+                const now = new Date();
+                const dateStr = now.toISOString().slice(0, 10);
+                link.download = `order_${getCafeName().replace(/[^a-zA-Z0-9]/g, '_')}_${dateStr}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                showToast('✅ Gambar order berhasil disimpan!', 'success');
+            } catch (err) {
+                console.error(err);
+                showToast('❌ Gagal menyimpan gambar order.', 'error');
+            }
+        }
+
+        function saveOrderAsImage() {
+            const items = getOrderItems();
+            if (!items.length) {
+                showToast('Tidak ada item order untuk disimpan.', 'error');
+                return;
+            }
+            openOrderImageModal();
+        }
+
+        // ================================================================
         //  PRINT STOCK WITH SLIDES (max 20 items per slide, NO CATEGORY)
         // ================================================================
 
@@ -2176,8 +2437,9 @@
             const keys = Object.keys(stock);
             if (!keys.length) return [];
 
-            // Flatten all items, sorted alphabetically with priority
+            // Flatten all items, sorted with priority
             const allItems = [];
+            const priorityItems = ['Coffe Beans', 'Fresh Milk', 'Creamer Milk', 'Whipping Cream'];
             for (const name of keys) {
                 const item = stock[name];
                 const isEmpty = emptyItems.has(name);
@@ -2186,7 +2448,6 @@
 
             // Sort: priority items first, then alphabetical
             allItems.sort((a, b) => {
-                const priorityItems = ['Coffe Beans', 'Fresh Milk'];
                 const aIsPriority = priorityItems.includes(a.name);
                 const bIsPriority = priorityItems.includes(b.name);
 
@@ -2236,7 +2497,6 @@
             let html = '';
             for (let i = 0; i < totalSlides; i++) {
                 html += `<div class="slide-page">`;
-                // Add header with title and date
                 html += `
                         <div class="paper-header">
                             <h2>STOCK BAR</h2>
@@ -2360,7 +2620,9 @@
                 wrapper.style.transform = transform;
 
                 const link = document.createElement('a');
-                link.download = `stockbar_${getCafeName().replace(/[^a-zA-Z0-9]/g, '_')}_${currentSlide + 1}.png`;
+                const now = new Date();
+                const dateStr = now.toISOString().slice(0, 10);
+                link.download = `stockbar_${getCafeName().replace(/[^a-zA-Z0-9]/g, '_')}_${dateStr}_${currentSlide + 1}.png`;
                 link.href = canvas.toDataURL('image/png');
                 link.click();
 
@@ -2621,6 +2883,7 @@
                     overlay.classList.remove('open');
                     if (overlay.id === 'confirmDeleteModal') cancelDelete();
                     if (overlay.id === 'confirmResetStockModal') cancelResetStock();
+                    if (overlay.id === 'orderImageModal') closeOrderImageModal();
                 }
             });
         });
