@@ -825,9 +825,9 @@
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
             z-index: 100;
             opacity: 0;
             visibility: hidden;
@@ -843,12 +843,15 @@
             background: var(--modal-bg);
             border-radius: 20px;
             padding: 24px 20px 20px;
-            max-width: 400px;
+            max-width: 480px;
             width: 100%;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
             transform: translateY(24px) scale(0.96);
             transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), var(--theme-transition);
             border: 0.5px solid var(--card-border);
+            max-height: 94vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .modal-overlay.open .modal-box {
@@ -862,14 +865,16 @@
             color: var(--text);
             transition: var(--theme-transition);
             letter-spacing: -0.2px;
+            flex-shrink: 0;
         }
 
         .modal-box .desc {
             font-size: 14px;
             color: var(--muted);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             line-height: 1.5;
             transition: var(--theme-transition);
+            flex-shrink: 0;
         }
 
         .modal-box .field {
@@ -878,6 +883,7 @@
 
         .modal-box .row {
             margin-top: 4px;
+            flex-shrink: 0;
         }
 
         .modal-box .row .btn {
@@ -960,7 +966,7 @@
                 flex: 0 1 auto;
             }
             .modal-box {
-                padding: 20px 16px 16px;
+                padding: 16px 14px 14px;
             }
             .clock {
                 font-size: 12px;
@@ -1054,24 +1060,10 @@
         }
 
         /* ===== PRINT STOCK MODAL ===== */
-        .print-modal {
-            align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
         .print-modal .modal-box {
             max-width: 480px;
             padding: 16px 16px 16px;
-            background: var(--modal-bg);
-            border-radius: 16px;
-            transform: translateY(0) scale(0.96);
             max-height: 92vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .print-modal.open .modal-box {
-            transform: translateY(0) scale(1);
         }
 
         .print-paper {
@@ -1085,8 +1077,8 @@
             flex: 1;
             overflow: hidden;
             position: relative;
-            min-height: 320px;
-            max-height: 520px;
+            min-height: 300px;
+            max-height: 500px;
         }
 
         .print-paper .paper-header {
@@ -1095,6 +1087,7 @@
             padding-bottom: 4px;
             margin-bottom: 6px;
             transition: var(--theme-transition);
+            flex-shrink: 0;
         }
 
         .print-paper .paper-header h2 {
@@ -1118,7 +1111,8 @@
         .print-paper .paper-content {
             overflow: hidden;
             position: relative;
-            height: calc(100% - 80px);
+            flex: 1;
+            min-height: 0;
         }
 
         .print-paper .paper-content .slide-wrapper {
@@ -1146,8 +1140,8 @@
         .print-paper .paper-item {
             display: flex;
             justify-content: space-between;
-            padding: 2px 0;
-            font-size: 12px;
+            padding: 3px 0;
+            font-size: 13px;
             border-bottom: 0.5px solid var(--divider);
             transition: var(--theme-transition);
         }
@@ -1160,14 +1154,14 @@
             font-weight: 500;
             color: var(--text);
             transition: var(--theme-transition);
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .print-paper .paper-item .qty {
             font-weight: 600;
             color: var(--muted);
             transition: var(--theme-transition);
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .print-paper .paper-item .qty.empty-print {
@@ -1192,13 +1186,15 @@
             margin-top: 4px;
             transition: var(--theme-transition);
             opacity: 0.6;
+            flex-shrink: 0;
         }
 
         .print-paper .slide-indicators {
             display: flex;
             justify-content: center;
             gap: 6px;
-            padding: 4px 0 2px;
+            padding: 6px 0 2px;
+            flex-shrink: 0;
         }
 
         .print-paper .slide-indicators .dot {
@@ -1223,43 +1219,45 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 6px 0 2px;
-            gap: 8px;
-            border-top: 0.5px solid var(--divider);
+            padding: 8px 0 2px;
+            gap: 10px;
+            border-top: 1px solid var(--divider);
             margin-top: 4px;
+            flex-shrink: 0;
         }
 
         .print-paper .slide-nav .nav-btn {
-            background: var(--badge-bg);
-            border: 1px solid var(--divider);
-            border-radius: 8px;
-            padding: 6px 14px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text);
+            background: var(--accent);
+            border: none;
+            border-radius: 10px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
             cursor: pointer;
-            transition: var(--theme-transition);
+            transition: var(--theme-transition), transform 0.12s;
             flex-shrink: 0;
-            min-width: 60px;
+            min-width: 80px;
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.25);
         }
 
         .print-paper .slide-nav .nav-btn:active {
             transform: scale(0.94);
-            background: var(--hover-bg);
         }
 
         .print-paper .slide-nav .nav-btn:disabled {
-            opacity: 0.3;
+            opacity: 0.35;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
         .print-paper .slide-nav .page-info {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--text);
-            font-weight: 600;
+            font-weight: 700;
             background: var(--badge-bg);
-            padding: 2px 14px;
+            padding: 4px 18px;
             border-radius: 12px;
             border: 0.5px solid var(--divider);
         }
@@ -1278,18 +1276,25 @@
             background: #28a745;
         }
 
-        /* ===== ORDER IMAGE SAVE ===== */
+        /* ===== ORDER IMAGE MODAL ===== */
+        .order-image-modal .modal-box {
+            max-width: 480px;
+            padding: 16px 16px 16px;
+            max-height: 92vh;
+        }
+
         .order-image-paper {
             background: var(--card);
-            padding: 16px 14px;
+            padding: 16px 16px;
             border-radius: 8px;
             box-shadow: inset 0 0 0 1px var(--divider);
             margin-bottom: 10px;
             font-family: var(--font);
             transition: var(--theme-transition);
-            min-height: 100px;
-            max-height: 400px;
+            flex: 1;
             overflow-y: auto;
+            min-height: 150px;
+            max-height: 450px;
         }
 
         .order-image-paper .order-header {
@@ -1300,21 +1305,33 @@
         }
 
         .order-image-paper .order-header h3 {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--text);
+            letter-spacing: 0.5px;
         }
 
         .order-image-paper .order-header .date {
-            font-size: 10px;
+            font-size: 11px;
             color: var(--muted);
+        }
+
+        .order-image-paper .order-cat {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            border-bottom: 0.5px solid var(--divider);
+            padding: 4px 0 2px;
+            margin-top: 4px;
+            letter-spacing: 0.5px;
         }
 
         .order-image-paper .order-item-print {
             display: flex;
             justify-content: space-between;
-            padding: 3px 0;
-            font-size: 12px;
+            padding: 4px 0;
+            font-size: 13px;
             border-bottom: 0.5px solid var(--divider);
         }
 
@@ -1335,7 +1352,16 @@
         .order-image-paper .order-empty {
             text-align: center;
             color: var(--muted);
-            padding: 20px 0;
+            padding: 30px 0;
+        }
+
+        .order-image-paper .order-footer {
+            text-align: center;
+            font-size: 8px;
+            color: var(--muted);
+            border-top: 1px solid var(--divider);
+            padding-top: 6px;
+            margin-top: 8px;
         }
 
         /* ===== CONFIRM TIMER ===== */
@@ -1701,7 +1727,7 @@
         </div>
 
         <!-- ===== MODAL: ORDER IMAGE ===== -->
-        <div id="orderImageModal" class="modal-overlay print-modal">
+        <div id="orderImageModal" class="modal-overlay order-image-modal">
             <div class="modal-box">
                 <div class="title">Order</div>
                 <div class="desc">Simpan daftar order sebagai gambar.</div>
@@ -2364,7 +2390,7 @@
             });
 
             for (const cat of sortedCats) {
-                html += `<div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;border-bottom:0.5px solid var(--divider);padding:4px 0 2px;margin-top:4px;">${cat}</div>`;
+                html += `<div class="order-cat">${cat}</div>`;
                 for (const item of groups[cat]) {
                     html += `
                             <div class="order-item-print">
@@ -2375,7 +2401,7 @@
                 }
             }
 
-            html += `<div style="text-align:center;font-size:8px;color:var(--muted);border-top:1px solid var(--divider);padding-top:4px;margin-top:6px;">${cafeName} · ${dateStr}</div>`;
+            html += `<div class="order-footer">${cafeName} · ${dateStr}</div>`;
 
             container.innerHTML = html;
             document.getElementById('orderImageModal').classList.add('open');
@@ -2409,6 +2435,7 @@
                 link.click();
 
                 showToast('✅ Gambar order berhasil disimpan!', 'success');
+                closeOrderImageModal();
             } catch (err) {
                 console.error(err);
                 showToast('❌ Gagal menyimpan gambar order.', 'error');
