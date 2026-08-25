@@ -229,28 +229,34 @@
         }
         .row .btn { flex: 1; }
 
-        /* ===== PRINT PAPER ===== */
+        /* ===== PRINT PAPER - FULL WHITE ===== */
         .print-paper {
-            background: var(--card);
-            padding: 20px 16px;
+            background: #ffffff;
+            padding: 24px 20px;
             border-radius: 12px;
-            box-shadow: inset 0 0 0 1px var(--divider);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
             margin-bottom: 12px;
             font-family: var(--font);
             min-height: 300px;
             max-height: 520px;
             overflow-y: auto;
+            color: #1c1c1e;
+        }
+
+        body.dark .print-paper {
+            background: #ffffff;
+            color: #1c1c1e;
         }
 
         .print-paper::-webkit-scrollbar {
             width: 4px;
         }
         .print-paper::-webkit-scrollbar-track {
-            background: rgba(60,60,67,0.06);
+            background: rgba(0,0,0,0.04);
             border-radius: 99px;
         }
         .print-paper::-webkit-scrollbar-thumb {
-            background: var(--muted);
+            background: #8e8e93;
             border-radius: 99px;
             opacity: 0.3;
         }
@@ -258,7 +264,7 @@
         /* ===== STOCK PRINT STYLE ===== */
         .stock-print-header {
             text-align: center;
-            border-bottom: 2px solid var(--text);
+            border-bottom: 2px solid #1c1c1e;
             padding-bottom: 6px;
             margin-bottom: 10px;
         }
@@ -267,13 +273,13 @@
             font-size: 18px;
             font-weight: 800;
             letter-spacing: 2px;
-            color: var(--text);
+            color: #1c1c1e;
             text-transform: uppercase;
         }
 
         .stock-print-header .date {
             font-size: 11px;
-            color: var(--muted);
+            color: #8e8e93;
             font-weight: 500;
             margin-top: 2px;
             letter-spacing: 0.3px;
@@ -282,11 +288,11 @@
         .stock-print-category {
             font-size: 11px;
             font-weight: 700;
-            color: var(--muted);
+            color: #8e8e93;
             text-transform: uppercase;
             letter-spacing: 0.8px;
             padding: 6px 0 3px;
-            border-bottom: 0.5px solid var(--divider);
+            border-bottom: 0.5px solid rgba(0,0,0,0.06);
             margin-top: 6px;
         }
 
@@ -296,7 +302,7 @@
             justify-content: space-between;
             padding: 4px 0;
             font-size: 13px;
-            border-bottom: 0.5px solid var(--divider);
+            border-bottom: 0.5px solid rgba(0,0,0,0.04);
         }
 
         .stock-print-item:last-child {
@@ -305,12 +311,12 @@
 
         .stock-print-item .name {
             font-weight: 500;
-            color: var(--text);
+            color: #1c1c1e;
         }
 
         .stock-print-item .qty {
             font-weight: 600;
-            color: var(--muted);
+            color: #8e8e93;
             font-variant-numeric: tabular-nums;
         }
 
@@ -322,8 +328,8 @@
         .stock-print-footer {
             text-align: center;
             font-size: 8px;
-            color: var(--muted);
-            border-top: 1px solid var(--divider);
+            color: #8e8e93;
+            border-top: 1px solid rgba(0,0,0,0.06);
             padding-top: 6px;
             margin-top: 10px;
             opacity: 0.5;
@@ -333,7 +339,7 @@
         /* ===== ORDER PRINT STYLE ===== */
         .order-print-header {
             text-align: center;
-            border-bottom: 2px solid var(--text);
+            border-bottom: 2px solid #1c1c1e;
             padding-bottom: 6px;
             margin-bottom: 10px;
         }
@@ -342,13 +348,13 @@
             font-size: 18px;
             font-weight: 800;
             letter-spacing: 2px;
-            color: var(--text);
+            color: #1c1c1e;
             text-transform: uppercase;
         }
 
         .order-print-header .date {
             font-size: 11px;
-            color: var(--muted);
+            color: #8e8e93;
             font-weight: 500;
             margin-top: 2px;
             letter-spacing: 0.3px;
@@ -357,11 +363,11 @@
         .order-print-category {
             font-size: 11px;
             font-weight: 700;
-            color: var(--muted);
+            color: #8e8e93;
             text-transform: uppercase;
             letter-spacing: 0.8px;
             padding: 6px 0 3px;
-            border-bottom: 0.5px solid var(--divider);
+            border-bottom: 0.5px solid rgba(0,0,0,0.06);
             margin-top: 6px;
         }
 
@@ -371,7 +377,7 @@
             justify-content: space-between;
             padding: 4px 0;
             font-size: 13px;
-            border-bottom: 0.5px solid var(--divider);
+            border-bottom: 0.5px solid rgba(0,0,0,0.04);
         }
 
         .order-print-item:last-child {
@@ -380,12 +386,12 @@
 
         .order-print-item .name {
             font-weight: 500;
-            color: var(--text);
+            color: #1c1c1e;
         }
 
         .order-print-item .qty {
             font-weight: 600;
-            color: var(--muted);
+            color: #8e8e93;
             font-variant-numeric: tabular-nums;
         }
 
@@ -396,8 +402,8 @@
         .order-print-footer {
             text-align: center;
             font-size: 8px;
-            color: var(--muted);
-            border-top: 1px solid var(--divider);
+            color: #8e8e93;
+            border-top: 1px solid rgba(0,0,0,0.06);
             padding-top: 6px;
             margin-top: 10px;
             opacity: 0.5;
@@ -498,6 +504,7 @@
             .card { padding: 14px; }
             .modal-box { padding: 16px; }
             .clock { font-size: 12px; padding: 3px 10px; }
+            .print-paper { padding: 16px 14px; }
         }
 
         /* Tabs */
@@ -531,6 +538,15 @@
         .tab-group .tab-btn:active {
             transform: scale(0.96);
         }
+
+        /* Full white preview for print */
+        .print-preview-full {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 12px;
+            color: #1c1c1e;
+        }
     </style>
 </head>
 <body>
@@ -560,7 +576,7 @@
             Cetak Stok &amp; Order
             <span class="badge" id="itemCount">0 item</span>
         </div>
-        <div class="card-desc">Lihat daftar stok dan order dalam format cetak yang rapi.</div>
+        <div class="card-desc">Lihat daftar stok dan order dalam format cetak full white.</div>
 
         <div class="tab-group">
             <button class="tab-btn active" id="tabStock" onclick="switchTab('stock')">Stok</button>
@@ -673,7 +689,7 @@
     }
 
     // ================================================================
-    // RENDER PRINT
+    // RENDER PRINT - FULL WHITE
     // ================================================================
 
     let currentTab = 'stock';
@@ -716,7 +732,7 @@
         const keys = Object.keys(stock);
 
         if (!keys.length) {
-            return `<div style="text-align:center;padding:40px 0;color:var(--muted);">Tidak ada stok untuk dicetak.</div>`;
+            return `<div style="text-align:center;padding:40px 0;color:#8e8e93;">Tidak ada stok untuk dicetak.</div>`;
         }
 
         // Group by category
@@ -741,13 +757,13 @@
         let html = `
             <div class="stock-print-header">
                 <h2>STOCK BAR</h2>
-                <div class="date">${cafeName} · ${dateStr}</div>
+                <div class="date">${escapeHtml(cafeName)} · ${dateStr}</div>
             </div>
         `;
 
         for (const cat of sortedCats) {
             const items = groups[cat];
-            html += `<div class="stock-print-category">${cat}</div>`;
+            html += `<div class="stock-print-category">${escapeHtml(cat)}</div>`;
             for (const item of items) {
                 const displayQty = item.isEmpty ? '—' : item.qty;
                 html += `
@@ -759,7 +775,7 @@
             }
         }
 
-        html += `<div class="stock-print-footer">${cafeName} · ${dateStr}</div>`;
+        html += `<div class="stock-print-footer">${escapeHtml(cafeName)} · ${dateStr}</div>`;
 
         return html;
     }
@@ -768,14 +784,13 @@
         const items = getOrderItems();
 
         if (!items.length) {
-            return `<div style="text-align:center;padding:40px 0;color:var(--muted);">Tidak ada item order.</div>`;
+            return `<div style="text-align:center;padding:40px 0;color:#8e8e93;">Tidak ada item order.</div>`;
         }
 
-        // Filter out EQUIPMENT
-        const filtered = items.filter(item => item.category !== 'EQUIPMENT');
+        const filtered = items;
 
         if (!filtered.length) {
-            return `<div style="text-align:center;padding:40px 0;color:var(--muted);">Tidak ada item order.</div>`;
+            return `<div style="text-align:center;padding:40px 0;color:#8e8e93;">Tidak ada item order.</div>`;
         }
 
         // Group by category
@@ -799,13 +814,13 @@
         let html = `
             <div class="order-print-header">
                 <h2>ORDER BAR</h2>
-                <div class="date">${cafeName} · ${dateStr}</div>
+                <div class="date">${escapeHtml(cafeName)} · ${dateStr}</div>
             </div>
         `;
 
         for (const cat of sortedCats) {
             const itemsCat = groups[cat];
-            html += `<div class="order-print-category">${cat}</div>`;
+            html += `<div class="order-print-category">${escapeHtml(cat)}</div>`;
             for (const item of itemsCat) {
                 html += `
                     <div class="order-print-item">
@@ -816,7 +831,7 @@
             }
         }
 
-        html += `<div class="order-print-footer">${cafeName} · ${dateStr}</div>`;
+        html += `<div class="order-print-footer">${escapeHtml(cafeName)} · ${dateStr}</div>`;
 
         return html;
     }
@@ -827,7 +842,7 @@
     }
 
     // ================================================================
-    // SAVE AS IMAGE
+    // SAVE AS IMAGE - FULL WHITE
     // ================================================================
 
     async function saveAsImage() {
@@ -841,7 +856,13 @@
         showToast('⏳ Menyiapkan gambar...', '');
 
         try {
-            // Temporarily remove max-height for full capture
+            // Force white background for capture
+            const originalBg = paper.style.background;
+            const originalColor = paper.style.color;
+            paper.style.background = '#ffffff';
+            paper.style.color = '#1c1c1e';
+
+            // Temporarily remove max-height
             const originalMaxHeight = paper.style.maxHeight;
             paper.style.maxHeight = 'none';
 
@@ -850,48 +871,26 @@
             const canvas = await html2canvas(paper, {
                 scale: 2,
                 useCORS: true,
-                backgroundColor: getTheme() === 'dark' ? '#2c2c2e' : '#ffffff',
+                backgroundColor: '#ffffff',
                 logging: false,
                 allowTaint: true,
                 width: paper.scrollWidth,
                 height: paper.scrollHeight,
-                borderRadius: '12px'
+                borderRadius: '0px'
             });
 
             paper.style.maxHeight = originalMaxHeight;
+            paper.style.background = originalBg || '';
+            paper.style.color = originalColor || '';
 
-            // Round corners
-            const roundedCanvas = document.createElement('canvas');
-            const ctx = roundedCanvas.getContext('2d');
-            const w = canvas.width;
-            const h = canvas.height;
-            const radius = 24;
-
-            roundedCanvas.width = w;
-            roundedCanvas.height = h;
-
-            ctx.beginPath();
-            ctx.moveTo(radius, 0);
-            ctx.lineTo(w - radius, 0);
-            ctx.quadraticCurveTo(w, 0, w, radius);
-            ctx.lineTo(w, h - radius);
-            ctx.quadraticCurveTo(w, h, w - radius, h);
-            ctx.lineTo(radius, h);
-            ctx.quadraticCurveTo(0, h, 0, h - radius);
-            ctx.lineTo(0, radius);
-            ctx.quadraticCurveTo(0, 0, radius, 0);
-            ctx.closePath();
-            ctx.clip();
-
-            ctx.drawImage(canvas, 0, 0, w, h);
-
+            // Direct save without rounding (full white)
             const link = document.createElement('a');
             const now = new Date();
             const dateStr = now.toISOString().slice(0, 10);
             const tabName = currentTab === 'stock' ? 'stock' : 'order';
             const cafeName = getCafeName().replace(/[^a-zA-Z0-9]/g, '_').substring(0, 20);
             link.download = `${tabName}_${cafeName}_${dateStr}.png`;
-            link.href = roundedCanvas.toDataURL('image/png');
+            link.href = canvas.toDataURL('image/png');
             link.click();
 
             showToast('✅ Gambar berhasil disimpan!', 'success');
@@ -899,6 +898,8 @@
             console.error(err);
             showToast('❌ Gagal menyimpan gambar.', 'error');
             paper.style.maxHeight = '';
+            paper.style.background = '';
+            paper.style.color = '';
         }
     }
 
