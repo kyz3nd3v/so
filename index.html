@@ -601,6 +601,11 @@
             transition: var(--theme-transition);
         }
 
+        /* Flat list mode - no category headers */
+        .stock-list-flat .stock-item {
+            padding: 7px 0;
+        }
+
         .stock-item {
             display: flex;
             align-items: center;
@@ -1559,14 +1564,14 @@
         .stock-image-paper .stock-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .stock-image-paper .stock-table th {
             text-align: left;
             font-weight: 600;
             color: #8e8e93;
-            font-size: 10px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             border-bottom: 0.5px solid rgba(0,0,0,0.06);
@@ -1591,15 +1596,16 @@
         }
 
         .stock-image-paper .stock-table .col-num {
-            width: 30px;
+            width: 35px;
             color: #8e8e93;
             font-weight: 500;
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .stock-image-paper .stock-table .col-name {
             font-weight: 500;
             color: #1c1c1e;
+            font-size: 14px;
         }
 
         body.dark .stock-image-paper .stock-table .col-name {
@@ -1611,11 +1617,12 @@
             font-weight: 600;
             color: #8e8e93;
             min-width: 40px;
+            font-size: 14px;
         }
 
-        .stock-image-paper .stock-table .col-qty.empty-stock {
-            color: var(--danger);
-            text-decoration: line-through;
+        .stock-image-paper .stock-table .col-qty.empty-qty {
+            color: #8e8e93;
+            opacity: 0.6;
         }
 
         .stock-image-paper .stock-footer {
@@ -1631,20 +1638,46 @@
             border-top-color: rgba(255,255,255,0.08);
         }
 
-        .stock-image-paper.small-items .stock-table {
-            font-size: 11px;
+        /* Zoom controls */
+        .zoom-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            padding: 6px 0 2px;
+            flex-shrink: 0;
         }
 
-        .stock-image-paper.small-items .stock-table td {
-            padding: 2px 0;
+        .zoom-controls .zoom-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--divider);
+            background: var(--badge-bg);
+            color: var(--text);
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .stock-image-paper.tiny-items .stock-table {
-            font-size: 9px;
+        .zoom-controls .zoom-btn:hover {
+            background: var(--hover-bg);
         }
 
-        .stock-image-paper.tiny-items .stock-table td {
-            padding: 1px 0;
+        .zoom-controls .zoom-btn:active {
+            transform: scale(0.92);
+        }
+
+        .zoom-controls .zoom-level {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+            min-width: 40px;
+            text-align: center;
         }
 
         /* ===== CONFIRM TIMER ===== */
@@ -2014,11 +2047,16 @@
         <div id="stockImageModal" class="modal-overlay stock-image-modal">
             <div class="modal-box">
                 <div class="title">Cetak Stok</div>
-                <div class="desc">Maksimal 18 baris per slide. Gunakan navigasi untuk melihat semua.</div>
+                <div class="desc">Maksimal 15 baris per slide. Gunakan navigasi untuk melihat semua.</div>
                 <div class="stock-image-paper" id="stockImagePaper">
                     <div id="stockImageContent"></div>
                 </div>
-                <div style="display:flex; justify-content:center; align-items:center; gap:12px; padding:6px 0; flex-shrink:0;">
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="zoomStock(-1)" title="Perkecil">−</button>
+                    <span class="zoom-level" id="stockZoomLevel">100%</span>
+                    <button class="zoom-btn" onclick="zoomStock(1)" title="Perbesar">+</button>
+                </div>
+                <div style="display:flex; justify-content:center; align-items:center; gap:12px; padding:4px 0 6px; flex-shrink:0;">
                     <button class="btn btn-secondary btn-sm" id="stockPrevBtn" style="width:auto; padding:6px 16px; font-size:16px; font-weight:700; border-radius:10px; background:var(--accent); color:#fff; border:none; cursor:pointer;">◀</button>
                     <span id="stockPageInfo" style="font-size:14px; font-weight:600; color:var(--text); min-width:60px; text-align:center;">1 / 1</span>
                     <button class="btn btn-secondary btn-sm" id="stockNextBtn" style="width:auto; padding:6px 16px; font-size:16px; font-weight:700; border-radius:10px; background:var(--accent); color:#fff; border:none; cursor:pointer;">▶</button>
@@ -2229,21 +2267,31 @@
             let hasItems = false;
 
             if (selectedCategory === 'all') {
+                // FLAT MODE: no category headers, just all items sorted
+                let allItems = [];
                 for (const cat of sortedCats) {
                     let catItems = groups[cat];
                     if (searchLower) {
                         catItems = catItems.filter(item => item.name.toLowerCase().includes(searchLower));
                     }
-                    if (catItems.length > 0) {
-                        hasItems = true;
-                        html += `<div class="stock-group"><div class="stock-group-header">${escapeHtml(cat)}</div>`;
-                        for (const item of catItems) {
-                            html += renderStockItem(item);
-                        }
-                        html += `</div>`;
+                    allItems = allItems.concat(catItems);
+                }
+                // Sort all items: priority first, then alphabetical
+                allItems.sort((a, b) => {
+                    if (a.isPriority && !b.isPriority) return -1;
+                    if (!a.isPriority && b.isPriority) return 1;
+                    return a.name.localeCompare(b.name);
+                });
+                if (allItems.length > 0) {
+                    hasItems = true;
+                    html += `<div class="stock-list-flat">`;
+                    for (const item of allItems) {
+                        html += renderStockItem(item);
                     }
+                    html += `</div>`;
                 }
             } else {
+                // CATEGORY MODE: show with headers
                 if (groups[selectedCategory]) {
                     let catItems = groups[selectedCategory];
                     if (searchLower) {
@@ -2707,6 +2755,7 @@
         let stockCurrentSlide = 0;
         let stockTotalSlides = 0;
         let stockSlideData = [];
+        let stockZoomLevel = 100;
 
         function buildStockSlideData() {
             const stock = getStock();
@@ -2717,16 +2766,14 @@
             for (const name of keys) {
                 const item = stock[name];
                 const isEmpty = emptyItems.has(name);
-                allItems.push({ name, qty: item.qty || '1', isEmpty, isPriority: priorityItems.has(name) });
+                allItems.push({ name, qty: item.qty || '1', isEmpty });
             }
 
             allItems.sort((a, b) => {
-                if (a.isPriority && !b.isPriority) return -1;
-                if (!a.isPriority && b.isPriority) return 1;
                 return a.name.localeCompare(b.name);
             });
 
-            const ITEMS_PER_SLIDE = 18;
+            const ITEMS_PER_SLIDE = 15;
             const slides = [];
             for (let i = 0; i < allItems.length; i += ITEMS_PER_SLIDE) {
                 slides.push(allItems.slice(i, i + ITEMS_PER_SLIDE));
@@ -2760,29 +2807,20 @@
             const dateStr = `${day} ${month} ${year}`;
             const cafeName = getCafeName();
 
-            const totalItems = slides.reduce((acc, s) => acc + s.length, 0);
-            const paper = document.getElementById('stockImagePaper');
-            paper.classList.remove('small-items', 'tiny-items');
-            if (totalItems > 24) {
-                paper.classList.add('tiny-items');
-            } else if (totalItems > 18) {
-                paper.classList.add('small-items');
-            }
-
             const slide = slides[stockCurrentSlide];
-            let num = stockCurrentSlide * 18 + 1;
+            let num = stockCurrentSlide * 15 + 1;
 
             let html = `
                 <div class="stock-header">
                     <h3>STOCK BAR</h3>
                     <div class="date">${cafeName} · ${dateStr}</div>
                 </div>
-                <table class="stock-table">
+                <table class="stock-table" style="font-size:${stockZoomLevel}%;">
                     <thead>
                         <tr>
-                            <th class="col-num">No.</th>
-                            <th class="col-name">Item</th>
-                            <th class="col-qty">Qty</th>
+                            <th class="col-num">NO.</th>
+                            <th class="col-name">ITEM</th>
+                            <th class="col-qty">QTY</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -2790,12 +2828,12 @@
 
             for (const item of slide) {
                 const displayQty = item.isEmpty ? '—' : item.qty;
-                const priorityMark = item.isPriority ? ' ★' : '';
+                const isEmptyClass = item.isEmpty ? 'empty-qty' : '';
                 html += `
                     <tr>
                         <td class="col-num">${num}.</td>
-                        <td class="col-name">${escapeHtml(item.name)}${priorityMark}</td>
-                        <td class="col-qty ${item.isEmpty ? 'empty-stock' : ''}">${escapeHtml(displayQty)}</td>
+                        <td class="col-name">${escapeHtml(item.name)}</td>
+                        <td class="col-qty ${isEmptyClass}">${escapeHtml(displayQty)}</td>
                     </tr>
                 `;
                 num++;
@@ -2820,11 +2858,16 @@
             prevBtn.disabled = stockTotalSlides <= 1 || stockCurrentSlide === 0;
             nextBtn.disabled = stockTotalSlides <= 1 || stockCurrentSlide >= stockTotalSlides - 1;
 
-            // Style disabled state
             prevBtn.style.opacity = prevBtn.disabled ? '0.4' : '1';
             nextBtn.style.opacity = nextBtn.disabled ? '0.4' : '1';
             prevBtn.style.cursor = prevBtn.disabled ? 'not-allowed' : 'pointer';
             nextBtn.style.cursor = nextBtn.disabled ? 'not-allowed' : 'pointer';
+        }
+
+        function zoomStock(direction) {
+            stockZoomLevel = Math.min(200, Math.max(60, stockZoomLevel + direction * 10));
+            document.getElementById('stockZoomLevel').textContent = stockZoomLevel + '%';
+            renderStockSlides();
         }
 
         function nextStockSlide() {
@@ -2843,10 +2886,11 @@
 
         function openStockImageModal() {
             stockCurrentSlide = 0;
+            stockZoomLevel = 100;
+            document.getElementById('stockZoomLevel').textContent = '100%';
             renderStockSlides();
             document.getElementById('stockImageModal').classList.add('open');
 
-            // Attach event listeners to buttons
             document.getElementById('stockPrevBtn').onclick = prevStockSlide;
             document.getElementById('stockNextBtn').onclick = nextStockSlide;
         }
@@ -2912,7 +2956,7 @@
                 link.href = roundedCanvas.toDataURL('image/png');
                 link.click();
 
-                showToast('✅ Gambar stok berhasil disimpan!', 'success');
+                showToast('✓ Gambar stok berhasil disimpan!', 'success');
             } catch (err) {
                 console.error(err);
                 showToast('❌ Gagal menyimpan gambar stok.', 'error');
@@ -3056,7 +3100,7 @@
                 link.href = roundedCanvas.toDataURL('image/png');
                 link.click();
 
-                showToast('✅ Gambar order berhasil disimpan!', 'success');
+                showToast('✓ Gambar order berhasil disimpan!', 'success');
                 closeOrderImageModal();
             } catch (err) {
                 console.error(err);
