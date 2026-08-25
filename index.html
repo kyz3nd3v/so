@@ -1027,7 +1027,7 @@
             background: var(--modal-bg);
             border-radius: 16px;
             transform: translateY(0) scale(0.96);
-            max-height: 90vh;
+            max-height: 92vh;
             display: flex;
             flex-direction: column;
         }
@@ -1038,84 +1038,78 @@
 
         .print-paper {
             background: var(--card);
-            padding: 20px 16px;
+            padding: 16px 14px;
             border-radius: 8px;
             box-shadow: inset 0 0 0 1px var(--divider);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-family: var(--font);
             transition: var(--theme-transition);
             flex: 1;
             overflow: hidden;
             position: relative;
-            min-height: 300px;
+            min-height: 320px;
+            max-height: 520px;
         }
 
         .print-paper .paper-header {
             text-align: center;
             border-bottom: 2px solid var(--text);
-            padding-bottom: 6px;
-            margin-bottom: 10px;
+            padding-bottom: 4px;
+            margin-bottom: 6px;
             transition: var(--theme-transition);
         }
 
         .print-paper .paper-header h2 {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 800;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             color: var(--text);
             transition: var(--theme-transition);
             text-transform: uppercase;
         }
 
         .print-paper .paper-header .date {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--muted);
             font-weight: 500;
-            margin-top: 2px;
+            margin-top: 1px;
             transition: var(--theme-transition);
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
         .print-paper .paper-content {
             overflow: hidden;
             position: relative;
+            height: calc(100% - 80px);
         }
 
         .print-paper .paper-content .slide-wrapper {
             display: flex;
             transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+            height: 100%;
         }
 
         .print-paper .slide-page {
             min-width: 100%;
-            padding: 4px 0;
+            padding: 2px 0;
+            overflow-y: auto;
+            height: 100%;
         }
 
-        .print-paper .paper-group {
-            margin-top: 6px;
+        .print-paper .slide-page::-webkit-scrollbar {
+            width: 3px;
         }
 
-        .print-paper .paper-group:first-child {
-            margin-top: 0;
-        }
-
-        .print-paper .paper-group-title {
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--muted);
-            border-bottom: 1px solid var(--divider);
-            padding-bottom: 3px;
-            margin-bottom: 4px;
-            transition: var(--theme-transition);
+        .print-paper .slide-page::-webkit-scrollbar-thumb {
+            background: var(--muted);
+            border-radius: 99px;
         }
 
         .print-paper .paper-item {
             display: flex;
             justify-content: space-between;
-            padding: 3px 0;
-            font-size: 13px;
+            padding: 2px 0;
+            font-size: 12px;
             border-bottom: 0.5px solid var(--divider);
             transition: var(--theme-transition);
         }
@@ -1128,12 +1122,14 @@
             font-weight: 500;
             color: var(--text);
             transition: var(--theme-transition);
+            font-size: 12px;
         }
 
         .print-paper .paper-item .qty {
             font-weight: 600;
             color: var(--muted);
             transition: var(--theme-transition);
+            font-size: 12px;
         }
 
         .print-paper .paper-item .qty.empty-print {
@@ -1151,19 +1147,20 @@
 
         .print-paper .paper-footer {
             text-align: center;
-            font-size: 9px;
+            font-size: 8px;
             color: var(--muted);
             border-top: 1px solid var(--divider);
-            padding-top: 6px;
-            margin-top: 8px;
+            padding-top: 4px;
+            margin-top: 4px;
             transition: var(--theme-transition);
+            opacity: 0.6;
         }
 
         .print-paper .slide-indicators {
             display: flex;
             justify-content: center;
             gap: 6px;
-            padding: 6px 0 2px;
+            padding: 4px 0 2px;
         }
 
         .print-paper .slide-indicators .dot {
@@ -1175,6 +1172,7 @@
             cursor: pointer;
             border: none;
             padding: 0;
+            flex-shrink: 0;
         }
 
         .print-paper .slide-indicators .dot.active {
@@ -1187,23 +1185,29 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 4px 0 0;
+            padding: 6px 0 2px;
+            gap: 8px;
+            border-top: 0.5px solid var(--divider);
+            margin-top: 4px;
         }
 
         .print-paper .slide-nav .nav-btn {
             background: var(--badge-bg);
-            border: 0.5px solid var(--divider);
-            border-radius: 6px;
-            padding: 4px 12px;
+            border: 1px solid var(--divider);
+            border-radius: 8px;
+            padding: 6px 14px;
             font-size: 12px;
             font-weight: 600;
             color: var(--text);
             cursor: pointer;
             transition: var(--theme-transition);
+            flex-shrink: 0;
+            min-width: 60px;
         }
 
         .print-paper .slide-nav .nav-btn:active {
             transform: scale(0.94);
+            background: var(--hover-bg);
         }
 
         .print-paper .slide-nav .nav-btn:disabled {
@@ -1213,9 +1217,13 @@
         }
 
         .print-paper .slide-nav .page-info {
-            font-size: 12px;
-            color: var(--muted);
-            font-weight: 500;
+            font-size: 13px;
+            color: var(--text);
+            font-weight: 600;
+            background: var(--badge-bg);
+            padding: 2px 14px;
+            border-radius: 12px;
+            border: 0.5px solid var(--divider);
         }
 
         .print-modal .row .btn {
@@ -1393,14 +1401,14 @@
             <div class="cafe-row">
                 <span class="cafe-name-display" id="cafeNameDisplay" onclick="openCafeNameModal()">
                     Kafe Saya
-                    <span class="edit-hint"></span>
+                    <span class="edit-hint">✎</span>
                 </span>
                 <div class="cafe-actions">
                     <button class="btn btn-save-cafe" onclick="exportStockToFile()">
-                        <span class="sym"></span> Simpan
+                        <span class="sym">⬇</span> Simpan Stok
                     </button>
                     <button class="btn btn-load-cafe" onclick="importStockFromFile()">
-                        <span class="sym"></span> Muat
+                        <span class="sym">⬆</span> Muat Stok
                     </button>
                 </div>
             </div>
@@ -1581,7 +1589,7 @@
                 </div>
                 <div class="row" style="gap:6px;">
                     <button class="btn btn-secondary btn-sm" onclick="closePrintModal()">Tutup</button>
-                    <button class="btn btn-save-image btn-sm" onclick="savePrintAsImage()">Simpan</button>
+                    <button class="btn btn-save-image btn-sm" onclick="savePrintAsImage()">⬇ Simpan Gambar</button>
                 </div>
             </div>
         </div>
@@ -1722,7 +1730,7 @@
             // Sort items within each category
             for (const cat in groups) {
                 groups[cat].sort((a, b) => {
-                    const priorityItems = ['Coffe Beans', 'Fresh Milk', 'Creamer Milk', 'Whipping Cream'];
+                    const priorityItems = ['Coffe Beans', 'Fresh Milk'];
                     const aIsPriority = priorityItems.includes(a.name);
                     const bIsPriority = priorityItems.includes(b.name);
 
@@ -1836,7 +1844,7 @@
         function updateCafeNameDisplay() {
             const name = getCafeName();
             document.getElementById('cafeNameDisplay').innerHTML = escapeHtml(name) +
-                ' <span class="edit-hint"></span>';
+                ' <span class="edit-hint">✎</span>';
             document.getElementById('cafeHeaderName').textContent = name;
         }
 
@@ -2178,7 +2186,7 @@
 
             // Sort: priority items first, then alphabetical
             allItems.sort((a, b) => {
-                const priorityItems = ['Coffe Beans', 'Fresh Milk', 'Creamer Milk', 'Whipping Cream'];
+                const priorityItems = ['Coffe Beans', 'Fresh Milk'];
                 const aIsPriority = priorityItems.includes(a.name);
                 const bIsPriority = priorityItems.includes(b.name);
 
