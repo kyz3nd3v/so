@@ -1363,10 +1363,13 @@
             width: 100%;
             border-radius: 16px;
             color: #1c1c1e;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.92);
         }
 
         body.dark .order-image-paper {
-            background: #2c2c2e;
+            background: rgba(44, 44, 46, 0.92);
             color: #f5f5f7;
         }
 
@@ -1459,6 +1462,189 @@
 
         body.dark .order-image-paper .order-footer {
             border-top-color: rgba(255,255,255,0.08);
+        }
+
+        /* dynamic font size for order image */
+        .order-image-paper .order-item-print .name {
+            font-size: 13px;
+        }
+
+        .order-image-paper .order-item-print .qty {
+            font-size: 13px;
+        }
+
+        .order-image-paper.small-items .order-item-print .name {
+            font-size: 11px;
+        }
+
+        .order-image-paper.small-items .order-item-print .qty {
+            font-size: 11px;
+        }
+
+        .order-image-paper.small-items .order-item-print {
+            padding: 2px 0;
+        }
+
+        .order-image-paper.tiny-items .order-item-print .name {
+            font-size: 9px;
+        }
+
+        .order-image-paper.tiny-items .order-item-print .qty {
+            font-size: 9px;
+        }
+
+        .order-image-paper.tiny-items .order-item-print {
+            padding: 1px 0;
+        }
+
+        /* ===== STOCK IMAGE MODAL ===== */
+        .stock-image-modal .modal-box {
+            max-width: 480px;
+            padding: 16px 16px 16px;
+            max-height: 92vh;
+        }
+
+        .stock-image-paper {
+            background: #ffffff;
+            padding: 16px 16px;
+            border-radius: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            margin-bottom: 10px;
+            font-family: var(--font);
+            transition: var(--theme-transition);
+            flex: 1;
+            overflow-y: auto;
+            min-height: 200px;
+            max-height: 500px;
+            width: 100%;
+            border-radius: 16px;
+            color: #1c1c1e;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        body.dark .stock-image-paper {
+            background: rgba(44, 44, 46, 0.92);
+            color: #f5f5f7;
+        }
+
+        .stock-image-paper .stock-header {
+            text-align: center;
+            border-bottom: 2px solid #1c1c1e;
+            padding-bottom: 6px;
+            margin-bottom: 8px;
+        }
+
+        body.dark .stock-image-paper .stock-header {
+            border-bottom-color: #f5f5f7;
+        }
+
+        .stock-image-paper .stock-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1c1c1e;
+            letter-spacing: 0.5px;
+        }
+
+        body.dark .stock-image-paper .stock-header h3 {
+            color: #f5f5f7;
+        }
+
+        .stock-image-paper .stock-header .date {
+            font-size: 11px;
+            color: #8e8e93;
+        }
+
+        .stock-image-paper .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .stock-image-paper .stock-table th {
+            text-align: left;
+            font-weight: 600;
+            color: #8e8e93;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 0.5px solid rgba(0,0,0,0.06);
+            padding: 4px 0;
+        }
+
+        body.dark .stock-image-paper .stock-table th {
+            border-bottom-color: rgba(255,255,255,0.08);
+        }
+
+        .stock-image-paper .stock-table td {
+            padding: 4px 0;
+            border-bottom: 0.5px solid rgba(0,0,0,0.06);
+        }
+
+        body.dark .stock-image-paper .stock-table td {
+            border-bottom-color: rgba(255,255,255,0.08);
+        }
+
+        .stock-image-paper .stock-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .stock-image-paper .stock-table .col-num {
+            width: 30px;
+            color: #8e8e93;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .stock-image-paper .stock-table .col-name {
+            font-weight: 500;
+            color: #1c1c1e;
+        }
+
+        body.dark .stock-image-paper .stock-table .col-name {
+            color: #f5f5f7;
+        }
+
+        .stock-image-paper .stock-table .col-qty {
+            text-align: right;
+            font-weight: 600;
+            color: #8e8e93;
+            min-width: 40px;
+        }
+
+        .stock-image-paper .stock-table .col-qty.empty-stock {
+            color: var(--danger);
+            text-decoration: line-through;
+        }
+
+        .stock-image-paper .stock-footer {
+            text-align: center;
+            font-size: 8px;
+            color: #8e8e93;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            padding-top: 6px;
+            margin-top: 8px;
+        }
+
+        body.dark .stock-image-paper .stock-footer {
+            border-top-color: rgba(255,255,255,0.08);
+        }
+
+        .stock-image-paper.small-items .stock-table {
+            font-size: 11px;
+        }
+
+        .stock-image-paper.small-items .stock-table td {
+            padding: 2px 0;
+        }
+
+        .stock-image-paper.tiny-items .stock-table {
+            font-size: 9px;
+        }
+
+        .stock-image-paper.tiny-items .stock-table td {
+            padding: 1px 0;
         }
 
         /* ===== CONFIRM TIMER ===== */
@@ -1720,7 +1906,7 @@
             <!-- ===== ACTION ROW ===== -->
             <div class="action-row">
                 <button class="btn btn-sm btn-secondary" onclick="refreshStockList()">⟳ Segarkan</button>
-                <button class="btn btn-sm btn-secondary" onclick="openPrintModal()">⌕ Cetak</button>
+                <button class="btn btn-sm btn-secondary" onclick="openStockImageModal()">⌕ Cetak</button>
                 <button class="btn btn-sm btn-danger" id="clearAllBtn" onclick="confirmClearAll()">✕ Hapus Semua</button>
             </div>
         </div>
@@ -1824,25 +2010,22 @@
             </div>
         </div>
 
-        <!-- ===== MODAL: PRINT STOCK with SLIDES ===== -->
-        <div id="printModal" class="modal-overlay print-modal">
+        <!-- ===== MODAL: STOCK IMAGE ===== -->
+        <div id="stockImageModal" class="modal-overlay stock-image-modal">
             <div class="modal-box">
                 <div class="title">Cetak Stok</div>
                 <div class="desc">Maksimal 15 baris per slide. Gunakan navigasi untuk melihat semua.</div>
-                <div class="print-paper" id="printPaper">
-                    <div class="paper-content" id="paperContent">
-                        <div class="slide-wrapper" id="slideWrapper"></div>
-                    </div>
-                    <div class="slide-indicators" id="slideIndicators"></div>
-                    <div class="slide-nav" id="slideNav">
-                        <button class="nav-btn" id="prevSlideBtn" onclick="prevSlide()">◀</button>
-                        <span class="page-info" id="pageInfo">1 / 1</span>
-                        <button class="nav-btn" id="nextSlideBtn" onclick="nextSlide()">▶</button>
-                    </div>
+                <div class="stock-image-paper" id="stockImagePaper">
+                    <div id="stockImageContent"></div>
+                </div>
+                <div style="display:flex; justify-content:center; align-items:center; gap:12px; padding:6px 0; flex-shrink:0;">
+                    <button class="btn btn-secondary btn-sm" onclick="prevStockSlide()" id="stockPrevBtn" style="width:auto;">◀</button>
+                    <span id="stockPageInfo" style="font-size:14px; font-weight:600; color:var(--text);">1 / 1</span>
+                    <button class="btn btn-secondary btn-sm" onclick="nextStockSlide()" id="stockNextBtn" style="width:auto;">▶</button>
                 </div>
                 <div class="row" style="gap:6px;">
-                    <button class="btn btn-secondary btn-sm" onclick="closePrintModal()">Tutup</button>
-                    <button class="btn btn-save-image btn-sm" onclick="savePrintAsImage()">⬇ Simpan Gambar</button>
+                    <button class="btn btn-secondary btn-sm" onclick="closeStockImageModal()">Tutup</button>
+                    <button class="btn btn-save-image btn-sm" onclick="saveStockImageNow()">⬇ Simpan Gambar</button>
                 </div>
             </div>
         </div>
@@ -2140,7 +2323,6 @@
                 return;
             }
 
-            // Show all items including EQUIPMENT
             const filteredItems = items;
 
             if (!filteredItems.length) {
@@ -2460,7 +2642,6 @@
             const items = getOrderItems();
             if (!items.length) return 'Tidak ada item order.';
 
-            // Show all items including EQUIPMENT
             const filteredItems = items;
             if (!filteredItems.length) return 'Tidak ada item order.';
 
@@ -2520,6 +2701,204 @@
         }
 
         // ================================================================
+        //  STOCK IMAGE MODAL (with blur background)
+        // ================================================================
+
+        let stockCurrentSlide = 0;
+        let stockTotalSlides = 0;
+        let stockSlideData = [];
+
+        function buildStockSlideData() {
+            const stock = getStock();
+            const keys = Object.keys(stock);
+            if (!keys.length) return [];
+
+            const allItems = [];
+            for (const name of keys) {
+                const item = stock[name];
+                const isEmpty = emptyItems.has(name);
+                allItems.push({ name, qty: item.qty || '1', isEmpty, isPriority: priorityItems.has(name) });
+            }
+
+            allItems.sort((a, b) => {
+                if (a.isPriority && !b.isPriority) return -1;
+                if (!a.isPriority && b.isPriority) return 1;
+                return a.name.localeCompare(b.name);
+            });
+
+            const ITEMS_PER_SLIDE = 15;
+            const slides = [];
+            for (let i = 0; i < allItems.length; i += ITEMS_PER_SLIDE) {
+                slides.push(allItems.slice(i, i + ITEMS_PER_SLIDE));
+            }
+            return slides;
+        }
+
+        function renderStockSlides() {
+            const slides = buildStockSlideData();
+            stockSlideData = slides;
+            stockTotalSlides = slides.length;
+            stockCurrentSlide = 0;
+
+            const container = document.getElementById('stockImageContent');
+
+            if (stockTotalSlides === 0) {
+                container.innerHTML = `<div class="stock-empty">Tidak ada stok untuk dicetak.</div>`;
+                document.getElementById('stockPageInfo').textContent = '0 / 0';
+                document.getElementById('stockPrevBtn').disabled = true;
+                document.getElementById('stockNextBtn').disabled = true;
+                return;
+            }
+
+            const now = new Date();
+            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = monthNames[now.getMonth()];
+            const year = now.getFullYear();
+            const dateStr = `${day} ${month} ${year}`;
+            const cafeName = getCafeName();
+
+            const totalItems = slides.reduce((acc, s) => acc + s.length, 0);
+            const paper = document.getElementById('stockImagePaper');
+            paper.classList.remove('small-items', 'tiny-items');
+            if (totalItems > 20) {
+                paper.classList.add('tiny-items');
+            } else if (totalItems > 15) {
+                paper.classList.add('small-items');
+            }
+
+            let html = `
+                <div class="stock-header">
+                    <h3>STOCK BAR</h3>
+                    <div class="date">${cafeName} · ${dateStr}</div>
+                </div>
+                <table class="stock-table">
+                    <thead>
+                        <tr>
+                            <th class="col-num">No.</th>
+                            <th class="col-name">Item</th>
+                            <th class="col-qty">Qty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            const slide = slides[stockCurrentSlide];
+            let num = stockCurrentSlide * 15 + 1;
+            for (const item of slide) {
+                const displayQty = item.isEmpty ? '—' : item.qty;
+                const priorityMark = item.isPriority ? ' ★' : '';
+                html += `
+                    <tr>
+                        <td class="col-num">${num}.</td>
+                        <td class="col-name">${escapeHtml(item.name)}${priorityMark}</td>
+                        <td class="col-qty ${item.isEmpty ? 'empty-stock' : ''}">${escapeHtml(displayQty)}</td>
+                    </tr>
+                `;
+                num++;
+            }
+
+            html += `
+                    </tbody>
+                </table>
+                <div class="stock-footer">${cafeName} · ${dateStr}</div>
+            `;
+
+            container.innerHTML = html;
+            document.getElementById('stockPageInfo').textContent = `${stockCurrentSlide + 1} / ${stockTotalSlides}`;
+            document.getElementById('stockPrevBtn').disabled = stockCurrentSlide === 0;
+            document.getElementById('stockNextBtn').disabled = stockCurrentSlide >= stockTotalSlides - 1;
+        }
+
+        function nextStockSlide() {
+            if (stockCurrentSlide < stockTotalSlides - 1) {
+                stockCurrentSlide++;
+                renderStockSlides();
+            }
+        }
+
+        function prevStockSlide() {
+            if (stockCurrentSlide > 0) {
+                stockCurrentSlide--;
+                renderStockSlides();
+            }
+        }
+
+        function openStockImageModal() {
+            renderStockSlides();
+            document.getElementById('stockImageModal').classList.add('open');
+        }
+
+        function closeStockImageModal() {
+            document.getElementById('stockImageModal').classList.remove('open');
+        }
+
+        async function saveStockImageNow() {
+            const paper = document.getElementById('stockImagePaper');
+
+            showToast('⏳ Menyiapkan gambar stok...', '');
+
+            try {
+                const originalMaxHeight = paper.style.maxHeight;
+                paper.style.maxHeight = 'none';
+
+                await new Promise(resolve => setTimeout(resolve, 200));
+
+                const canvas = await html2canvas(paper, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff',
+                    logging: false,
+                    allowTaint: true,
+                    width: paper.scrollWidth,
+                    height: paper.scrollHeight
+                });
+
+                paper.style.maxHeight = originalMaxHeight;
+
+                const roundedCanvas = document.createElement('canvas');
+                const ctx = roundedCanvas.getContext('2d');
+                const w = canvas.width;
+                const h = canvas.height;
+                const radius = 32;
+
+                roundedCanvas.width = w;
+                roundedCanvas.height = h;
+
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, w, h);
+
+                ctx.beginPath();
+                ctx.moveTo(radius, 0);
+                ctx.lineTo(w - radius, 0);
+                ctx.quadraticCurveTo(w, 0, w, radius);
+                ctx.lineTo(w, h - radius);
+                ctx.quadraticCurveTo(w, h, w - radius, h);
+                ctx.lineTo(radius, h);
+                ctx.quadraticCurveTo(0, h, 0, h - radius);
+                ctx.lineTo(0, radius);
+                ctx.quadraticCurveTo(0, 0, radius, 0);
+                ctx.closePath();
+                ctx.clip();
+
+                ctx.drawImage(canvas, 0, 0, w, h);
+
+                const link = document.createElement('a');
+                const now = new Date();
+                const dateStr = now.toISOString().slice(0, 10);
+                link.download = `stockbar_${getCafeName().replace(/[^a-zA-Z0-9]/g, '_')}_${dateStr}_${stockCurrentSlide + 1}.png`;
+                link.href = roundedCanvas.toDataURL('image/png');
+                link.click();
+
+                showToast('✅ Gambar stok berhasil disimpan!', 'success');
+            } catch (err) {
+                console.error(err);
+                showToast('❌ Gagal menyimpan gambar stok.', 'error');
+                paper.style.maxHeight = '';
+            }
+        }
+
+        // ================================================================
         //  SAVE ORDER AS IMAGE
         // ================================================================
 
@@ -2527,7 +2906,6 @@
             const items = getOrderItems();
             const container = document.getElementById('orderImageContent');
 
-            // Show all items including EQUIPMENT
             const filteredItems = items;
 
             if (!filteredItems.length) {
@@ -2551,7 +2929,6 @@
                     </div>
                 `;
 
-            // Group by category
             const groups = {};
             for (const item of filteredItems) {
                 const cat = item.category || 'Umum';
@@ -2569,8 +2946,14 @@
                 return ia - ib;
             });
 
-            // Count total items for dynamic sizing
             const totalItems = filteredItems.length;
+            const paper = document.getElementById('orderImagePaper');
+            paper.classList.remove('small-items', 'tiny-items');
+            if (totalItems > 20) {
+                paper.classList.add('tiny-items');
+            } else if (totalItems > 15) {
+                paper.classList.add('small-items');
+            }
 
             for (const cat of sortedCats) {
                 html += `<div class="order-cat">${cat}</div>`;
@@ -2587,17 +2970,6 @@
             html += `<div class="order-footer">${cafeName} · ${dateStr}</div>`;
 
             container.innerHTML = html;
-
-            // Apply dynamic font size based on number of items
-            const paper = document.getElementById('orderImagePaper');
-            if (totalItems > 15) {
-                paper.style.fontSize = '11px';
-            } else if (totalItems > 10) {
-                paper.style.fontSize = '12px';
-            } else {
-                paper.style.fontSize = '';
-            }
-
             document.getElementById('orderImageModal').classList.add('open');
         }
 
@@ -2611,7 +2983,6 @@
             showToast('⏳ Menyiapkan gambar order...', '');
 
             try {
-                // Temporarily remove max-height for full capture
                 const originalMaxHeight = paper.style.maxHeight;
                 paper.style.maxHeight = 'none';
 
@@ -2624,27 +2995,23 @@
                     logging: false,
                     allowTaint: true,
                     width: paper.scrollWidth,
-                    height: paper.scrollHeight,
-                    borderRadius: '16px'
+                    height: paper.scrollHeight
                 });
 
                 paper.style.maxHeight = originalMaxHeight;
 
-                // Create rounded image using canvas
                 const roundedCanvas = document.createElement('canvas');
                 const ctx = roundedCanvas.getContext('2d');
                 const w = canvas.width;
                 const h = canvas.height;
-                const radius = 32; // 16px * 2 scale
+                const radius = 32;
 
                 roundedCanvas.width = w;
                 roundedCanvas.height = h;
 
-                // Draw white background first
                 ctx.fillStyle = '#ffffff';
                 ctx.fillRect(0, 0, w, h);
 
-                // Clip rounded rect
                 ctx.beginPath();
                 ctx.moveTo(radius, 0);
                 ctx.lineTo(w - radius, 0);
@@ -2683,219 +3050,6 @@
                 return;
             }
             openOrderImageModal();
-        }
-
-        // ================================================================
-        //  PRINT STOCK WITH SLIDES (max 15 items per slide)
-        // ================================================================
-
-        let currentSlide = 0;
-        let totalSlides = 0;
-        let slideData = [];
-
-        function buildSlideData() {
-            const stock = getStock();
-            const keys = Object.keys(stock);
-            if (!keys.length) return [];
-
-            // Flatten all items, sorted with priority
-            const allItems = [];
-            for (const name of keys) {
-                const item = stock[name];
-                const isEmpty = emptyItems.has(name);
-                allItems.push({ name, qty: item.qty || '1', isEmpty, category: item.category || 'Umum', isPriority: priorityItems
-                        .has(name) });
-            }
-
-            // Sort: priority items first, then alphabetical
-            allItems.sort((a, b) => {
-                if (a.isPriority && !b.isPriority) return -1;
-                if (!a.isPriority && b.isPriority) return 1;
-                return a.name.localeCompare(b.name);
-            });
-
-            // Split into slides (max 15 items per slide)
-            const ITEMS_PER_SLIDE = 15;
-            const slides = [];
-            for (let i = 0; i < allItems.length; i += ITEMS_PER_SLIDE) {
-                slides.push(allItems.slice(i, i + ITEMS_PER_SLIDE));
-            }
-            return slides;
-        }
-
-        function renderPrintSlides() {
-            const slides = buildSlideData();
-            slideData = slides;
-            totalSlides = slides.length;
-            currentSlide = 0;
-
-            const wrapper = document.getElementById('slideWrapper');
-            const indicators = document.getElementById('slideIndicators');
-            const pageInfo = document.getElementById('pageInfo');
-
-            if (totalSlides === 0) {
-                wrapper.innerHTML = `<div class="paper-empty">Tidak ada stok untuk dicetak.</div>`;
-                indicators.innerHTML = '';
-                pageInfo.textContent = '0 / 0';
-                document.getElementById('prevSlideBtn').disabled = true;
-                document.getElementById('nextSlideBtn').disabled = true;
-                return;
-            }
-
-            // Get current date
-            const now = new Date();
-            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-            const day = String(now.getDate()).padStart(2, '0');
-            const month = monthNames[now.getMonth()];
-            const year = now.getFullYear();
-            const dateStr = `${day} ${month} ${year}`;
-            const cafeName = getCafeName();
-
-            let html = '';
-            for (let i = 0; i < totalSlides; i++) {
-                html += `<div class="slide-page">`;
-                html += `
-                        <div class="paper-header">
-                            <h2>STOCK BAR</h2>
-                            <div class="date">${cafeName} · ${dateStr}</div>
-                        </div>
-                    `;
-                const slide = slides[i];
-                let num = i * 15 + 1;
-                for (const item of slide) {
-                    const displayQty = item.isEmpty ? '—' : item.qty;
-                    const priorityMark = item.isPriority ? ' ★' : '';
-                    html += `
-                            <div class="paper-item">
-                                <span class="num">${num}.</span>
-                                <span class="name">${escapeHtml(item.name)}${priorityMark}</span>
-                                <span class="qty ${item.isEmpty ? 'empty-print' : ''}">${escapeHtml(displayQty)}</span>
-                            </div>
-                        `;
-                    num++;
-                }
-                html += `
-                        <div class="paper-footer">${cafeName} · ${dateStr}</div>
-                    `;
-                html += `</div>`;
-            }
-
-            wrapper.innerHTML = html;
-            updateSlideIndicators();
-            updateSlidePosition();
-
-            document.getElementById('prevSlideBtn').disabled = totalSlides <= 1;
-            document.getElementById('nextSlideBtn').disabled = totalSlides <= 1;
-        }
-
-        function updateSlideIndicators() {
-            const indicators = document.getElementById('slideIndicators');
-            if (totalSlides <= 1) {
-                indicators.innerHTML = '';
-                return;
-            }
-            let html = '';
-            for (let i = 0; i < totalSlides; i++) {
-                html += `<button class="dot ${i === currentSlide ? 'active' : ''}" onclick="goToSlide(${i})"></button>`;
-            }
-            indicators.innerHTML = html;
-            document.getElementById('pageInfo').textContent = `${currentSlide + 1} / ${totalSlides}`;
-        }
-
-        function updateSlidePosition() {
-            const wrapper = document.getElementById('slideWrapper');
-            wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-            document.getElementById('pageInfo').textContent = `${currentSlide + 1} / ${totalSlides}`;
-            document.querySelectorAll('.dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentSlide);
-            });
-            document.getElementById('prevSlideBtn').disabled = currentSlide === 0;
-            document.getElementById('nextSlideBtn').disabled = currentSlide >= totalSlides - 1;
-        }
-
-        function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateSlidePosition();
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlidePosition();
-            }
-        }
-
-        function goToSlide(index) {
-            if (index >= 0 && index < totalSlides) {
-                currentSlide = index;
-                updateSlidePosition();
-            }
-        }
-
-        function openPrintModal() {
-            renderPrintSlides();
-            document.getElementById('printModal').classList.add('open');
-        }
-
-        function closePrintModal() {
-            document.getElementById('printModal').classList.remove('open');
-        }
-
-        // ================================================================
-        //  SAVE PRINT AS IMAGE
-        // ================================================================
-
-        async function savePrintAsImage() {
-            const paper = document.getElementById('printPaper');
-
-            showToast('⏳ Menyiapkan gambar...', '');
-
-            try {
-                const nav = paper.querySelector('.slide-nav');
-                const indicators = paper.querySelector('.slide-indicators');
-                const navHidden = nav.style.display;
-                const indicatorsHidden = indicators.style.display;
-                nav.style.display = 'none';
-                indicators.style.display = 'none';
-
-                const wrapper = document.getElementById('slideWrapper');
-                const transform = wrapper.style.transform;
-                wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-                await new Promise(resolve => setTimeout(resolve, 100));
-
-                const canvas = await html2canvas(paper, {
-                    scale: 2,
-                    useCORS: true,
-                    backgroundColor: getTheme() === 'dark' ? '#2c2c2e' : '#ffffff',
-                    logging: false,
-                    allowTaint: true,
-                    width: paper.scrollWidth,
-                    height: paper.scrollHeight
-                });
-
-                nav.style.display = navHidden || '';
-                indicators.style.display = indicatorsHidden || '';
-                wrapper.style.transform = transform;
-
-                const link = document.createElement('a');
-                const now = new Date();
-                const dateStr = now.toISOString().slice(0, 10);
-                link.download = `stockbar_${getCafeName().replace(/[^a-zA-Z0-9]/g, '_')}_${dateStr}_${currentSlide + 1}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-
-                showToast('✅ Gambar berhasil disimpan!', 'success');
-            } catch (err) {
-                console.error(err);
-                showToast('❌ Gagal menyimpan gambar. Coba lagi.', 'error');
-                const nav = paper.querySelector('.slide-nav');
-                const indicators = paper.querySelector('.slide-indicators');
-                nav.style.display = '';
-                indicators.style.display = '';
-            }
         }
 
         // ================================================================
@@ -3152,6 +3306,7 @@
                     if (overlay.id === 'confirmDeleteModal') cancelDelete();
                     if (overlay.id === 'confirmResetStockModal') cancelResetStock();
                     if (overlay.id === 'orderImageModal') closeOrderImageModal();
+                    if (overlay.id === 'stockImageModal') closeStockImageModal();
                 }
             });
         });
