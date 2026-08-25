@@ -743,8 +743,8 @@
         .order-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 9px 0;
+            justify-content: space-between;
+            padding: 4px 0;
             border-bottom: 0.5px solid var(--divider);
             transition: var(--theme-transition);
         }
@@ -771,11 +771,58 @@
             border-radius: 999px;
             transition: var(--theme-transition);
             font-variant-numeric: tabular-nums;
+            flex-shrink: 0;
+            margin-left: 8px;
         }
 
         .order-item .qty.empty-order {
             background: rgba(255, 59, 48, 0.12);
             color: var(--danger);
+        }
+
+        /* order container dynamic sizing */
+        #orderListContainer {
+            transition: all 0.2s ease;
+        }
+
+        #orderListContainer .scroll-area {
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        #orderListContainer .scroll-area::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        #orderListContainer .scroll-area::-webkit-scrollbar-track {
+            background: var(--badge-bg);
+            border-radius: 99px;
+        }
+
+        #orderListContainer .scroll-area::-webkit-scrollbar-thumb {
+            background: var(--muted);
+            border-radius: 99px;
+            opacity: 0.3;
+        }
+
+        /* dynamic font size for order items */
+        .order-item .name {
+            font-size: 14px;
+        }
+
+        /* when many items, reduce font size */
+        #orderListContainer .many-items .order-item .name {
+            font-size: 12px;
+        }
+
+        #orderListContainer .many-items .order-item .qty {
+            font-size: 11px;
+            padding: 1px 10px;
+        }
+
+        #orderListContainer .many-items .order-item {
+            padding: 3px 0;
         }
 
         /* ===== TOAST ===== */
@@ -1304,7 +1351,7 @@
         .order-image-paper {
             background: var(--card);
             padding: 16px 16px;
-            border-radius: 8px;
+            border-radius: 12px;
             box-shadow: inset 0 0 0 1px var(--divider);
             margin-bottom: 10px;
             font-family: var(--font);
@@ -1314,6 +1361,7 @@
             min-height: 200px;
             max-height: 500px;
             width: 100%;
+            border-radius: 16px;
         }
 
         .order-image-paper .order-header {
@@ -1381,6 +1429,15 @@
             border-top: 1px solid var(--divider);
             padding-top: 6px;
             margin-top: 8px;
+        }
+
+        /* dynamic font size for order image */
+        .order-image-paper .order-item-print .name {
+            font-size: 13px;
+        }
+
+        .order-image-paper .order-item-print .qty {
+            font-size: 13px;
         }
 
         /* ===== CONFIRM TIMER ===== */
@@ -2070,7 +2127,9 @@
                 return;
             }
 
-            let html = '<div class="scroll-area">';
+            // Determine if many items
+            const manyItems = filteredItems.length > 10;
+            let html = `<div class="scroll-area ${manyItems ? 'many-items' : ''}">`;
             filteredItems.forEach((item) => {
                 html += `
                         <div class="order-item">
@@ -2489,6 +2548,9 @@
                 return ia - ib;
             });
 
+            // Count total items for dynamic sizing
+            const totalItems = filteredItems.length;
+
             for (const cat of sortedCats) {
                 html += `<div class="order-cat">${cat}</div>`;
                 for (const item of groups[cat]) {
@@ -2504,6 +2566,17 @@
             html += `<div class="order-footer">${cafeName} · ${dateStr}</div>`;
 
             container.innerHTML = html;
+
+            // Apply dynamic font size based on number of items
+            const paper = document.getElementById('orderImagePaper');
+            if (totalItems > 15) {
+                paper.style.fontSize = '11px';
+            } else if (totalItems > 10) {
+                paper.style.fontSize = '12px';
+            } else {
+                paper.style.fontSize = '';
+            }
+
             document.getElementById('orderImageModal').classList.add('open');
         }
 
@@ -2530,16 +2603,42 @@
                     logging: false,
                     allowTaint: true,
                     width: paper.scrollWidth,
-                    height: paper.scrollHeight
+                    height: paper.scrollHeight,
+                    borderRadius: '16px'
                 });
 
                 paper.style.maxHeight = originalMaxHeight;
+
+                // Create rounded image using canvas
+                const roundedCanvas = document.createElement('canvas');
+                const ctx = roundedCanvas.getContext('2d');
+                const w = canvas.width;
+                const h = canvas.height;
+                const radius = 32; // 16px * 2 scale
+
+                roundedCanvas.width = w;
+                roundedCanvas.height = h;
+
+                ctx.beginPath();
+                ctx.moveTo(radius, 0);
+                ctx.lineTo(w - radius, 0);
+                ctx.quadraticCurveTo(w, 0, w, radius);
+                ctx.lineTo(w, h - radius);
+                ctx.quadraticCurveTo(w, h, w - radius, h);
+                ctx.lineTo(radius, h);
+                ctx.quadraticCurveTo(0, h, 0, h - radius);
+                ctx.lineTo(0, radius);
+                ctx.quadraticCurveTo(0, 0, radius, 0);
+                ctx.closePath();
+                ctx.clip();
+
+                ctx.drawImage(canvas, 0, 0, w, h);
 
                 const link = document.createElement('a');
                 const now = new Date();
                 const dateStr = now.toISOString().slice(0, 10);
                 link.download = `order_${getCafeName().replace(/[^a-zA-Z0-9]/g, '_')}_${dateStr}.png`;
-                link.href = canvas.toDataURL('image/png');
+                link.href = roundedCanvas.toDataURL('image/png');
                 link.click();
 
                 showToast('✅ Gambar order berhasil disimpan!', 'success');
