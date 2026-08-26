@@ -30,7 +30,6 @@
             --safe-bottom: env(safe-area-inset-bottom, 16px);
             --input-bg: #f8f8fc;
             --modal-bg: #ffffff;
-            --header-bg: transparent;
             --badge-bg: #f2f2f7;
             --divider: rgba(0, 0, 0, 0.06);
             --hover-bg: rgba(0, 0, 0, 0.04);
@@ -369,17 +368,6 @@
             transform: none;
         }
 
-        .btn-gold {
-            background: var(--gold);
-            color: #fff;
-            box-shadow: 0 2px 10px rgba(255, 149, 0, 0.2);
-            transition: var(--theme-transition), transform 0.12s;
-        }
-
-        .btn-gold:hover {
-            background: #e68a00;
-        }
-
         .btn-whatsapp {
             background: #25d366;
             color: #fff;
@@ -416,30 +404,34 @@
             pointer-events: none;
         }
 
-        .cafe-name-display {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text);
-            background: var(--badge-bg);
-            padding: 6px 16px;
-            border-radius: 999px;
-            display: inline-block;
-            border: 0.5px solid var(--divider);
-            transition: var(--theme-transition);
-            cursor: pointer;
-            user-select: none;
+        .btn-google-drive {
+            background: #4285f4;
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(66, 133, 244, 0.3);
+            transition: var(--theme-transition), transform 0.12s;
+        }
+        .btn-google-drive:hover {
+            background: #3367d6;
         }
 
-        .cafe-name-display:hover {
-            background: var(--hover-bg);
+        .btn-share {
+            background: #8e44ad;
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(142, 68, 173, 0.3);
+            transition: var(--theme-transition), transform 0.12s;
+        }
+        .btn-share:hover {
+            background: #7d3c98;
         }
 
-        .cafe-name-display .edit-hint {
-            font-size: 10px;
-            font-weight: 400;
-            color: var(--muted);
-            margin-left: 4px;
-            opacity: 0.5;
+        .btn-save-image {
+            background: #34c759;
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(52, 199, 89, 0.2);
+            transition: var(--theme-transition), transform 0.12s;
+        }
+        .btn-save-image:hover {
+            background: #28a745;
         }
 
         .cafe-actions {
@@ -698,6 +690,13 @@
             background: rgba(255, 59, 48, 0.08);
         }
 
+        .stock-item .restore-value {
+            font-size: 10px;
+            color: var(--muted);
+            opacity: 0.5;
+            margin-left: 4px;
+        }
+
         .empty-state {
             text-align: center;
             padding: 28px 10px;
@@ -907,6 +906,42 @@
             flex: 1;
         }
 
+        .modal-box .qr-code-display {
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            background: var(--badge-bg);
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid var(--divider);
+            word-break: break-all;
+            max-height: 180px;
+            overflow-y: auto;
+            margin: 8px 0;
+            color: var(--text);
+            transition: var(--theme-transition);
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+        }
+
+        .modal-box .qr-code-display::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        .modal-box .qr-code-display::-webkit-scrollbar-thumb {
+            background: var(--muted);
+            border-radius: 99px;
+        }
+
+        .modal-box .qr-label {
+            text-align: center;
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            transition: var(--theme-transition);
+        }
+
         .scroll-area {
             max-height: 220px;
             overflow-y: auto;
@@ -998,10 +1033,6 @@
                 font-size: 11px;
                 padding: 5px 10px;
             }
-            .cafe-name-display {
-                font-size: 14px;
-                padding: 5px 12px;
-            }
             .category-tabs .tab-btn {
                 font-size: 11px;
                 padding: 5px 12px;
@@ -1012,6 +1043,11 @@
             .search-bar .btn {
                 font-size: 12px;
                 padding: 8px 10px;
+            }
+            .modal-box .qr-code-display {
+                font-size: 9px;
+                padding: 10px;
+                max-height: 140px;
             }
         }
 
@@ -1069,16 +1105,6 @@
             background: var(--hover-bg);
         }
 
-        .btn-save-image {
-            background: #34c759;
-            color: #fff;
-            box-shadow: 0 2px 10px rgba(52, 199, 89, 0.2);
-            transition: var(--theme-transition), transform 0.12s;
-        }
-        .btn-save-image:hover {
-            background: #28a745;
-        }
-
         .order-image-modal .modal-box {
             max-width: 480px;
             padding: 16px 16px 16px;
@@ -1089,7 +1115,7 @@
             background: #ffffff;
             padding: 16px 16px;
             border-radius: 12px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
             margin-bottom: 10px;
             font-family: var(--font);
             transition: var(--theme-transition);
@@ -1142,14 +1168,14 @@
             font-weight: 700;
             color: #8e8e93;
             text-transform: uppercase;
-            border-bottom: 0.5px solid rgba(0,0,0,0.06);
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
             padding: 4px 0 2px;
             margin-top: 4px;
             letter-spacing: 0.5px;
         }
 
         body.dark .order-image-paper .order-cat {
-            border-bottom-color: rgba(255,255,255,0.08);
+            border-bottom-color: rgba(255, 255, 255, 0.08);
         }
 
         .order-image-paper .order-item-print {
@@ -1157,11 +1183,11 @@
             justify-content: space-between;
             padding: 4px 0;
             font-size: 13px;
-            border-bottom: 0.5px solid rgba(0,0,0,0.06);
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
         }
 
         body.dark .order-image-paper .order-item-print {
-            border-bottom-color: rgba(255,255,255,0.08);
+            border-bottom-color: rgba(255, 255, 255, 0.08);
         }
 
         .order-image-paper .order-item-print:last-child {
@@ -1192,13 +1218,13 @@
             text-align: center;
             font-size: 8px;
             color: #8e8e93;
-            border-top: 1px solid rgba(0,0,0,0.06);
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
             padding-top: 6px;
             margin-top: 8px;
         }
 
         body.dark .order-image-paper .order-footer {
-            border-top-color: rgba(255,255,255,0.08);
+            border-top-color: rgba(255, 255, 255, 0.08);
         }
 
         .order-image-paper .order-item-print .name {
@@ -1243,7 +1269,7 @@
             background: #ffffff;
             padding: 16px 16px;
             border-radius: 12px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
             margin-bottom: 10px;
             font-family: var(--font);
             transition: var(--theme-transition);
@@ -1304,21 +1330,21 @@
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             padding: 4px 0;
         }
 
         body.dark .stock-image-paper .stock-table th {
-            border-bottom-color: rgba(255,255,255,0.08);
+            border-bottom-color: rgba(255, 255, 255, 0.08);
         }
 
         .stock-image-paper .stock-table td {
             padding: 4px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         body.dark .stock-image-paper .stock-table td {
-            border-bottom-color: rgba(255,255,255,0.08);
+            border-bottom-color: rgba(255, 255, 255, 0.08);
         }
 
         .stock-image-paper .stock-table tr:last-child td {
@@ -1386,13 +1412,13 @@
             text-align: center;
             font-size: 8px;
             color: #8e8e93;
-            border-top: 1px solid rgba(0,0,0,0.08);
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
             padding-top: 6px;
             margin-top: 3px;
         }
 
         body.dark .stock-image-paper .stock-footer {
-            border-top-color: rgba(255,255,255,0.08);
+            border-top-color: rgba(255, 255, 255, 0.08);
         }
 
         .stock-image-paper.small-items .stock-table {
@@ -1486,36 +1512,6 @@
             border: 0.5px solid var(--divider);
             transition: var(--theme-transition);
             line-height: 20px;
-        }
-
-        .cafe-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .cafe-row .cafe-name-display {
-            flex: 0 1 auto;
-        }
-
-        .cafe-row .cafe-actions {
-            flex: 1;
-            justify-content: flex-end;
-        }
-
-        @media (max-width: 480px) {
-            .cafe-row {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 8px;
-            }
-            .cafe-row .cafe-actions {
-                justify-content: center;
-            }
-            .cafe-row .cafe-actions .btn {
-                flex: 1;
-            }
         }
 
         .order-action-row {
@@ -1704,12 +1700,65 @@
             color: var(--muted);
         }
 
-        /* ===== STOCK RESTORE VALUE ===== */
-        .stock-item .restore-value {
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin: 4px 0 8px;
+        }
+
+        .dashboard-grid .stat-card {
+            background: var(--badge-bg);
+            border-radius: 10px;
+            padding: 10px 8px;
+            text-align: center;
+            border: 0.5px solid var(--divider);
+            transition: var(--theme-transition);
+        }
+
+        .dashboard-grid .stat-card .number {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+            transition: var(--theme-transition);
+            line-height: 1.2;
+        }
+
+        .dashboard-grid .stat-card .label {
             font-size: 10px;
             color: var(--muted);
-            opacity: 0.5;
-            margin-left: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            transition: var(--theme-transition);
+        }
+
+        .dashboard-grid .stat-card .number.in {
+            color: var(--success);
+        }
+
+        .dashboard-grid .stat-card .number.out {
+            color: var(--danger);
+        }
+
+        .dashboard-grid .stat-card .number.empty {
+            color: var(--danger);
+        }
+
+        .dashboard-grid .stat-card .number.quarter {
+            color: var(--gold);
+        }
+
+        .dashboard-grid .stat-card .number.total {
+            color: var(--accent);
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-grid .stat-card .number {
+                font-size: 18px;
+            }
+            .dashboard-grid .stat-card .label {
+                font-size: 9px;
+            }
         }
     </style>
 </head>
@@ -1721,7 +1770,7 @@
             <div class="header-left">
                 <div class="header-icon">K</div>
                 <div class="header-info">
-                    <h1 id="cafeHeaderName">KafeBot</h1>
+                    <h1 id="cafeHeaderName">Element Caffe</h1>
                     <div class="sub" id="headerSub">Manajemen Stok</div>
                 </div>
             </div>
@@ -1737,35 +1786,76 @@
 
         <div class="toast" id="toast"></div>
 
-        <div class="card">
-            <div class="card-title">Kafe</div>
-            <div class="card-desc">Nama kafe untuk identitas. Klik nama untuk mengubah.</div>
-            <div class="cafe-row">
-                <span class="cafe-name-display" id="cafeNameDisplay" onclick="openCafeNameModal()">
-                    Element Caffe
-                    <span class="edit-hint">✎</span>
-                </span>
-                <div class="cafe-actions">
-                    <button class="btn btn-save-cafe" onclick="exportStockToFile()">
-                        <span class="sym"></span> Save
-                    </button>
-                    <button class="btn btn-load-cafe" onclick="importStockFromFile()">
-                        <span class="sym"></span> Load
-                    </button>
+        <!-- ===== DASHBOARD ===== -->
+        <div class="card" id="dashboardCard">
+            <div class="card-title">
+                Dashboard
+                <span class="badge-count" id="dashboardTime">Hari Ini</span>
+            </div>
+            <div class="dashboard-grid" id="dashboardGrid">
+                <div class="stat-card">
+                    <div class="number total" id="statTotal">0</div>
+                    <div class="label">Total Item</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number empty" id="statEmpty">0</div>
+                    <div class="label">Habis</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number quarter" id="statQuarter">0</div>
+                    <div class="label">1/4 (Order)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number in" id="statIn">+0</div>
+                    <div class="label">In Hari Ini</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number out" id="statOut">-0</div>
+                    <div class="label">Out Hari Ini</div>
+                </div>
+                <div class="stat-card" style="background:var(--accent); border-color:var(--accent);">
+                    <div class="number" style="color:#fff;" id="statOrder">0</div>
+                    <div class="label" style="color:rgba(255,255,255,0.8);">Need Order</div>
                 </div>
             </div>
-            <div class="text-muted" style="text-align:center; font-size:10px; opacity:0.4; margin-top:6px;">
-                simpan &amp; muat semua item ke/dari file .txt
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <button class="btn btn-sm btn-secondary" onclick="updateDashboard()" style="flex:1;">Refresh</button>
             </div>
-            <input type="file" id="fileInput" accept=".txt" onchange="handleFileLoad(event)" />
         </div>
 
+        <!-- ===== BACKUP & SHARE ===== -->
+        <div class="card">
+            <div class="card-title">Backup & Share</div>
+            <div class="card-desc">Backup data atau share stok antar perangkat via QR Code.</div>
+            <div class="row" style="gap:6px;">
+                <button class="btn btn-google-drive btn-sm" onclick="backupToDrive()" style="flex:1;">
+                    Backup
+                </button>
+                <button class="btn btn-google-drive btn-sm" onclick="restoreFromDrive()" style="flex:1;">
+                    Restore
+                </button>
+            </div>
+            <div class="subtle-divider"></div>
+            <div class="row" style="gap:6px;">
+                <button class="btn btn-share btn-sm" onclick="generateQRCode()" style="flex:1;">
+                    Generate QR
+                </button>
+                <button class="btn btn-share btn-sm" onclick="importFromQR()" style="flex:1;">
+                    Import QR
+                </button>
+            </div>
+            <div id="shareInfoDisplay" class="text-muted" style="text-align:center; margin-top:6px; font-size:12px;">
+                Klik Generate QR untuk membuat kode yang bisa di-scan HP lain
+            </div>
+        </div>
+
+        <!-- ===== STOCK MANAGEMENT ===== -->
         <div class="card">
             <div class="card-title">
                 Stok Barang
                 <span class="badge-stock" id="stockCountBadge">0</span>
             </div>
-            <div class="card-desc">Tambahkan item dengan <strong>kategori</strong> dan <strong>jumlah</strong>. Klik <strong>−</strong> untuk tandai habis.</div>
+            <div class="card-desc">Tambahkan item dengan <strong>kategori</strong> dan <strong>jumlah</strong>. Klik <strong>-</strong> untuk tandai habis.</div>
 
             <div class="field">
                 <label>Nama Barang</label>
@@ -1797,7 +1887,7 @@
             <div class="subtle-divider"></div>
 
             <div class="search-bar">
-                <input id="searchInput" class="input" placeholder="🔍 Cari item..." oninput="filterStock()" />
+                <input id="searchInput" class="input" placeholder="Cari item..." oninput="filterStock()" />
                 <button class="btn btn-secondary btn-sm btn-clear" onclick="clearSearch()" title="Hapus pencarian">✕</button>
             </div>
 
@@ -1812,10 +1902,11 @@
                 <button class="btn btn-sm btn-secondary" onclick="refreshStockList()">Refresh</button>
                 <button class="btn btn-sm btn-secondary" onclick="openStockImageModal()">View</button>
                 <button class="btn btn-sm btn-secondary" onclick="openStockInOutModal()">In/Out</button>
-                <button class="btn btn-sm btn-danger" id="clearAllBtn" onclick="confirmClearAll()">✕ Reset</button>
+                <button class="btn btn-sm btn-danger" id="clearAllBtn" onclick="confirmClearAll()">Reset</button>
             </div>
         </div>
 
+        <!-- ===== ORDER ===== -->
         <div class="card">
             <div class="card-title">
                 Order
@@ -1828,29 +1919,15 @@
             </div>
 
             <div class="order-action-row">
-                <button class="btn btn-sm btn-secondary" onclick="copyOrderText()">⌘ Salin</button>
-                <button class="btn btn-sm btn-whatsapp" onclick="shareToWhatsApp()">◆ WhatsApp</button>
+                <button class="btn btn-sm btn-secondary" onclick="copyOrderText()">Salin</button>
+                <button class="btn btn-sm btn-whatsapp" onclick="shareToWhatsApp()">WhatsApp</button>
                 <button class="btn btn-sm btn-save-image" onclick="saveOrderAsImage()">Simpan</button>
             </div>
         </div>
 
         <div class="footer">KafeBot · built with care</div>
 
-        <div id="cafeNameModal" class="modal-overlay">
-            <div class="modal-box">
-                <div class="title">Nama Kafe</div>
-                <div class="desc">Masukkan nama kafe baru.</div>
-                <div class="field">
-                    <label>Nama Kafe</label>
-                    <input id="cafeNameInput" class="input" placeholder="Kafe Saya" />
-                </div>
-                <div class="row">
-                    <button class="btn btn-secondary" onclick="closeCafeNameModal()">Batal</button>
-                    <button class="btn btn-primary" onclick="saveCafeName()">Simpan</button>
-                </div>
-            </div>
-        </div>
-
+        <!-- ===== MODALS ===== -->
         <div id="editItemModal" class="modal-overlay">
             <div class="modal-box">
                 <div class="title" id="editItemTitle">Edit Item</div>
@@ -1956,6 +2033,35 @@
             </div>
         </div>
 
+        <!-- ===== QR CODE MODALS ===== -->
+        <div id="qrCodeModal" class="modal-overlay">
+            <div class="modal-box">
+                <div class="title">QR Code Share</div>
+                <div class="desc">Salin data QR Code di bawah dan kirim ke HP lain.</div>
+                <div class="qr-label">Data QR Code</div>
+                <div class="qr-code-display" id="qrCodeDisplay">---</div>
+                <div style="display:flex; gap:6px; margin-top:8px; flex-wrap:wrap;">
+                    <button class="btn btn-sm btn-secondary" onclick="closeQRCodeModal()" style="flex:1;">Tutup</button>
+                    <button class="btn btn-sm btn-primary" onclick="copyQRData()" style="flex:1;">Salin Data</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="importQRModal" class="modal-overlay">
+            <div class="modal-box">
+                <div class="title">Import QR Code</div>
+                <div class="desc">Tempel data QR Code dari HP lain di bawah.</div>
+                <div class="field">
+                    <label>Data QR Code</label>
+                    <textarea id="qrImportInput" class="input" rows="4" placeholder="Tempel data QR di sini..."></textarea>
+                </div>
+                <div class="row" style="gap:6px;">
+                    <button class="btn btn-secondary btn-sm" onclick="closeImportQRModal()">Batal</button>
+                    <button class="btn btn-primary btn-sm" onclick="importQRData()">Import</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -1996,8 +2102,8 @@
 
         let emptyItems = new Set();
         let priorityItems = new Set();
-        // Store original qty when marking as empty
         let emptyRestoreValues = new Map();
+        const CAFE_NAME = 'Element Caffe';
 
         function loadEmptyItems() {
             try {
@@ -2055,14 +2161,6 @@
             localStorage.setItem('cafe_stock', JSON.stringify(stock));
         }
 
-        function getCafeName() {
-            return localStorage.getItem('cafe_name') || 'Kafe Saya';
-        }
-
-        function setCafeName(name) {
-            localStorage.setItem('cafe_name', name);
-        }
-
         loadEmptyItems();
         loadEmptyRestoreValues();
         loadPriorityItems();
@@ -2108,18 +2206,41 @@
             if (confirm('Hapus semua riwayat stok In/Out?')) {
                 saveInOutHistory([]);
                 renderInOutContent();
+                updateDashboard();
                 showToast('Riwayat In/Out dihapus.', 'success');
             }
         }
 
-        // ================================================================
-        //  GET ITEM IN/OUT SUMMARY
-        // ================================================================
+        function getTodayInOut() {
+            const history = getInOutHistory();
+            const today = new Date();
+            const todayStr = today.toLocaleString('id-ID', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+            let totalIn = 0,
+                totalOut = 0;
+            for (const record of history) {
+                const recordDate = new Date(record.timestamp);
+                const recordStr = recordDate.toLocaleString('id-ID', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit'
+                });
+                if (recordStr === todayStr) {
+                    const qty = parseFloat(record.qty) || 0;
+                    if (record.type === 'in') totalIn += qty;
+                    else totalOut += qty;
+                }
+            }
+            return { totalIn, totalOut };
+        }
 
         function getItemInOutSummary(name) {
             const history = getInOutHistory();
-            let totalIn = 0;
-            let totalOut = 0;
+            let totalIn = 0,
+                totalOut = 0;
             for (const record of history) {
                 if (record.name === name) {
                     const qty = parseFloat(record.qty) || 0;
@@ -2130,16 +2251,11 @@
             return { totalIn, totalOut };
         }
 
-        // ================================================================
-        //  ORDER
-        // ================================================================
-
         function getOrderItems() {
             const stock = getStock();
             const items = [];
             for (const [name, data] of Object.entries(stock)) {
                 const isEmpty = emptyItems.has(name);
-                // Only show empty items OR items with qty 1/4
                 if (isEmpty || data.qty === '1/4') {
                     items.push({
                         name,
@@ -2151,6 +2267,34 @@
                 }
             }
             return items;
+        }
+
+        // ================================================================
+        //  DASHBOARD
+        // ================================================================
+
+        function updateDashboard() {
+            const stock = getStock();
+            const keys = Object.keys(stock);
+
+            let total = keys.length;
+            let emptyCount = 0;
+            let quarterCount = 0;
+
+            for (const name of keys) {
+                if (emptyItems.has(name)) emptyCount++;
+                if (stock[name].qty === '1/4') quarterCount++;
+            }
+
+            const todayInOut = getTodayInOut();
+            const orderItems = getOrderItems();
+
+            document.getElementById('statTotal').textContent = total;
+            document.getElementById('statEmpty').textContent = emptyCount;
+            document.getElementById('statQuarter').textContent = quarterCount;
+            document.getElementById('statIn').textContent = '+' + todayInOut.totalIn;
+            document.getElementById('statOut').textContent = '-' + todayInOut.totalOut;
+            document.getElementById('statOrder').textContent = orderItems.length;
         }
 
         // ================================================================
@@ -2174,6 +2318,7 @@
                     `<div class="empty-state"><span class="big">—</span>Tidak ada stok.<br />Tambahkan barang di atas.</div>`;
                 document.getElementById('categoryTabs').innerHTML = '';
                 renderOrderList();
+                updateDashboard();
                 return;
             }
 
@@ -2211,7 +2356,8 @@
                 return ia - ib;
             });
 
-            let tabsHtml = `<button class="tab-btn ${selectedCategory === 'all' ? 'active' : ''}" onclick="selectCategory('all')">Semua <span class="count">(${keys.length})</span></button>`;
+            let tabsHtml =
+                `<button class="tab-btn ${selectedCategory === 'all' ? 'active' : ''}" onclick="selectCategory('all')">Semua <span class="count">(${keys.length})</span></button>`;
             for (const cat of sortedCats) {
                 const count = groups[cat].length;
                 tabsHtml +=
@@ -2257,11 +2403,13 @@
             }
 
             if (!hasItems) {
-                html = `<div class="empty-state"><span class="big">—</span>${searchLower ? 'Tidak ada item yang cocok dengan pencarian.' : 'Tidak ada item di kategori ini.'}</div>`;
+                html =
+                    `<div class="empty-state"><span class="big">—</span>${searchLower ? 'Tidak ada item yang cocok dengan pencarian.' : 'Tidak ada item di kategori ini.'}</div>`;
             }
 
             container.innerHTML = html;
             renderOrderList();
+            updateDashboard();
         }
 
         function renderStockItem(item) {
@@ -2341,18 +2489,6 @@
             container.innerHTML = html;
         }
 
-        function updateCafeNameDisplay() {
-            const name = getCafeName();
-            document.getElementById('cafeNameDisplay').innerHTML = escapeHtml(name) +
-                ' <span class="edit-hint">✎</span>';
-            document.getElementById('cafeHeaderName').textContent = name;
-        }
-
-        function refreshUI() {
-            renderStockList();
-            updateCafeNameDisplay();
-        }
-
         function escapeHtml(str) {
             const div = document.createElement('div');
             div.textContent = str;
@@ -2379,7 +2515,7 @@
         }
 
         // ================================================================
-        //  TOGGLE EMPTY ITEM - FIXED! (with restore value)
+        //  TOGGLE EMPTY ITEM
         // ================================================================
 
         function toggleEmptyItem(name) {
@@ -2388,22 +2524,18 @@
             const currentQty = stock[name].qty || '1';
 
             if (!emptyItems.has(name)) {
-                // Marking as empty -> save current qty as restore value, set qty to "0"
                 emptyRestoreValues.set(name, currentQty);
                 stock[name].qty = '0';
                 saveStock(stock);
-                // Record OUT with current quantity
                 addInOutRecord(name, currentQty, 'out');
                 emptyItems.add(name);
                 saveEmptyItems();
                 saveEmptyRestoreValues();
                 showToast(`${name} ditandai habis (—) → restore: ${currentQty}`, 'success');
             } else {
-                // Restoring from empty -> restore to saved value
                 const restoreValue = emptyRestoreValues.get(name) || '1/4';
                 stock[name].qty = restoreValue;
                 saveStock(stock);
-                // Record IN with restore value
                 addInOutRecord(name, restoreValue, 'in');
                 emptyItems.delete(name);
                 emptyRestoreValues.delete(name);
@@ -2425,10 +2557,6 @@
         function setEditQty(val) {
             document.getElementById('editItemQty').value = val;
         }
-
-        // ================================================================
-        //  PARSE QTY TO NUMBER
-        // ================================================================
 
         function parseQty(qty) {
             if (typeof qty === 'string' && qty.includes('/')) {
@@ -2461,7 +2589,6 @@
             const existing = stock[name];
             const oldQty = existing ? existing.qty : null;
 
-            // If item was empty and we're adding new qty, remove from empty
             if (emptyItems.has(name)) {
                 emptyItems.delete(name);
                 emptyRestoreValues.delete(name);
@@ -2489,7 +2616,7 @@
             nameInput.value = '';
             qtyInput.value = '1';
             renderStockList();
-            showToast(`✓ ${name} → ${qty}`, 'success');
+            showToast('✓ ' + name + ' → ' + qty, 'success');
         }
 
         function deleteStockItem(name) {
@@ -2497,7 +2624,6 @@
             if (!stock[name]) return;
 
             const qty = stock[name].qty || '1';
-            // Only record OUT if qty > 0
             if (parseQty(qty) > 0) {
                 addInOutRecord(name, qty, 'out');
             }
@@ -2515,7 +2641,7 @@
                 savePriorityItems();
             }
             renderStockList();
-            showToast(`✕ ${name} dihapus.`, 'success');
+            showToast('✕ ' + name + ' dihapus.', 'success');
         }
 
         // ================================================================
@@ -2529,7 +2655,7 @@
             if (!stock[name]) { showToast('Item tidak ditemukan.', 'error'); return; }
             editTargetName = name;
             const item = stock[name];
-            document.getElementById('editItemTitle').textContent = `Edit: ${name}`;
+            document.getElementById('editItemTitle').textContent = 'Edit: ' + name;
             document.getElementById('editItemDesc').textContent = 'Ubah nama, kategori, dan jumlah stok.';
             document.getElementById('editItemNameInput').value = name;
             document.getElementById('editItemCategory').value = item.category || 'Umum';
@@ -2560,7 +2686,6 @@
 
             const oldQty = stock[editTargetName].qty;
 
-            // If item was empty, remove from empty when editing
             if (emptyItems.has(editTargetName)) {
                 emptyItems.delete(editTargetName);
                 emptyRestoreValues.delete(editTargetName);
@@ -2570,7 +2695,7 @@
 
             if (newName !== editTargetName) {
                 if (stock[newName]) {
-                    showToast(`Nama "${newName}" sudah digunakan.`, 'error');
+                    showToast('Nama "' + newName + '" sudah digunakan.', 'error');
                     return;
                 }
                 stock[newName] = { qty: newQty, category: newCategory };
@@ -2598,7 +2723,7 @@
             saveStock(stock);
             closeEditItemModal();
             renderStockList();
-            showToast(`✓ ${newName} diperbarui.`, 'success');
+            showToast('✓ ' + newName + ' diperbarui.', 'success');
         }
 
         // ================================================================
@@ -2612,7 +2737,8 @@
         function confirmDeleteItem(name) {
             deleteTargetName = name;
             deleteCountdown = 5;
-            document.getElementById('confirmDeleteDesc').textContent = `Hapus "${name}"? Tekan tombol hapus setelah 5 detik untuk konfirmasi.`;
+            document.getElementById('confirmDeleteDesc').textContent =
+                'Hapus "' + name + '"? Tekan tombol hapus setelah 5 detik untuk konfirmasi.';
             document.getElementById('confirmDeleteTimer').textContent = '5';
             document.getElementById('confirmDeleteBtn').disabled = true;
             document.getElementById('confirmDeleteBtn').textContent = 'Hapus';
@@ -2665,7 +2791,7 @@
 
             resetStockCountdown = 5;
             document.getElementById('resetStockDesc').textContent =
-                `Semua item stok (${keys.length} item) akan dihapus permanen. Tekan tombol hapus setelah 5 detik untuk konfirmasi.`;
+                'Semua item stok (' + keys.length + ' item) akan dihapus permanen. Tekan tombol hapus setelah 5 detik untuk konfirmasi.';
             document.getElementById('resetStockTimer').textContent = '5';
             document.getElementById('resetStockConfirmBtn').disabled = true;
             document.getElementById('resetStockConfirmBtn').textContent = 'Hapus Semua';
@@ -2723,9 +2849,9 @@
             const day = String(now.getDate()).padStart(2, '0');
             const month = monthNames[now.getMonth()];
             const year = now.getFullYear();
-            const dateStr = `${day} ${month} ${year}`;
+            const dateStr = day + ' ' + month + ' ' + year;
 
-            let txt = `ORDER BAR\n${getCafeName()} · ${dateStr}\n\n`;
+            let txt = 'ORDER BAR\n' + CAFE_NAME + ' · ' + dateStr + '\n\n';
             const groups = {};
             for (const item of filteredItems) {
                 const cat = item.category || 'Umum';
@@ -2742,9 +2868,9 @@
                 return ia - ib;
             });
             for (const cat of sortedCats) {
-                txt += `${cat}\n`;
+                txt += cat + '\n';
                 for (const item of groups[cat]) {
-                    txt += `- ${item.name} — ${item.qty}\n`;
+                    txt += '- ' + item.name + ' — ' + item.qty + '\n';
                 }
                 txt += '\n';
             }
@@ -2758,7 +2884,7 @@
                 return;
             }
             copyText(text);
-            showToast('⌘ Order disalin ke clipboard.', 'success');
+            showToast('Order disalin ke clipboard.', 'success');
         }
 
         function shareToWhatsApp() {
@@ -2767,9 +2893,9 @@
                 showToast('Tidak ada item order untuk dibagikan.', 'error');
                 return;
             }
-            const msg = `${text}\n\n— ${getCafeName()}`;
+            const msg = text + '\n\n— ' + CAFE_NAME;
             const encoded = encodeURIComponent(msg);
-            const url = `https://wa.me/?text=${encoded}`;
+            const url = 'https://wa.me/?text=' + encoded;
             window.open(url, '_blank');
         }
 
@@ -2826,7 +2952,8 @@
             const container = document.getElementById('stockImageContent');
 
             if (stockTotalSlides === 0) {
-                container.innerHTML = `<div class="stock-empty" style="text-align:center;color:var(--muted);padding:30px 0;">Tidak ada stok untuk dicetak.</div>`;
+                container.innerHTML =
+                    '<div class="stock-empty" style="text-align:center;color:var(--muted);padding:30px 0;">Tidak ada stok untuk dicetak.</div>';
                 document.getElementById('stockPageInfo').textContent = '0 / 0';
                 document.getElementById('stockPrevBtn').disabled = true;
                 document.getElementById('stockNextBtn').disabled = true;
@@ -2838,8 +2965,7 @@
             const day = String(now.getDate()).padStart(2, '0');
             const month = monthNames[now.getMonth()];
             const year = now.getFullYear();
-            const dateStr = `${day} ${month} ${year}`;
-            const cafeName = getCafeName();
+            const dateStr = day + ' ' + month + ' ' + year;
 
             const totalItems = slides.reduce((acc, s) => acc + s.length, 0);
             const paper = document.getElementById('stockImagePaper');
@@ -2856,7 +2982,7 @@
             let html = `
                 <div class="stock-header">
                     <h3>STOCK BAR</h3>
-                    <div class="date">${cafeName} · ${dateStr}</div>
+                    <div class="date">${CAFE_NAME} · ${dateStr}</div>
                 </div>
                 <table class="stock-table">
                     <thead>
@@ -2876,10 +3002,10 @@
                 let inOutHtml = '';
                 if (item.totalIn > 0 || item.totalOut > 0) {
                     if (item.totalIn > 0) {
-                        inOutHtml += `<span class="in-out-badge in">+${item.totalIn}</span>`;
+                        inOutHtml += '<span class="in-out-badge in">+' + item.totalIn + '</span>';
                     }
                     if (item.totalOut > 0) {
-                        inOutHtml += `<span class="in-out-badge out">-${item.totalOut}</span>`;
+                        inOutHtml += '<span class="in-out-badge out">-' + item.totalOut + '</span>';
                     }
                 } else {
                     inOutHtml = '-';
@@ -2898,7 +3024,7 @@
             html += `
                     </tbody>
                 </table>
-                <div class="stock-footer">${cafeName} · ${dateStr}</div>
+                <div class="stock-footer">${CAFE_NAME} · ${dateStr}</div>
             `;
 
             container.innerHTML = html;
@@ -2910,7 +3036,7 @@
             const nextBtn = document.getElementById('stockNextBtn');
             const pageInfo = document.getElementById('stockPageInfo');
 
-            pageInfo.textContent = `${stockCurrentSlide + 1} / ${stockTotalSlides}`;
+            pageInfo.textContent = (stockCurrentSlide + 1) + ' / ' + stockTotalSlides;
             prevBtn.disabled = stockTotalSlides <= 1 || stockCurrentSlide === 0;
             nextBtn.disabled = stockTotalSlides <= 1 || stockCurrentSlide >= stockTotalSlides - 1;
 
@@ -2950,7 +3076,7 @@
         async function saveStockImageNow() {
             const paper = document.getElementById('stockImagePaper');
 
-            showToast('⏳ Menyiapkan gambar stok...', '');
+            showToast('Menyiapkan gambar stok...', '');
 
             try {
                 const originalMaxHeight = paper.style.maxHeight;
@@ -3000,14 +3126,16 @@
                 const link = document.createElement('a');
                 const now = new Date();
                 const dateStr = now.toISOString().slice(0, 10);
-                link.download = `stockbar_${getCafeName().replace(/[^a-zA-Z0-9]/g, '_')}_${dateStr}_${stockCurrentSlide + 1}.png`;
+                link.download =
+                    'stockbar_' + CAFE_NAME.replace(/[^a-zA-Z0-9]/g, '_') + '_' + dateStr + '_' + (stockCurrentSlide + 1) +
+                    '.png';
                 link.href = roundedCanvas.toDataURL('image/png');
                 link.click();
 
-                showToast('✓ Success', 'success');
+                showToast('Success', 'success');
             } catch (err) {
                 console.error(err);
-                showToast('❌ Error.', 'error');
+                showToast('Error.', 'error');
                 paper.style.maxHeight = '';
             }
         }
@@ -3021,18 +3149,18 @@
             const container = document.getElementById('inoutContent');
 
             if (!history.length) {
-                container.innerHTML = `<div class="inout-empty">Belum ada riwayat In/Out.</div>`;
+                container.innerHTML = '<div class="inout-empty">Belum ada riwayat In/Out.</div>';
                 return;
             }
 
             const reversed = [...history].reverse();
-            let totalIn = 0;
-            let totalOut = 0;
+            let totalIn = 0,
+                totalOut = 0;
 
             let html = `
                 <div class="inout-header">
                     <h2>Riwayat Stok</h2>
-                    <div class="date">${getCafeName()}</div>
+                    <div class="date">${CAFE_NAME}</div>
                 </div>
             `;
 
@@ -3044,7 +3172,7 @@
                 if (isIn) totalIn += parseFloat(record.qty) || 0;
                 else totalOut += parseFloat(record.qty) || 0;
 
-                const displayQty = isIn ? `+${record.qty}` : `-${record.qty}`;
+                const displayQty = isIn ? '+' + record.qty : '-' + record.qty;
                 const changeClass = isIn ? 'in' : 'out';
 
                 html += `
@@ -3063,7 +3191,7 @@
                     <span class="total-in">⬆ ${totalIn}</span>
                     <span class="total-out">⬇ ${totalOut}</span>
                 </div>
-                <div class="inout-footer">${displayItems.length} dari ${history.length} record · ${getCafeName()}</div>
+                <div class="inout-footer">${displayItems.length} dari ${history.length} record · ${CAFE_NAME}</div>
             `;
 
             container.innerHTML = html;
@@ -3089,7 +3217,7 @@
             const filteredItems = items;
 
             if (!filteredItems.length) {
-                container.innerHTML = `<div class="order-empty">Tidak ada item order.</div>`;
+                container.innerHTML = '<div class="order-empty">Tidak ada item order.</div>';
                 document.getElementById('orderImageModal').classList.add('open');
                 return;
             }
@@ -3099,13 +3227,12 @@
             const day = String(now.getDate()).padStart(2, '0');
             const month = monthNames[now.getMonth()];
             const year = now.getFullYear();
-            const dateStr = `${day} ${month} ${year}`;
-            const cafeName = getCafeName();
+            const dateStr = day + ' ' + month + ' ' + year;
 
             let html = `
                     <div class="order-header">
                         <h3>ORDER BAR</h3>
-                        <div class="date">${cafeName} · ${dateStr}</div>
+                        <div class="date">${CAFE_NAME} · ${dateStr}</div>
                     </div>
                 `;
 
@@ -3136,7 +3263,7 @@
             }
 
             for (const cat of sortedCats) {
-                html += `<div class="order-cat">${cat}</div>`;
+                html += '<div class="order-cat">' + cat + '</div>';
                 for (const item of groups[cat]) {
                     html += `
                             <div class="order-item-print">
@@ -3147,7 +3274,7 @@
                 }
             }
 
-            html += `<div class="order-footer">${cafeName} · ${dateStr}</div>`;
+            html += '<div class="order-footer">' + CAFE_NAME + ' · ' + dateStr + '</div>';
 
             container.innerHTML = html;
             document.getElementById('orderImageModal').classList.add('open');
@@ -3160,7 +3287,7 @@
         async function saveOrderImageNow() {
             const paper = document.getElementById('orderImagePaper');
 
-            showToast('⏳ Menyiapkan gambar order...', '');
+            showToast('Menyiapkan gambar order...', '');
 
             try {
                 const originalMaxHeight = paper.style.maxHeight;
@@ -3210,15 +3337,15 @@
                 const link = document.createElement('a');
                 const now = new Date();
                 const dateStr = now.toISOString().slice(0, 10);
-                link.download = `order_${getCafeName().replace(/[^a-zA-Z0-9]/g, '_')}_${dateStr}.png`;
+                link.download = 'order_' + CAFE_NAME.replace(/[^a-zA-Z0-9]/g, '_') + '_' + dateStr + '.png';
                 link.href = roundedCanvas.toDataURL('image/png');
                 link.click();
 
-                showToast('✓ Success', 'success');
+                showToast('Success', 'success');
                 closeOrderImageModal();
             } catch (err) {
                 console.error(err);
-                showToast('❌ Error.', 'error');
+                showToast('Error.', 'error');
                 paper.style.maxHeight = '';
             }
         }
@@ -3233,28 +3360,6 @@
         }
 
         // ================================================================
-        //  CAFE NAME MODAL
-        // ================================================================
-
-        function openCafeNameModal() {
-            document.getElementById('cafeNameInput').value = getCafeName();
-            document.getElementById('cafeNameModal').classList.add('open');
-        }
-
-        function closeCafeNameModal() {
-            document.getElementById('cafeNameModal').classList.remove('open');
-        }
-
-        function saveCafeName() {
-            const name = document.getElementById('cafeNameInput').value.trim();
-            if (!name) { showToast('Nama kafe tidak boleh kosong.', 'error'); return; }
-            setCafeName(name);
-            updateCafeNameDisplay();
-            closeCafeNameModal();
-            showToast(`✓ Nama kafe: ${name}`, 'success');
-        }
-
-        // ================================================================
         //  CLOCK
         // ================================================================
 
@@ -3262,7 +3367,7 @@
             const now = new Date();
             const h = String(now.getHours()).padStart(2, '0');
             const m = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('clockDisplay').textContent = `${h}:${m}`;
+            document.getElementById('clockDisplay').textContent = h + ':' + m;
         }
         setInterval(updateClock, 10000);
         updateClock();
@@ -3273,7 +3378,8 @@
 
         let toastTimer = null;
 
-        function showToast(msg, type = '') {
+        function showToast(msg, type) {
+            type = type || '';
             const el = document.getElementById('toast');
             el.textContent = msg;
             el.className = 'toast show' + (type ? ' ' + type : '');
@@ -3307,7 +3413,216 @@
         }
 
         // ================================================================
-        //  SAVE / LOAD STOCK
+        //  BACKUP & SHARE
+        // ================================================================
+
+        function backupToDrive() {
+            const stock = getStock();
+            const keys = Object.keys(stock);
+
+            if (!keys.length) {
+                showToast('Tidak ada stok untuk di-backup.', 'error');
+                return;
+            }
+
+            const data = {
+                cafeName: CAFE_NAME,
+                stock: stock,
+                emptyItems: [...emptyItems],
+                emptyRestoreValues: Object.fromEntries(emptyRestoreValues),
+                priorityItems: [...priorityItems],
+                inOutHistory: getInOutHistory(),
+                timestamp: new Date().toISOString(),
+                version: '1.0'
+            };
+
+            localStorage.setItem('kafebot_cloud_backup', JSON.stringify(data));
+            localStorage.setItem('kafebot_backup_time', new Date().toLocaleString('id-ID'));
+
+            showToast('Backup berhasil! ' + keys.length + ' item disimpan.', 'success');
+
+            const backupTime = localStorage.getItem('kafebot_backup_time') || 'Baru saja';
+            document.getElementById('shareInfoDisplay').textContent = 'Backup terakhir: ' + backupTime + ' (' + keys.length +
+                ' item)';
+        }
+
+        function restoreFromDrive() {
+            const backupData = localStorage.getItem('kafebot_cloud_backup');
+
+            if (!backupData) {
+                showToast('Tidak ada backup yang ditemukan.', 'error');
+                return;
+            }
+
+            try {
+                const data = JSON.parse(backupData);
+
+                if (!data.stock || Object.keys(data.stock).length === 0) {
+                    showToast('Data backup kosong atau rusak.', 'error');
+                    return;
+                }
+
+                const confirmMsg =
+                    'Restore backup dari ' + (data.timestamp ? new Date(data.timestamp).toLocaleString('id-ID') :
+                        'waktu tidak diketahui') + '?\n\n' +
+                    'Stok: ' + Object.keys(data.stock).length + ' item\n' +
+                    'Kafe: ' + (data.cafeName || 'Tidak diketahui') + '\n\n' +
+                    'Stok saat ini akan DIGANTI seluruhnya. Lanjutkan?';
+
+                if (!confirm(confirmMsg)) {
+                    showToast('Restore dibatalkan.', 'error');
+                    return;
+                }
+
+                saveStock(data.stock);
+                emptyItems = new Set(data.emptyItems || []);
+                saveEmptyItems();
+                emptyRestoreValues = new Map(Object.entries(data.emptyRestoreValues || {}));
+                saveEmptyRestoreValues();
+                priorityItems = new Set(data.priorityItems || []);
+                savePriorityItems();
+
+                if (data.inOutHistory) {
+                    saveInOutHistory(data.inOutHistory);
+                }
+
+                renderStockList();
+                updateDashboard();
+                showToast('Restore berhasil! ' + Object.keys(data.stock).length + ' item dimuat.', 'success');
+
+            } catch (e) {
+                console.error(e);
+                showToast('Gagal restore backup. Data rusak.', 'error');
+            }
+        }
+
+        // ================================================================
+        //  QR CODE GENERATOR & IMPORT (Clean version)
+        // ================================================================
+
+        function generateQRCode() {
+            const stock = getStock();
+            const keys = Object.keys(stock);
+
+            if (!keys.length) {
+                showToast('Tidak ada stok untuk di-share.', 'error');
+                return;
+            }
+
+            const data = {
+                cafeName: CAFE_NAME,
+                stock: stock,
+                emptyItems: [...emptyItems],
+                emptyRestoreValues: Object.fromEntries(emptyRestoreValues),
+                priorityItems: [...priorityItems],
+                timestamp: new Date().toISOString(),
+                version: '1.0'
+            };
+
+            const jsonStr = JSON.stringify(data);
+            let encoded = '';
+            try {
+                encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+            } catch (e) {
+                encoded = btoa(jsonStr);
+            }
+
+            localStorage.setItem('kafebot_qr_data', encoded);
+
+            // Display clean text data only
+            document.getElementById('qrCodeDisplay').textContent = encoded;
+
+            document.getElementById('qrCodeModal').classList.add('open');
+
+            document.getElementById('shareInfoDisplay').textContent =
+                'QR Code siap! ' + keys.length + ' item. Salin data dan kirim ke HP lain.';
+            showToast('QR Code siap disalin.', 'success');
+        }
+
+        function copyQRData() {
+            const data = document.getElementById('qrCodeDisplay').textContent;
+            if (data && data.length > 10 && data !== '---') {
+                copyText(data);
+                showToast('Data QR disalin ke clipboard.', 'success');
+            } else {
+                showToast('Tidak ada data untuk disalin.', 'error');
+            }
+        }
+
+        function closeQRCodeModal() {
+            document.getElementById('qrCodeModal').classList.remove('open');
+        }
+
+        function importFromQR() {
+            document.getElementById('qrImportInput').value = '';
+            document.getElementById('importQRModal').classList.add('open');
+        }
+
+        function closeImportQRModal() {
+            document.getElementById('importQRModal').classList.remove('open');
+        }
+
+        function importQRData() {
+            const input = document.getElementById('qrImportInput').value.trim();
+
+            if (!input || input.length < 10) {
+                showToast('Masukkan data QR yang valid (minimal 10 karakter).', 'error');
+                return;
+            }
+
+            try {
+                let jsonStr = '';
+                try {
+                    jsonStr = decodeURIComponent(escape(atob(input)));
+                } catch (e1) {
+                    try {
+                        jsonStr = atob(input);
+                    } catch (e2) {
+                        jsonStr = input;
+                    }
+                }
+
+                const data = JSON.parse(jsonStr);
+
+                if (!data.stock || Object.keys(data.stock).length === 0) {
+                    showToast('Data tidak valid atau kosong.', 'error');
+                    return;
+                }
+
+                const confirmMsg =
+                    'Import stok dari QR Code?\n\n' +
+                    'Kafe: ' + (data.cafeName || 'Tidak diketahui') + '\n' +
+                    'Item: ' + Object.keys(data.stock).length + ' item\n' +
+                    'Dibuat: ' + (data.timestamp ? new Date(data.timestamp).toLocaleString('id-ID') : 'Tidak diketahui') +
+                    '\n\n' +
+                    'Stok saat ini akan DIGANTI. Lanjutkan?';
+
+                if (!confirm(confirmMsg)) {
+                    showToast('Import dibatalkan.', 'error');
+                    return;
+                }
+
+                saveStock(data.stock);
+                emptyItems = new Set(data.emptyItems || []);
+                saveEmptyItems();
+                emptyRestoreValues = new Map(Object.entries(data.emptyRestoreValues || {}));
+                saveEmptyRestoreValues();
+                priorityItems = new Set(data.priorityItems || []);
+                savePriorityItems();
+
+                renderStockList();
+                updateDashboard();
+                closeImportQRModal();
+                showToast('Import berhasil! ' + Object.keys(data.stock).length + ' item dimuat.', 'success');
+
+            } catch (e) {
+                console.error(e);
+                showToast('Gagal import data. Pastikan data QR valid.', 'error');
+            }
+        }
+
+        // ================================================================
+        //  SAVE / LOAD STOCK (File)
         // ================================================================
 
         function exportStockToFile() {
@@ -3319,7 +3634,6 @@
                 return;
             }
 
-            const cafeName = getCafeName();
             const now = new Date();
             const dateStr = now.toLocaleString('id-ID', {
                 year: 'numeric',
@@ -3332,8 +3646,8 @@
 
             let content = '';
             content += '# KafeBot Stock Export\n';
-            content += `# Cafe: ${cafeName}\n`;
-            content += `# Date: ${dateStr}\n`;
+            content += '# Cafe: ' + CAFE_NAME + '\n';
+            content += '# Date: ' + dateStr + '\n';
             content += '#\n';
             content += '# Format: nama_item|kategori|jumlah|prioritas|habis|restore\n';
             content += '#\n';
@@ -3345,15 +3659,14 @@
                 const isPriority = priorityItems.has(name) ? '1' : '0';
                 const isEmpty = emptyItems.has(name) ? '1' : '0';
                 const restore = emptyRestoreValues.get(name) || '';
-                content += `${name}|${cat}|${qty}|${isPriority}|${isEmpty}|${restore}\n`;
+                content += name + '|' + cat + '|' + qty + '|' + isPriority + '|' + isEmpty + '|' + restore + '\n';
             }
 
             const fileDate = now.toISOString().slice(0, 10);
-            const safeCafeName = cafeName.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
-            const fileName = `stock_${safeCafeName}_${fileDate}.txt`;
+            const fileName = 'stock_' + CAFE_NAME.replace(/[^a-zA-Z0-9]/g, '_') + '_' + fileDate + '.txt';
 
             downloadFile(content, fileName, 'text/plain');
-            showToast(`⬇ ${keys.length} item disimpan ke ${fileName}`, 'success');
+            showToast('⬇ ' + keys.length + ' item disimpan ke ' + fileName, 'success');
         }
 
         function importStockFromFile() {
@@ -3383,20 +3696,13 @@
             const emptyNames = [];
             const priorityNames = [];
             const restoreMap = {};
-            let cafeName = null;
             let dataCount = 0;
 
             for (const line of lines) {
                 const trimmed = line.trim();
                 if (!trimmed) continue;
 
-                if (trimmed.startsWith('#')) {
-                    if (trimmed.startsWith('# Cafe:')) {
-                        const val = trimmed.substring(7).trim();
-                        if (val) cafeName = val;
-                    }
-                    continue;
-                }
+                if (trimmed.startsWith('#')) continue;
 
                 const parts = trimmed.split('|');
                 if (parts.length >= 3) {
@@ -3418,14 +3724,15 @@
             }
 
             if (!dataCount) {
-                showToast('Tidak ada data valid dalam file. Format: nama|kategori|jumlah|prioritas|habis|restore', 'error');
+                showToast('Tidak ada data valid dalam file. Format: nama|kategori|jumlah|prioritas|habis|restore',
+                    'error');
                 return;
             }
 
             const currentCount = Object.keys(getStock()).length;
-            let confirmMsg = `Muat ${dataCount} item dari file.`;
+            let confirmMsg = 'Muat ' + dataCount + ' item dari file.';
             if (currentCount > 0) {
-                confirmMsg += `\n\nStok saat ini (${currentCount} item) akan DIGANTI seluruhnya. Lanjutkan?`;
+                confirmMsg += '\n\nStok saat ini (' + currentCount + ' item) akan DIGANTI seluruhnya. Lanjutkan?';
             }
             if (!confirm(confirmMsg)) {
                 showToast('Muat stok dibatalkan.', 'error');
@@ -3440,17 +3747,13 @@
             emptyRestoreValues = new Map(Object.entries(restoreMap));
             saveEmptyRestoreValues();
 
-            if (cafeName) {
-                setCafeName(cafeName);
-                updateCafeNameDisplay();
-            }
-
             renderStockList();
-            showToast(`⬆ ${dataCount} item berhasil dimuat.${cafeName ? ` (Kafe: ${cafeName})` : ''}`, 'success');
+            showToast('⬆ ' + dataCount + ' item berhasil dimuat.', 'success');
         }
 
-        function downloadFile(content, fileName, mimeType = 'text/plain') {
-            const blob = new Blob([content], { type: `${mimeType};charset=utf-8` });
+        function downloadFile(content, fileName, mimeType) {
+            mimeType = mimeType || 'text/plain';
+            const blob = new Blob([content], { type: mimeType + ';charset=utf-8' });
             const url = URL.createObjectURL(blob);
 
             const link = document.createElement('a');
@@ -3475,10 +3778,18 @@
                     addStockItem();
                 }
             });
-            refreshUI();
+
+            document.getElementById('cafeHeaderName').textContent = CAFE_NAME;
+
+            renderStockList();
 
             document.getElementById('confirmDeleteBtn').addEventListener('click', executeDelete);
             document.getElementById('resetStockConfirmBtn').addEventListener('click', executeResetStock);
+
+            const backupTime = localStorage.getItem('kafebot_backup_time');
+            if (backupTime) {
+                document.getElementById('shareInfoDisplay').textContent = 'Backup terakhir: ' + backupTime;
+            }
         });
 
         // ================================================================
@@ -3494,6 +3805,8 @@
                     if (overlay.id === 'orderImageModal') closeOrderImageModal();
                     if (overlay.id === 'stockImageModal') closeStockImageModal();
                     if (overlay.id === 'stockInOutModal') closeStockInOutModal();
+                    if (overlay.id === 'qrCodeModal') closeQRCodeModal();
+                    if (overlay.id === 'importQRModal') closeImportQRModal();
                 }
             });
         });
@@ -3504,7 +3817,7 @@
 
         function refreshStockList() {
             renderStockList();
-            showToast('⟳ Stok diperbarui.', 'success');
+            showToast('Stok diperbarui.', 'success');
         }
     </script>
 
