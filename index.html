@@ -3122,7 +3122,7 @@
 
             for (const item of slide) {
                 const displayQty = item.isEmpty ? '—' : item.qty;
-                const priorityMark = item.isPriority ? '★' : '';
+                const priorityMark = item.isPriority ? '' : '';
                 let inOutHtml = '';
                 if (item.totalIn > 0 || item.totalOut > 0) {
                     if (item.totalIn > 0) {
