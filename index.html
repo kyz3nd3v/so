@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
     <title>KafeBot · Stock</title>
     <style>
-        /* ===== RESET & ROOT ===== */
         * {
             margin: 0;
             padding: 0;
@@ -73,7 +72,6 @@
             padding-top: 6px;
         }
 
-        /* ===== HEADER ===== */
         .header {
             display: flex;
             align-items: center;
@@ -141,7 +139,6 @@
             transition: var(--theme-transition);
         }
 
-        /* ===== THEME TOGGLE ===== */
         .theme-toggle {
             width: 52px;
             height: 30px;
@@ -184,7 +181,6 @@
             fill: currentColor;
         }
 
-        /* ===== CARD ===== */
         .card {
             padding: 18px 16px 18px;
             margin-bottom: 14px;
@@ -234,7 +230,6 @@
             transition: var(--theme-transition);
         }
 
-        /* ===== FORM ===== */
         .field {
             margin-bottom: 10px;
         }
@@ -301,14 +296,6 @@
             flex: 0 1 auto;
         }
 
-        .inline-flex {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        /* ===== BUTTONS ===== */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -429,7 +416,6 @@
             pointer-events: none;
         }
 
-        /* ===== CAFE NAME ===== */
         .cafe-name-display {
             font-size: 15px;
             font-weight: 600;
@@ -456,7 +442,6 @@
             opacity: 0.5;
         }
 
-        /* ===== SAVE / LOAD BUTTONS IN CAFE CARD ===== */
         .cafe-actions {
             display: flex;
             gap: 6px;
@@ -491,13 +476,6 @@
             background: #e68a00;
         }
 
-        .btn-save-cafe .sym,
-        .btn-load-cafe .sym {
-            font-weight: 300;
-            margin-right: 2px;
-        }
-
-        /* ===== CATEGORY TABS ===== */
         .category-tabs {
             display: flex;
             gap: 6px;
@@ -548,7 +526,6 @@
             transform: scale(0.94);
         }
 
-        /* ===== SEARCH BAR ===== */
         .search-bar {
             display: flex;
             gap: 8px;
@@ -580,7 +557,6 @@
             background: var(--hover-bg);
         }
 
-        /* ===== STOCK LIST ===== */
         .stock-group {
             margin-top: 4px;
         }
@@ -739,7 +715,6 @@
             opacity: 0.4;
         }
 
-        /* ===== ORDER LIST ===== */
         .order-item {
             display: flex;
             align-items: center;
@@ -780,7 +755,6 @@
             color: var(--danger);
         }
 
-        /* order container dynamic sizing */
         #orderListContainer {
             transition: all 0.2s ease;
         }
@@ -806,12 +780,10 @@
             opacity: 0.3;
         }
 
-        /* dynamic font size for order items */
         .order-item .name {
             font-size: 14px;
         }
 
-        /* when many items, reduce font size */
         #orderListContainer .many-items .order-item .name {
             font-size: 12px;
         }
@@ -825,7 +797,6 @@
             padding: 3px 0;
         }
 
-        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: calc(24px + var(--safe-bottom));
@@ -864,7 +835,6 @@
             background: rgba(255, 59, 48, 0.92);
         }
 
-        /* ===== MODAL / SHEET ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -937,7 +907,6 @@
             flex: 1;
         }
 
-        /* ===== SCROLL ===== */
         .scroll-area {
             max-height: 220px;
             overflow-y: auto;
@@ -959,7 +928,6 @@
             opacity: 0.3;
         }
 
-        /* ===== MISC ===== */
         .hidden {
             display: none !important;
         }
@@ -988,7 +956,6 @@
             flex: 1;
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
             .header-info h1 {
                 font-size: 18px;
@@ -1048,7 +1015,6 @@
             }
         }
 
-        /* ===== DIVIDER ===== */
         .divider {
             height: 0.5px;
             background: var(--divider);
@@ -1056,7 +1022,6 @@
             transition: var(--theme-transition);
         }
 
-        /* ===== BADGE ORDER ===== */
         .badge-order {
             background: var(--accent);
             color: #fff;
@@ -1069,7 +1034,6 @@
             line-height: 20px;
         }
 
-        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             color: var(--muted);
@@ -1081,7 +1045,6 @@
             letter-spacing: 0.2px;
         }
 
-        /* ===== QUICK QTY BUTTONS ===== */
         .qty-quick {
             display: flex;
             gap: 6px;
@@ -1106,231 +1069,6 @@
             background: var(--hover-bg);
         }
 
-        /* ===== PRINT STOCK MODAL ===== */
-        .print-modal .modal-box {
-            max-width: 480px;
-            padding: 16px 16px 16px;
-            max-height: 92vh;
-        }
-
-        .print-paper {
-            background: var(--card);
-            padding: 16px 14px;
-            border-radius: 8px;
-            box-shadow: inset 0 0 0 1px var(--divider);
-            margin-bottom: 10px;
-            font-family: var(--font);
-            transition: var(--theme-transition);
-            flex: 1;
-            overflow: hidden;
-            position: relative;
-            min-height: 300px;
-            max-height: 500px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .print-paper .paper-header {
-            text-align: center;
-            border-bottom: 2px solid var(--text);
-            padding-bottom: 4px;
-            margin-bottom: 6px;
-            transition: var(--theme-transition);
-            flex-shrink: 0;
-        }
-
-        .print-paper .paper-header h2 {
-            font-size: 17px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            color: var(--text);
-            transition: var(--theme-transition);
-            text-transform: uppercase;
-        }
-
-        .print-paper .paper-header .date {
-            font-size: 11px;
-            color: var(--muted);
-            font-weight: 500;
-            margin-top: 1px;
-            transition: var(--theme-transition);
-            letter-spacing: 0.3px;
-        }
-
-        .print-paper .paper-content {
-            overflow: hidden;
-            position: relative;
-            flex: 1;
-            min-height: 0;
-        }
-
-        .print-paper .paper-content .slide-wrapper {
-            display: flex;
-            transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-            height: 100%;
-        }
-
-        .print-paper .slide-page {
-            min-width: 100%;
-            padding: 2px 0;
-            overflow-y: auto;
-            height: 100%;
-        }
-
-        .print-paper .slide-page::-webkit-scrollbar {
-            width: 3px;
-        }
-
-        .print-paper .slide-page::-webkit-scrollbar-thumb {
-            background: var(--muted);
-            border-radius: 99px;
-        }
-
-        .print-paper .paper-item {
-            display: flex;
-            align-items: center;
-            padding: 3px 0;
-            font-size: 13px;
-            border-bottom: 0.5px solid var(--divider);
-            transition: var(--theme-transition);
-        }
-
-        .print-paper .paper-item:last-child {
-            border-bottom: 0;
-        }
-
-        .print-paper .paper-item .num {
-            font-weight: 600;
-            color: var(--muted);
-            margin-right: 8px;
-            font-size: 12px;
-            min-width: 28px;
-            opacity: 0.6;
-            flex-shrink: 0;
-        }
-
-        .print-paper .paper-item .name {
-            font-weight: 500;
-            color: var(--text);
-            transition: var(--theme-transition);
-            font-size: 13px;
-            flex: 1;
-        }
-
-        .print-paper .paper-item .qty {
-            font-weight: 600;
-            color: var(--muted);
-            transition: var(--theme-transition);
-            font-size: 13px;
-            min-width: 30px;
-            text-align: right;
-            flex-shrink: 0;
-        }
-
-        .print-paper .paper-item .qty.empty-print {
-            color: var(--danger);
-            text-decoration: line-through;
-        }
-
-        .print-paper .paper-empty {
-            text-align: center;
-            color: var(--muted);
-            padding: 20px 0;
-            font-size: 14px;
-            transition: var(--theme-transition);
-        }
-
-        .print-paper .paper-footer {
-            text-align: center;
-            font-size: 8px;
-            color: var(--muted);
-            border-top: 1px solid var(--divider);
-            padding-top: 4px;
-            margin-top: 4px;
-            transition: var(--theme-transition);
-            opacity: 0.6;
-            flex-shrink: 0;
-        }
-
-        .print-paper .slide-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            padding: 6px 0 2px;
-            flex-shrink: 0;
-        }
-
-        .print-paper .slide-indicators .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--divider);
-            transition: var(--theme-transition);
-            cursor: pointer;
-            border: none;
-            padding: 0;
-            flex-shrink: 0;
-        }
-
-        .print-paper .slide-indicators .dot.active {
-            background: var(--accent);
-            width: 20px;
-            border-radius: 4px;
-        }
-
-        .print-paper .slide-nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 8px 0 2px;
-            gap: 12px;
-            border-top: 1px solid var(--divider);
-            margin-top: 4px;
-            flex-shrink: 0;
-        }
-
-        .print-paper .slide-nav .nav-btn {
-            background: var(--accent);
-            border: none;
-            border-radius: 10px;
-            padding: 8px 16px;
-            font-size: 14px;
-            font-weight: 700;
-            color: #fff;
-            cursor: pointer;
-            transition: var(--theme-transition), transform 0.12s;
-            flex-shrink: 0;
-            min-width: 60px;
-            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.25);
-        }
-
-        .print-paper .slide-nav .nav-btn:active {
-            transform: scale(0.94);
-        }
-
-        .print-paper .slide-nav .nav-btn:disabled {
-            opacity: 0.35;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .print-paper .slide-nav .page-info {
-            font-size: 14px;
-            color: var(--text);
-            font-weight: 700;
-            background: var(--badge-bg);
-            padding: 4px 18px;
-            border-radius: 12px;
-            border: 0.5px solid var(--divider);
-            min-width: 60px;
-            text-align: center;
-        }
-
-        .print-modal .row .btn {
-            flex: 1;
-        }
-
         .btn-save-image {
             background: #34c759;
             color: #fff;
@@ -1341,7 +1079,6 @@
             background: #28a745;
         }
 
-        /* ===== ORDER IMAGE MODAL ===== */
         .order-image-modal .modal-box {
             max-width: 480px;
             padding: 16px 16px 16px;
@@ -1464,7 +1201,6 @@
             border-top-color: rgba(255,255,255,0.08);
         }
 
-        /* dynamic font size for order image */
         .order-image-paper .order-item-print .name {
             font-size: 13px;
         }
@@ -1497,7 +1233,6 @@
             padding: 1px 0;
         }
 
-        /* ===== STOCK IMAGE MODAL ===== */
         .stock-image-modal .modal-box {
             max-width: 480px;
             padding: 16px 16px 16px;
@@ -1676,7 +1411,6 @@
             padding: 2px 0;
         }
 
-        /* ===== CONFIRM TIMER ===== */
         .confirm-timer {
             font-size: 40px;
             font-weight: 700;
@@ -1696,7 +1430,6 @@
             letter-spacing: 0.2px;
         }
 
-        /* ===== HINT ===== */
         .auto-urgent-hint {
             font-size: 11px;
             color: var(--muted);
@@ -1707,12 +1440,10 @@
             transition: var(--theme-transition);
         }
 
-        /* ===== FILE INPUT ===== */
         #fileInput {
             display: none;
         }
 
-        /* ===== SUBTLE DIVIDER ===== */
         .subtle-divider {
             height: 0.5px;
             background: var(--divider);
@@ -1720,7 +1451,6 @@
             transition: var(--theme-transition);
         }
 
-        /* ===== ACTION ROW ===== */
         .action-row {
             display: flex;
             gap: 6px;
@@ -1733,7 +1463,6 @@
             min-width: 70px;
         }
 
-        /* ===== RESET CONFIRM MODAL ===== */
         .reset-confirm-desc {
             font-size: 14px;
             color: var(--muted);
@@ -1747,7 +1476,6 @@
             font-weight: 600;
         }
 
-        /* ===== BADGE STOCK ===== */
         .card-title .badge-stock {
             font-size: 11px;
             font-weight: 500;
@@ -1760,7 +1488,6 @@
             line-height: 20px;
         }
 
-        /* cafe name row flex */
         .cafe-row {
             display: flex;
             align-items: center;
@@ -1791,7 +1518,6 @@
             }
         }
 
-        /* order action row */
         .order-action-row {
             display: flex;
             gap: 6px;
@@ -1804,7 +1530,6 @@
             min-width: 70px;
         }
 
-        /* ===== PRIORITY TOGGLE ===== */
         .priority-btn {
             background: none;
             border: 1px solid var(--divider);
@@ -1828,7 +1553,6 @@
             transform: scale(0.92);
         }
 
-        /* ===== STOCK IN/OUT MODAL ===== */
         .stock-inout-modal .modal-box {
             max-width: 480px;
             padding: 16px 16px 16px;
@@ -1979,13 +1703,20 @@
             font-weight: 400;
             color: var(--muted);
         }
+
+        /* ===== STOCK RESTORE VALUE ===== */
+        .stock-item .restore-value {
+            font-size: 10px;
+            color: var(--muted);
+            opacity: 0.5;
+            margin-left: 4px;
+        }
     </style>
 </head>
 <body>
 
     <div class="app" id="app">
 
-        <!-- ===== HEADER ===== -->
         <header class="header">
             <div class="header-left">
                 <div class="header-icon">K</div>
@@ -2004,10 +1735,8 @@
             </div>
         </header>
 
-        <!-- ===== TOAST ===== -->
         <div class="toast" id="toast"></div>
 
-        <!-- ===== CAFE NAME with SAVE/LOAD ===== -->
         <div class="card">
             <div class="card-title">Kafe</div>
             <div class="card-desc">Nama kafe untuk identitas. Klik nama untuk mengubah.</div>
@@ -2031,7 +1760,6 @@
             <input type="file" id="fileInput" accept=".txt" onchange="handleFileLoad(event)" />
         </div>
 
-        <!-- ===== STOCK MANAGEMENT ===== -->
         <div class="card">
             <div class="card-title">
                 Stok Barang
@@ -2039,7 +1767,6 @@
             </div>
             <div class="card-desc">Tambahkan item dengan <strong>kategori</strong> dan <strong>jumlah</strong>. Klik <strong>−</strong> untuk tandai habis.</div>
 
-            <!-- Form -->
             <div class="field">
                 <label>Nama Barang</label>
                 <input id="stockNameInput" class="input" placeholder="Coffe, Susu, Monin…" />
@@ -2069,31 +1796,26 @@
 
             <div class="subtle-divider"></div>
 
-            <!-- ===== SEARCH BAR ===== -->
             <div class="search-bar">
                 <input id="searchInput" class="input" placeholder="🔍 Cari item..." oninput="filterStock()" />
                 <button class="btn btn-secondary btn-sm btn-clear" onclick="clearSearch()" title="Hapus pencarian">✕</button>
             </div>
 
-            <!-- ===== CATEGORY TABS ===== -->
             <div class="category-tabs" id="categoryTabs"></div>
 
-            <!-- ===== STOCK LIST ===== -->
             <div id="stockListContainer">
                 <div class="empty-state"><span class="big">—</span>Tidak ada stok.<br />Tambahkan barang di atas.</div>
             </div>
             <div class="auto-urgent-hint"></div>
 
-            <!-- ===== ACTION ROW ===== -->
             <div class="action-row">
-                <button class="btn btn-sm btn-secondary" onclick="refreshStockList()">Refesh</button>
+                <button class="btn btn-sm btn-secondary" onclick="refreshStockList()">Refresh</button>
                 <button class="btn btn-sm btn-secondary" onclick="openStockImageModal()">View</button>
                 <button class="btn btn-sm btn-secondary" onclick="openStockInOutModal()">In/Out</button>
                 <button class="btn btn-sm btn-danger" id="clearAllBtn" onclick="confirmClearAll()">✕ Reset</button>
             </div>
         </div>
 
-        <!-- ===== ORDER ===== -->
         <div class="card">
             <div class="card-title">
                 Order
@@ -2112,10 +1834,8 @@
             </div>
         </div>
 
-        <!-- ===== FOOTER ===== -->
         <div class="footer">KafeBot · built with care</div>
 
-        <!-- ===== MODAL: CAFE NAME ===== -->
         <div id="cafeNameModal" class="modal-overlay">
             <div class="modal-box">
                 <div class="title">Nama Kafe</div>
@@ -2131,7 +1851,6 @@
             </div>
         </div>
 
-        <!-- ===== MODAL: EDIT ITEM ===== -->
         <div id="editItemModal" class="modal-overlay">
             <div class="modal-box">
                 <div class="title" id="editItemTitle">Edit Item</div>
@@ -2166,7 +1885,6 @@
             </div>
         </div>
 
-        <!-- ===== MODAL: CONFIRM DELETE ITEM (timer 5 detik) ===== -->
         <div id="confirmDeleteModal" class="modal-overlay">
             <div class="modal-box">
                 <div class="title">Hapus Item?</div>
@@ -2179,7 +1897,6 @@
             </div>
         </div>
 
-        <!-- ===== MODAL: CONFIRM RESET STOCK (5 detik) ===== -->
         <div id="confirmResetStockModal" class="modal-overlay">
             <div class="modal-box">
                 <div class="title">Hapus Semua Stok?</div>
@@ -2192,7 +1909,6 @@
             </div>
         </div>
 
-        <!-- ===== MODAL: STOCK IMAGE ===== -->
         <div id="stockImageModal" class="modal-overlay stock-image-modal">
             <div class="modal-box">
                 <div class="title">Cetak Stok</div>
@@ -2212,7 +1928,6 @@
             </div>
         </div>
 
-        <!-- ===== MODAL: STOCK IN/OUT ===== -->
         <div id="stockInOutModal" class="modal-overlay stock-inout-modal">
             <div class="modal-box">
                 <div class="title">Stok In / Out</div>
@@ -2227,7 +1942,6 @@
             </div>
         </div>
 
-        <!-- ===== MODAL: ORDER IMAGE ===== -->
         <div id="orderImageModal" class="modal-overlay order-image-modal">
             <div class="modal-box">
                 <div class="title">Order</div>
@@ -2282,6 +1996,8 @@
 
         let emptyItems = new Set();
         let priorityItems = new Set();
+        // Store original qty when marking as empty
+        let emptyRestoreValues = new Map();
 
         function loadEmptyItems() {
             try {
@@ -2292,6 +2008,21 @@
 
         function saveEmptyItems() {
             localStorage.setItem('cafe_empty_items', JSON.stringify([...emptyItems]));
+        }
+
+        function loadEmptyRestoreValues() {
+            try {
+                const data = JSON.parse(localStorage.getItem('cafe_empty_restore') || '{}');
+                emptyRestoreValues = new Map(Object.entries(data));
+            } catch { emptyRestoreValues = new Map(); }
+        }
+
+        function saveEmptyRestoreValues() {
+            const obj = {};
+            for (const [key, value] of emptyRestoreValues) {
+                obj[key] = value;
+            }
+            localStorage.setItem('cafe_empty_restore', JSON.stringify(obj));
         }
 
         function loadPriorityItems() {
@@ -2332,6 +2063,10 @@
             localStorage.setItem('cafe_name', name);
         }
 
+        loadEmptyItems();
+        loadEmptyRestoreValues();
+        loadPriorityItems();
+
         // ================================================================
         //  IN/OUT HISTORY
         // ================================================================
@@ -2359,11 +2094,10 @@
             history.push({
                 name,
                 qty,
-                type, // 'in' or 'out'
+                type,
                 date: dateStr,
                 timestamp: now.getTime()
             });
-            // Keep last 200 records
             if (history.length > 200) {
                 history.splice(0, history.length - 200);
             }
@@ -2397,7 +2131,7 @@
         }
 
         // ================================================================
-        //  ORDER — items with qty 1/4 OR marked as empty
+        //  ORDER
         // ================================================================
 
         function getOrderItems() {
@@ -2405,6 +2139,7 @@
             const items = [];
             for (const [name, data] of Object.entries(stock)) {
                 const isEmpty = emptyItems.has(name);
+                // Only show empty items OR items with qty 1/4
                 if (isEmpty || data.qty === '1/4') {
                     items.push({
                         name,
@@ -2442,16 +2177,22 @@
                 return;
             }
 
-            // Build groups
             const groups = {};
             for (const name of keys) {
                 const item = stock[name];
                 const cat = item.category || 'Umum';
                 if (!groups[cat]) groups[cat] = [];
-                groups[cat].push({ name, ...item, isEmpty: emptyItems.has(name), isPriority: priorityItems.has(name) });
+                const isEmpty = emptyItems.has(name);
+                const restoreValue = emptyRestoreValues.get(name) || item.qty;
+                groups[cat].push({
+                    name,
+                    ...item,
+                    isEmpty,
+                    isPriority: priorityItems.has(name),
+                    restoreValue
+                });
             }
 
-            // Sort items: priority first, then alphabetical
             for (const cat in groups) {
                 groups[cat].sort((a, b) => {
                     if (a.isPriority && !b.isPriority) return -1;
@@ -2460,7 +2201,6 @@
                 });
             }
 
-            // Build category tabs
             const categoryOrder = ['Urgent Stock', 'FIND', 'SYRUP', 'EQUIPMENT', 'Umum'];
             const sortedCats = Object.keys(groups).sort((a, b) => {
                 const ia = categoryOrder.indexOf(a);
@@ -2479,10 +2219,8 @@
             }
             document.getElementById('categoryTabs').innerHTML = tabsHtml;
 
-            // Filter by search
             const searchLower = searchQuery.toLowerCase().trim();
 
-            // Render items based on selected category and search
             let html = '';
             let hasItems = false;
 
@@ -2532,9 +2270,10 @@
             const isEmpty = item.isEmpty;
             const displayQty = isEmpty ? '—' : qty;
             const isPriority = item.isPriority;
+            const restoreHint = isEmpty ? `<span class="restore-value">(${item.restoreValue})</span>` : '';
             return `
                     <div class="stock-item">
-                        <span class="name">${escapeHtml(item.name)}</span>
+                        <span class="name">${escapeHtml(item.name)} ${restoreHint}</span>
                         <span class="qty-badge ${isQuarter ? 'quarter' : ''} ${isEmpty ? 'empty-stock' : ''}" 
                               onclick="openEditItemModal('${escapeHtml(item.name)}')">
                             ${escapeHtml(displayQty)}
@@ -2588,7 +2327,6 @@
                 return;
             }
 
-            // Determine if many items
             const manyItems = filteredItems.length > 10;
             let html = `<div class="scroll-area ${manyItems ? 'many-items' : ''}">`;
             filteredItems.forEach((item) => {
@@ -2641,33 +2379,39 @@
         }
 
         // ================================================================
-        //  TOGGLE EMPTY ITEM
+        //  TOGGLE EMPTY ITEM - FIXED! (with restore value)
         // ================================================================
 
         function toggleEmptyItem(name) {
             const stock = getStock();
             if (!stock[name]) return;
-            const qty = stock[name].qty || '1';
+            const currentQty = stock[name].qty || '1';
 
             if (!emptyItems.has(name)) {
-                // Marking as empty -> OUT
-                addInOutRecord(name, qty, 'out');
-            } else {
-                // Restoring -> IN
-                addInOutRecord(name, qty, 'in');
-            }
-
-            if (emptyItems.has(name)) {
-                emptyItems.delete(name);
-            } else {
+                // Marking as empty -> save current qty as restore value, set qty to "0"
+                emptyRestoreValues.set(name, currentQty);
+                stock[name].qty = '0';
+                saveStock(stock);
+                // Record OUT with current quantity
+                addInOutRecord(name, currentQty, 'out');
                 emptyItems.add(name);
+                saveEmptyItems();
+                saveEmptyRestoreValues();
+                showToast(`${name} ditandai habis (—) → restore: ${currentQty}`, 'success');
+            } else {
+                // Restoring from empty -> restore to saved value
+                const restoreValue = emptyRestoreValues.get(name) || '1/4';
+                stock[name].qty = restoreValue;
+                saveStock(stock);
+                // Record IN with restore value
+                addInOutRecord(name, restoreValue, 'in');
+                emptyItems.delete(name);
+                emptyRestoreValues.delete(name);
+                saveEmptyItems();
+                saveEmptyRestoreValues();
+                showToast(`${name} dipulihkan → ${restoreValue}`, 'success');
             }
-            saveEmptyItems();
             renderStockList();
-            const item = stock[name];
-            if (item) {
-                showToast(`${name} ${emptyItems.has(name) ? 'ditandai habis (—)' : 'dipulihkan'}`, 'success');
-            }
         }
 
         // ================================================================
@@ -2683,7 +2427,7 @@
         }
 
         // ================================================================
-        //  PARSE QTY TO NUMBER FOR COMPARISON
+        //  PARSE QTY TO NUMBER
         // ================================================================
 
         function parseQty(qty) {
@@ -2717,31 +2461,29 @@
             const existing = stock[name];
             const oldQty = existing ? existing.qty : null;
 
+            // If item was empty and we're adding new qty, remove from empty
+            if (emptyItems.has(name)) {
+                emptyItems.delete(name);
+                emptyRestoreValues.delete(name);
+                saveEmptyItems();
+                saveEmptyRestoreValues();
+            }
+
             stock[name] = { qty, category };
             saveStock(stock);
 
-            // Record In if it's a new item
             if (!existing) {
                 addInOutRecord(name, qty, 'in');
             } else {
-                // Compare old vs new qty
                 const oldVal = parseQty(oldQty);
                 const newVal = parseQty(qty);
                 if (newVal > oldVal) {
-                    // Stock increased -> IN
                     const diff = (newVal - oldVal).toString();
                     addInOutRecord(name, diff, 'in');
                 } else if (newVal < oldVal) {
-                    // Stock decreased -> OUT
                     const diff = (oldVal - newVal).toString();
                     addInOutRecord(name, diff, 'out');
                 }
-                // If equal, no record
-            }
-
-            if (emptyItems.has(name)) {
-                emptyItems.delete(name);
-                saveEmptyItems();
             }
 
             nameInput.value = '';
@@ -2754,15 +2496,19 @@
             const stock = getStock();
             if (!stock[name]) return;
 
-            // Record OUT for remaining stock before deletion
             const qty = stock[name].qty || '1';
-            addInOutRecord(name, qty, 'out');
+            // Only record OUT if qty > 0
+            if (parseQty(qty) > 0) {
+                addInOutRecord(name, qty, 'out');
+            }
 
             delete stock[name];
             saveStock(stock);
             if (emptyItems.has(name)) {
                 emptyItems.delete(name);
+                emptyRestoreValues.delete(name);
                 saveEmptyItems();
+                saveEmptyRestoreValues();
             }
             if (priorityItems.has(name)) {
                 priorityItems.delete(name);
@@ -2814,6 +2560,14 @@
 
             const oldQty = stock[editTargetName].qty;
 
+            // If item was empty, remove from empty when editing
+            if (emptyItems.has(editTargetName)) {
+                emptyItems.delete(editTargetName);
+                emptyRestoreValues.delete(editTargetName);
+                saveEmptyItems();
+                saveEmptyRestoreValues();
+            }
+
             if (newName !== editTargetName) {
                 if (stock[newName]) {
                     showToast(`Nama "${newName}" sudah digunakan.`, 'error');
@@ -2821,11 +2575,6 @@
                 }
                 stock[newName] = { qty: newQty, category: newCategory };
                 delete stock[editTargetName];
-                if (emptyItems.has(editTargetName)) {
-                    emptyItems.delete(editTargetName);
-                    emptyItems.add(newName);
-                    saveEmptyItems();
-                }
                 if (priorityItems.has(editTargetName)) {
                     priorityItems.delete(editTargetName);
                     priorityItems.add(newName);
@@ -2836,13 +2585,12 @@
                 stock[newName].category = newCategory;
             }
 
-            // Record IN/OUT based on qty change
             const oldVal = parseQty(oldQty);
             const newVal = parseQty(newQty);
             if (newVal > oldVal) {
                 const diff = (newVal - oldVal).toString();
                 addInOutRecord(newName, diff, 'in');
-            } else if (newVal < oldVal) {
+            } else if (newVal < oldVal && oldVal > 0) {
                 const diff = (oldVal - newVal).toString();
                 addInOutRecord(newName, diff, 'out');
             }
@@ -2854,7 +2602,7 @@
         }
 
         // ================================================================
-        //  CONFIRM DELETE ITEM (timer 5 detik)
+        //  CONFIRM DELETE
         // ================================================================
 
         let deleteTargetName = '';
@@ -2901,7 +2649,7 @@
         }
 
         // ================================================================
-        //  CONFIRM RESET STOCK (5 detik)
+        //  CONFIRM RESET STOCK
         // ================================================================
 
         let resetStockTimerInterval = null;
@@ -2949,7 +2697,9 @@
         function executeResetStock() {
             saveStock({});
             emptyItems.clear();
+            emptyRestoreValues.clear();
             saveEmptyItems();
+            saveEmptyRestoreValues();
             priorityItems.clear();
             savePriorityItems();
             renderStockList();
@@ -3024,7 +2774,7 @@
         }
 
         // ================================================================
-        //  STOCK IMAGE MODAL (with blur background)
+        //  STOCK IMAGE MODAL
         // ================================================================
 
         let stockCurrentSlide = 0;
@@ -3557,7 +3307,7 @@
         }
 
         // ================================================================
-        //  SAVE / LOAD STOCK (format .txt)
+        //  SAVE / LOAD STOCK
         // ================================================================
 
         function exportStockToFile() {
@@ -3585,7 +3335,7 @@
             content += `# Cafe: ${cafeName}\n`;
             content += `# Date: ${dateStr}\n`;
             content += '#\n';
-            content += '# Format: nama_item|kategori|jumlah|prioritas|habis\n';
+            content += '# Format: nama_item|kategori|jumlah|prioritas|habis|restore\n';
             content += '#\n';
 
             for (const name of keys) {
@@ -3594,7 +3344,8 @@
                 const qty = item.qty || '1';
                 const isPriority = priorityItems.has(name) ? '1' : '0';
                 const isEmpty = emptyItems.has(name) ? '1' : '0';
-                content += `${name}|${cat}|${qty}|${isPriority}|${isEmpty}\n`;
+                const restore = emptyRestoreValues.get(name) || '';
+                content += `${name}|${cat}|${qty}|${isPriority}|${isEmpty}|${restore}\n`;
             }
 
             const fileDate = now.toISOString().slice(0, 10);
@@ -3631,6 +3382,7 @@
             const stock = {};
             const emptyNames = [];
             const priorityNames = [];
+            const restoreMap = {};
             let cafeName = null;
             let dataCount = 0;
 
@@ -3653,18 +3405,20 @@
                     const qty = parts[2].trim();
                     const isPriority = parts.length > 3 ? parts[3].trim() === '1' : false;
                     const isEmpty = parts.length > 4 ? parts[4].trim() === '1' : false;
+                    const restore = parts.length > 5 ? parts[5].trim() : '';
 
                     if (name && category && qty && /^\d+$|^\d+\/\d+$/.test(qty)) {
                         stock[name] = { category, qty };
                         if (isEmpty) emptyNames.push(name);
                         if (isPriority) priorityNames.push(name);
+                        if (restore) restoreMap[name] = restore;
                         dataCount++;
                     }
                 }
             }
 
             if (!dataCount) {
-                showToast('Tidak ada data valid dalam file. Format: nama|kategori|jumlah|prioritas|habis', 'error');
+                showToast('Tidak ada data valid dalam file. Format: nama|kategori|jumlah|prioritas|habis|restore', 'error');
                 return;
             }
 
@@ -3683,6 +3437,8 @@
             saveEmptyItems();
             priorityItems = new Set(priorityNames);
             savePriorityItems();
+            emptyRestoreValues = new Map(Object.entries(restoreMap));
+            saveEmptyRestoreValues();
 
             if (cafeName) {
                 setCafeName(cafeName);
@@ -3743,7 +3499,7 @@
         });
 
         // ================================================================
-        //  REFRESH STOCK LIST (global)
+        //  REFRESH
         // ================================================================
 
         function refreshStockList() {
