@@ -1607,6 +1607,33 @@
             color: #f5f5f7;
         }
 
+        .stock-image-paper .stock-table .col-inout {
+            text-align: center;
+            font-size: 11px;
+            color: #8e8e93;
+            min-width: 60px;
+            font-weight: 500;
+        }
+
+        .stock-image-paper .stock-table .col-inout .in-out-badge {
+            display: inline-block;
+            padding: 0 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            margin: 0 2px;
+        }
+
+        .stock-image-paper .stock-table .col-inout .in-out-badge.in {
+            color: var(--success);
+            background: rgba(52, 199, 89, 0.12);
+        }
+
+        .stock-image-paper .stock-table .col-inout .in-out-badge.out {
+            color: var(--danger);
+            background: rgba(255, 59, 48, 0.12);
+        }
+
         .stock-image-paper .stock-table .col-qty {
             text-align: right;
             font-weight: 600;
@@ -1800,6 +1827,158 @@
         .priority-btn:active {
             transform: scale(0.92);
         }
+
+        /* ===== STOCK IN/OUT MODAL ===== */
+        .stock-inout-modal .modal-box {
+            max-width: 480px;
+            padding: 16px 16px 16px;
+            max-height: 92vh;
+        }
+
+        .inout-paper {
+            background: var(--card);
+            padding: 16px 14px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 0 1px var(--divider);
+            margin-bottom: 10px;
+            font-family: var(--font);
+            transition: var(--theme-transition);
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            min-height: 200px;
+            max-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .inout-paper .inout-header {
+            text-align: center;
+            border-bottom: 2px solid var(--text);
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+            transition: var(--theme-transition);
+            flex-shrink: 0;
+        }
+
+        .inout-paper .inout-header h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            transition: var(--theme-transition);
+        }
+
+        .inout-paper .inout-header .date {
+            font-size: 11px;
+            color: var(--muted);
+            font-weight: 500;
+            margin-top: 1px;
+            transition: var(--theme-transition);
+        }
+
+        .inout-paper .inout-row {
+            display: flex;
+            align-items: center;
+            padding: 4px 0;
+            border-bottom: 0.5px solid var(--divider);
+            transition: var(--theme-transition);
+        }
+
+        .inout-paper .inout-row:last-child {
+            border-bottom: 0;
+        }
+
+        .inout-paper .inout-row .num {
+            font-weight: 600;
+            color: var(--muted);
+            margin-right: 8px;
+            font-size: 11px;
+            min-width: 24px;
+            opacity: 0.6;
+            flex-shrink: 0;
+        }
+
+        .inout-paper .inout-row .name {
+            font-weight: 500;
+            color: var(--text);
+            transition: var(--theme-transition);
+            font-size: 13px;
+            flex: 1;
+        }
+
+        .inout-paper .inout-row .qty {
+            font-weight: 600;
+            color: var(--muted);
+            transition: var(--theme-transition);
+            font-size: 13px;
+            min-width: 40px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .inout-paper .inout-row .change {
+            font-weight: 700;
+            font-size: 13px;
+            min-width: 36px;
+            text-align: right;
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+
+        .inout-paper .inout-row .change.in {
+            color: var(--success);
+        }
+
+        .inout-paper .inout-row .change.out {
+            color: var(--danger);
+        }
+
+        .inout-paper .inout-empty {
+            text-align: center;
+            color: var(--muted);
+            padding: 20px 0;
+            font-size: 14px;
+            transition: var(--theme-transition);
+        }
+
+        .inout-paper .inout-footer {
+            text-align: center;
+            font-size: 8px;
+            color: var(--muted);
+            border-top: 1px solid var(--divider);
+            padding-top: 4px;
+            margin-top: 4px;
+            transition: var(--theme-transition);
+            opacity: 0.6;
+            flex-shrink: 0;
+        }
+
+        .inout-paper .inout-summary {
+            display: flex;
+            justify-content: space-between;
+            border-top: 2px solid var(--text);
+            padding-top: 4px;
+            margin-top: 4px;
+            font-weight: 600;
+            font-size: 12px;
+            color: var(--text);
+            transition: var(--theme-transition);
+            flex-shrink: 0;
+        }
+
+        .inout-paper .inout-summary .total-in {
+            color: var(--success);
+        }
+
+        .inout-paper .inout-summary .total-out {
+            color: var(--danger);
+        }
+
+        .inout-paper .inout-summary .total-in .label,
+        .inout-paper .inout-summary .total-out .label {
+            font-weight: 400;
+            color: var(--muted);
+        }
     </style>
 </head>
 <body>
@@ -1909,6 +2088,7 @@
             <div class="action-row">
                 <button class="btn btn-sm btn-secondary" onclick="refreshStockList()">Refesh</button>
                 <button class="btn btn-sm btn-secondary" onclick="openStockImageModal()">View</button>
+                <button class="btn btn-sm btn-secondary" onclick="openStockInOutModal()">In/Out</button>
                 <button class="btn btn-sm btn-danger" id="clearAllBtn" onclick="confirmClearAll()">✕ Reset</button>
             </div>
         </div>
@@ -2016,7 +2196,7 @@
         <div id="stockImageModal" class="modal-overlay stock-image-modal">
             <div class="modal-box">
                 <div class="title">Cetak Stok</div>
-                <div class="desc">Maksimal 18 baris per slide. Gunakan navigasi untuk melihat semua.</div>
+                <div class="desc">Maksimal 16 baris per slide. Gunakan navigasi untuk melihat semua.</div>
                 <div class="stock-image-paper" id="stockImagePaper">
                     <div id="stockImageContent"></div>
                 </div>
@@ -2028,6 +2208,21 @@
                 <div class="row" style="gap:6px;">
                     <button class="btn btn-secondary btn-sm" onclick="closeStockImageModal()">Tutup</button>
                     <button class="btn btn-save-image btn-sm" onclick="saveStockImageNow()">Simpan</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MODAL: STOCK IN/OUT ===== -->
+        <div id="stockInOutModal" class="modal-overlay stock-inout-modal">
+            <div class="modal-box">
+                <div class="title">Stok In / Out</div>
+                <div class="desc">Riwayat perubahan stok. <span style="font-weight:600; color:var(--success);">In</span> = penambahan, <span style="font-weight:600; color:var(--danger);">Out</span> = pengurangan.</div>
+                <div class="inout-paper" id="inoutPaper">
+                    <div id="inoutContent"></div>
+                </div>
+                <div class="row" style="gap:6px;">
+                    <button class="btn btn-secondary btn-sm" onclick="closeStockInOutModal()">Tutup</button>
+                    <button class="btn btn-danger btn-sm" onclick="clearInOutHistory()" style="flex:0 1 auto; padding:6px 12px;">Hapus Riwayat</button>
                 </div>
             </div>
         </div>
@@ -2137,8 +2332,69 @@
             localStorage.setItem('cafe_name', name);
         }
 
-        loadEmptyItems();
-        loadPriorityItems();
+        // ================================================================
+        //  IN/OUT HISTORY
+        // ================================================================
+
+        function getInOutHistory() {
+            try {
+                return JSON.parse(localStorage.getItem('cafe_inout_history') || '[]');
+            } catch { return []; }
+        }
+
+        function saveInOutHistory(history) {
+            localStorage.setItem('cafe_inout_history', JSON.stringify(history));
+        }
+
+        function addInOutRecord(name, qty, type) {
+            const history = getInOutHistory();
+            const now = new Date();
+            const dateStr = now.toLocaleString('id-ID', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            history.push({
+                name,
+                qty,
+                type, // 'in' or 'out'
+                date: dateStr,
+                timestamp: now.getTime()
+            });
+            // Keep last 200 records
+            if (history.length > 200) {
+                history.splice(0, history.length - 200);
+            }
+            saveInOutHistory(history);
+        }
+
+        function clearInOutHistory() {
+            if (confirm('Hapus semua riwayat stok In/Out?')) {
+                saveInOutHistory([]);
+                renderInOutContent();
+                showToast('Riwayat In/Out dihapus.', 'success');
+            }
+        }
+
+        // ================================================================
+        //  GET ITEM IN/OUT SUMMARY
+        // ================================================================
+
+        function getItemInOutSummary(name) {
+            const history = getInOutHistory();
+            let totalIn = 0;
+            let totalOut = 0;
+            for (const record of history) {
+                if (record.name === name) {
+                    const qty = parseFloat(record.qty) || 0;
+                    if (record.type === 'in') totalIn += qty;
+                    else totalOut += qty;
+                }
+            }
+            return { totalIn, totalOut };
+        }
 
         // ================================================================
         //  ORDER — items with qty 1/4 OR marked as empty
@@ -2389,6 +2645,18 @@
         // ================================================================
 
         function toggleEmptyItem(name) {
+            const stock = getStock();
+            if (!stock[name]) return;
+            const qty = stock[name].qty || '1';
+
+            if (!emptyItems.has(name)) {
+                // Marking as empty -> OUT
+                addInOutRecord(name, qty, 'out');
+            } else {
+                // Restoring -> IN
+                addInOutRecord(name, qty, 'in');
+            }
+
             if (emptyItems.has(name)) {
                 emptyItems.delete(name);
             } else {
@@ -2396,7 +2664,6 @@
             }
             saveEmptyItems();
             renderStockList();
-            const stock = getStock();
             const item = stock[name];
             if (item) {
                 showToast(`${name} ${emptyItems.has(name) ? 'ditandai habis (—)' : 'dipulihkan'}`, 'success');
@@ -2413,6 +2680,18 @@
 
         function setEditQty(val) {
             document.getElementById('editItemQty').value = val;
+        }
+
+        // ================================================================
+        //  PARSE QTY TO NUMBER FOR COMPARISON
+        // ================================================================
+
+        function parseQty(qty) {
+            if (typeof qty === 'string' && qty.includes('/')) {
+                const parts = qty.split('/');
+                return parseFloat(parts[0]) / parseFloat(parts[1]);
+            }
+            return parseFloat(qty) || 0;
         }
 
         // ================================================================
@@ -2435,12 +2714,36 @@
             }
 
             const stock = getStock();
+            const existing = stock[name];
+            const oldQty = existing ? existing.qty : null;
+
             stock[name] = { qty, category };
             saveStock(stock);
+
+            // Record In if it's a new item
+            if (!existing) {
+                addInOutRecord(name, qty, 'in');
+            } else {
+                // Compare old vs new qty
+                const oldVal = parseQty(oldQty);
+                const newVal = parseQty(qty);
+                if (newVal > oldVal) {
+                    // Stock increased -> IN
+                    const diff = (newVal - oldVal).toString();
+                    addInOutRecord(name, diff, 'in');
+                } else if (newVal < oldVal) {
+                    // Stock decreased -> OUT
+                    const diff = (oldVal - newVal).toString();
+                    addInOutRecord(name, diff, 'out');
+                }
+                // If equal, no record
+            }
+
             if (emptyItems.has(name)) {
                 emptyItems.delete(name);
                 saveEmptyItems();
             }
+
             nameInput.value = '';
             qtyInput.value = '1';
             renderStockList();
@@ -2450,6 +2753,11 @@
         function deleteStockItem(name) {
             const stock = getStock();
             if (!stock[name]) return;
+
+            // Record OUT for remaining stock before deletion
+            const qty = stock[name].qty || '1';
+            addInOutRecord(name, qty, 'out');
+
             delete stock[name];
             saveStock(stock);
             if (emptyItems.has(name)) {
@@ -2504,6 +2812,8 @@
             const stock = getStock();
             if (!stock[editTargetName]) { showToast('Item tidak ditemukan.', 'error'); return; }
 
+            const oldQty = stock[editTargetName].qty;
+
             if (newName !== editTargetName) {
                 if (stock[newName]) {
                     showToast(`Nama "${newName}" sudah digunakan.`, 'error');
@@ -2524,6 +2834,17 @@
             } else {
                 stock[newName].qty = newQty;
                 stock[newName].category = newCategory;
+            }
+
+            // Record IN/OUT based on qty change
+            const oldVal = parseQty(oldQty);
+            const newVal = parseQty(newQty);
+            if (newVal > oldVal) {
+                const diff = (newVal - oldVal).toString();
+                addInOutRecord(newName, diff, 'in');
+            } else if (newVal < oldVal) {
+                const diff = (oldVal - newVal).toString();
+                addInOutRecord(newName, diff, 'out');
             }
 
             saveStock(stock);
@@ -2719,7 +3040,15 @@
             for (const name of keys) {
                 const item = stock[name];
                 const isEmpty = emptyItems.has(name);
-                allItems.push({ name, qty: item.qty || '1', isEmpty, isPriority: priorityItems.has(name) });
+                const summary = getItemInOutSummary(name);
+                allItems.push({
+                    name,
+                    qty: item.qty || '1',
+                    isEmpty,
+                    isPriority: priorityItems.has(name),
+                    totalIn: summary.totalIn,
+                    totalOut: summary.totalOut
+                });
             }
 
             allItems.sort((a, b) => {
@@ -2728,7 +3057,7 @@
                 return a.name.localeCompare(b.name);
             });
 
-            const ITEMS_PER_SLIDE = 18;
+            const ITEMS_PER_SLIDE = 16;
             const slides = [];
             for (let i = 0; i < allItems.length; i += ITEMS_PER_SLIDE) {
                 slides.push(allItems.slice(i, i + ITEMS_PER_SLIDE));
@@ -2772,7 +3101,7 @@
             }
 
             const slide = slides[stockCurrentSlide];
-            let num = stockCurrentSlide * 18 + 1;
+            let num = stockCurrentSlide * 16 + 1;
 
             let html = `
                 <div class="stock-header">
@@ -2784,6 +3113,7 @@
                         <tr>
                             <th class="col-num">No.</th>
                             <th class="col-name">Name</th>
+                            <th class="col-inout">In / Out</th>
                             <th class="col-qty">Qty</th>
                         </tr>
                     </thead>
@@ -2792,11 +3122,23 @@
 
             for (const item of slide) {
                 const displayQty = item.isEmpty ? '—' : item.qty;
-                const priorityMark = item.isPriority ? ' ' : '';
+                const priorityMark = item.isPriority ? '★' : '';
+                let inOutHtml = '';
+                if (item.totalIn > 0 || item.totalOut > 0) {
+                    if (item.totalIn > 0) {
+                        inOutHtml += `<span class="in-out-badge in">+${item.totalIn}</span>`;
+                    }
+                    if (item.totalOut > 0) {
+                        inOutHtml += `<span class="in-out-badge out">-${item.totalOut}</span>`;
+                    }
+                } else {
+                    inOutHtml = '-';
+                }
                 html += `
                     <tr>
                         <td class="col-num">${num}.</td>
-                        <td class="col-name">${escapeHtml(item.name)}${priorityMark}</td>
+                        <td class="col-name">${escapeHtml(item.name)} ${priorityMark}</td>
+                        <td class="col-inout">${inOutHtml}</td>
                         <td class="col-qty ${item.isEmpty ? 'empty-stock' : ''}">${escapeHtml(displayQty)}</td>
                     </tr>
                 `;
@@ -2822,7 +3164,6 @@
             prevBtn.disabled = stockTotalSlides <= 1 || stockCurrentSlide === 0;
             nextBtn.disabled = stockTotalSlides <= 1 || stockCurrentSlide >= stockTotalSlides - 1;
 
-            // Style disabled state
             prevBtn.style.opacity = prevBtn.disabled ? '0.4' : '1';
             nextBtn.style.opacity = nextBtn.disabled ? '0.4' : '1';
             prevBtn.style.cursor = prevBtn.disabled ? 'not-allowed' : 'pointer';
@@ -2848,7 +3189,6 @@
             renderStockSlides();
             document.getElementById('stockImageModal').classList.add('open');
 
-            // Attach event listeners to buttons
             document.getElementById('stockPrevBtn').onclick = prevStockSlide;
             document.getElementById('stockNextBtn').onclick = nextStockSlide;
         }
@@ -2920,6 +3260,72 @@
                 showToast('❌ Error.', 'error');
                 paper.style.maxHeight = '';
             }
+        }
+
+        // ================================================================
+        //  STOCK IN/OUT MODAL
+        // ================================================================
+
+        function renderInOutContent() {
+            const history = getInOutHistory();
+            const container = document.getElementById('inoutContent');
+
+            if (!history.length) {
+                container.innerHTML = `<div class="inout-empty">Belum ada riwayat In/Out.</div>`;
+                return;
+            }
+
+            const reversed = [...history].reverse();
+            let totalIn = 0;
+            let totalOut = 0;
+
+            let html = `
+                <div class="inout-header">
+                    <h2>Riwayat Stok</h2>
+                    <div class="date">${getCafeName()}</div>
+                </div>
+            `;
+
+            const displayItems = reversed.slice(0, 50);
+            let num = 1;
+
+            for (const record of displayItems) {
+                const isIn = record.type === 'in';
+                if (isIn) totalIn += parseFloat(record.qty) || 0;
+                else totalOut += parseFloat(record.qty) || 0;
+
+                const displayQty = isIn ? `+${record.qty}` : `-${record.qty}`;
+                const changeClass = isIn ? 'in' : 'out';
+
+                html += `
+                    <div class="inout-row">
+                        <span class="num">${num}.</span>
+                        <span class="name">${escapeHtml(record.name)}</span>
+                        <span class="qty">${record.date}</span>
+                        <span class="change ${changeClass}">${displayQty}</span>
+                    </div>
+                `;
+                num++;
+            }
+
+            html += `
+                <div class="inout-summary">
+                    <span class="total-in">⬆ ${totalIn}</span>
+                    <span class="total-out">⬇ ${totalOut}</span>
+                </div>
+                <div class="inout-footer">${displayItems.length} dari ${history.length} record · ${getCafeName()}</div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function openStockInOutModal() {
+            renderInOutContent();
+            document.getElementById('stockInOutModal').classList.add('open');
+        }
+
+        function closeStockInOutModal() {
+            document.getElementById('stockInOutModal').classList.remove('open');
         }
 
         // ================================================================
@@ -3331,6 +3737,7 @@
                     if (overlay.id === 'confirmResetStockModal') cancelResetStock();
                     if (overlay.id === 'orderImageModal') closeOrderImageModal();
                     if (overlay.id === 'stockImageModal') closeStockImageModal();
+                    if (overlay.id === 'stockInOutModal') closeStockInOutModal();
                 }
             });
         });
