@@ -77,7 +77,6 @@
       padding-top: 8px;
     }
 
-    /* ----- Elegant Topbar ----- */
     .header {
       display: flex;
       align-items: center;
@@ -232,7 +231,6 @@
       transition: var(--theme-transition);
     }
 
-    /* ----- Panel (Animasi Scale & Fade) ----- */
     .panel-overlay {
       position: fixed;
       inset: 0;
@@ -398,7 +396,6 @@
       letter-spacing: 0.3px;
     }
 
-    /* ----- Section Card ----- */
     .card {
       padding: 18px 16px;
       margin-bottom: 14px;
@@ -443,7 +440,6 @@
       transition: var(--theme-transition);
     }
 
-    /* ----- Tabel Stock (Meniru Gambar) ----- */
     .stock-table-container {
       overflow-x: auto;
       border: 1px solid var(--divider);
@@ -543,7 +539,6 @@
       stroke-linejoin: round;
     }
 
-    /* ----- Other Components ----- */
     .hidden-section {
       display: none;
     }
@@ -587,7 +582,6 @@
       background: rgba(255, 59, 48, 0.92);
     }
 
-    /* ----- Modals ----- */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -805,7 +799,6 @@
       letter-spacing: 0.2px;
     }
 
-    /* Order Image Paper & Stock View Image Paper (Print style) */
     .print-paper {
       background: #ffffff;
       padding: 16px;
@@ -817,6 +810,11 @@
       min-height: 200px;
       max-height: 500px;
       width: 100%;
+    }
+
+    .order-image-modal .print-paper {
+      max-height: 70vh;
+      min-height: 300px;
     }
     
     .print-header {
@@ -844,7 +842,6 @@
       margin-top: 3px;
     }
 
-    /* Order */
     .order-cat {
       font-size: 10px;
       font-weight: 700;
@@ -871,7 +868,6 @@
       color: #8e8e93;
     }
 
-    /* Stock View Table */
     .stock-table-print {
       width: 100%;
       border-collapse: collapse;
@@ -918,7 +914,6 @@
 <body>
 <div class="app" id="app">
 
-  <!-- header -->
   <header class="header">
     <div class="header-left">
       <div class="header-icon">
@@ -946,7 +941,6 @@
 
   <div class="toast" id="toast"></div>
 
-  <!-- ===== PANEL (Animasi Scale & Fade) ===== -->
   <div class="panel-overlay" id="panelOverlay" onclick="toggleMenu()"></div>
   <div class="panel" id="panel">
     <div class="panel-header">
@@ -1000,7 +994,6 @@
     <div class="panel-footer">xDms - v9.8</div>
   </div>
 
-  <!-- ===== HIDDEN SECTIONS ===== -->
   <div id="section-stock" class="hidden-section">
     <div class="card">
       <div class="card-title">Stock <span class="badge-count" id="stockCountBadge" style="font-size:11px;font-weight:500;color:var(--muted);background:var(--badge-bg);padding:0 10px;border-radius:999px;border:0.5px solid var(--divider);line-height:20px;">0</span></div>
@@ -1023,7 +1016,6 @@
       
       <div class="category-tabs" id="categoryTabs"></div>
       
-      <!-- TABEL STOCK -->
       <div class="stock-table-container" id="stockListContainer"></div>
       
       <div class="action-row" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;">
@@ -1068,7 +1060,6 @@
 
   <div class="footer">xDms · ©2026</div>
 
-  <!-- ===== MODALS ===== -->
   <div id="editItemModal" class="modal-overlay">
     <div class="modal-box">
       <div class="title" id="editItemTitle">Edit Item</div>
@@ -1108,7 +1099,6 @@
     </div>
   </div>
 
-  <!-- MODAL: Stock View & Print -->
   <div id="stockImageModal" class="modal-overlay stock-image-modal">
     <div class="modal-box">
       <div class="title">Stock View</div>
@@ -1128,7 +1118,6 @@
     </div>
   </div>
 
-  <!-- MODAL: Order Image & Print -->
   <div id="orderImageModal" class="modal-overlay order-image-modal">
     <div class="modal-box">
       <div class="title">Order Bar</div>
@@ -1190,15 +1179,12 @@
   
 let emptyItems=new Set(), priorityItems=new Set(), emptyRestoreValues=new Map();
 const CAFE_NAME='Element Caffe';
-// Konfigurasi JSONBin (diambil dari permintaan user)
 const JSONBIN_API_KEY = '$2a$10$mzGJH4Ar1f6Ab1SBjkUR0eaB8.ioljA8Lwrp4O6Eia4BEtFVrIcYG';
 const JSONBIN_BIN_ID = '6a9ab3eaf5f4af5e2969d9f5';
 
-// Fitur Whitelist: Nama item yang jika stoknya <= 2, otomatis masuk order
 const WHITELIST_AUTO_ORDER = [
   'Coffee Beans', 'Fresh Milk', 'Whipping Cream', 'Milk Powder', 'Monde Genji', 'Tonjie', 'Yakult', 'Cream Charger', 'Paper Roll'
 ];
-// Ambang batas minimum stok untuk memicu order otomatis (default 2)
 const WHITELIST_THRESHOLD = 1;
 
 function loadEmptyItems(){ try{ const d=JSON.parse(localStorage.getItem('cafe_empty_items')||'[]'); emptyItems=new Set(d); }catch{} }
@@ -1208,9 +1194,6 @@ function saveEmptyRestoreValues(){ const o={}; for(const [k,v] of emptyRestoreVa
 function loadPriorityItems(){ try{ const d=JSON.parse(localStorage.getItem('cafe_priority_items')||'[]'); priorityItems=new Set(d); }catch{} }
 function savePriorityItems(){ localStorage.setItem('cafe_priority_items',JSON.stringify([...priorityItems])); }
 
-// ================================================================
-// (FIX) Tambahkan fungsi history di sini agar tidak error saat load data
-// ================================================================
 function getInOutHistory(){ 
   try{ 
     return JSON.parse(localStorage.getItem('cafe_inout_history') || '[]'); 
@@ -1232,7 +1215,6 @@ function addInOutRecord(name, qty, type){
   if(h.length > 200) h.splice(0, h.length - 200); 
   saveInOutHistory(h); 
 }
-// ================================================================
 
 function getStock(){ 
   try{ 
@@ -1272,15 +1254,12 @@ loadEmptyItems(); loadEmptyRestoreValues(); loadPriorityItems();
       const isEmpty = emptyItems.has(name); 
       const qtyNum = parseQtyToNumber(data.qty);
       
-      // 1. Jika kosong (empty)
       if(isEmpty) { 
         items.push({name, qty:'—', category:data.category||'General', isEmpty, isPriority:priorityItems.has(name)}); 
       } 
-      // 2. Jika stok 1/4
       else if(data.qty === '1/4') { 
         items.push({name, qty:data.qty, category:data.category||'General', isEmpty:false, isPriority:priorityItems.has(name)}); 
       }
-      // 3. Jika item White List dan stoknya kurang dari atau sama dengan 2
       else if (isWhitelistItem(name) && qtyNum <= WHITELIST_THRESHOLD) {
         items.push({name, qty:data.qty, category:data.category||'General', isEmpty:false, isPriority:true}); 
       }
@@ -1338,7 +1317,6 @@ loadEmptyItems(); loadEmptyRestoreValues(); loadPriorityItems();
       return;
     }
 
-    // Membangun Tabel
     let tableHtml = `<table class="stock-table">
         <thead>
             <tr>
@@ -1606,45 +1584,152 @@ loadEmptyItems(); loadEmptyRestoreValues(); loadPriorityItems();
     copyText(text); showToast('Order copied.','success'); 
   }
 
+  // ================================================================
+  // ORDER IMAGE MODAL - FIXED
+  // ================================================================
   function openOrderImageModal(){ 
-    const items=getOrderItems(); 
-    const container=document.getElementById('orderImageContent'); 
-    if(!items.length){ container.innerHTML='<div style="text-align:center;color:var(--muted);padding:30px 0;">No order items.</div>'; document.getElementById('orderImageModal').classList.add('open'); return; } 
-    const now=new Date(); 
-    const monthNames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; 
-    const dateStr=String(now.getDate()).padStart(2,'0')+' '+monthNames[now.getMonth()]+' '+now.getFullYear(); 
-    let html=`<div class="print-header"><h3>ORDER BAR</h3><div class="date">${CAFE_NAME} · ${dateStr}</div></div>`; 
-    const groups={}; 
-    for(const item of items){ const cat=item.category||'General'; if(!groups[cat]) groups[cat]=[]; groups[cat].push(item); } 
-    const categoryOrder=['Urgent Stock','FIND','SYRUP','EQUIPMENT','General']; 
-    const sortedCats=Object.keys(groups).sort((a,b)=>{ const ia=categoryOrder.indexOf(a), ib=categoryOrder.indexOf(b); if(ia===-1&&ib===-1) return a.localeCompare(b); if(ia===-1) return 1; if(ib===-1) return -1; return ia-ib; }); 
-    for(const cat of sortedCats){ html+='<div class="order-cat">'+cat+'</div>'; for(const item of groups[cat]) html+=`<div class="order-item-print"><span class="name">${escapeHtml(item.name)}</span><span class="qty">${escapeHtml(item.qty)}</span></div>`; } 
-    html+='<div class="print-footer">'+CAFE_NAME+' · '+dateStr+'</div>'; 
-    container.innerHTML=html; 
+    const items = getOrderItems(); 
+    const container = document.getElementById('orderImageContent'); 
+    const paper = document.getElementById('orderImagePaper');
+    
+    if(!items.length){ 
+        container.innerHTML = '<div style="text-align:center;color:var(--muted);padding:30px 0;">No order items.</div>'; 
+        document.getElementById('orderImageModal').classList.add('open'); 
+        return; 
+    } 
+    
+    // Reset paper style untuk menampung semua konten
+    paper.style.maxHeight = 'none';
+    paper.style.overflow = 'visible';
+    paper.style.height = 'auto';
+    
+    const now = new Date(); 
+    const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; 
+    const dateStr = String(now.getDate()).padStart(2,'0')+' '+monthNames[now.getMonth()]+' '+now.getFullYear(); 
+    
+    let html = `<div class="print-header"><h3>ORDER BAR</h3><div class="date">${CAFE_NAME} · ${dateStr}</div></div>`; 
+    
+    const groups = {}; 
+    for(const item of items){ 
+        const cat = item.category||'General'; 
+        if(!groups[cat]) groups[cat]=[]; 
+        groups[cat].push(item); 
+    } 
+    
+    const categoryOrder = ['Urgent Stock','FIND','SYRUP','EQUIPMENT','General']; 
+    const sortedCats = Object.keys(groups).sort((a,b)=>{ 
+        const ia = categoryOrder.indexOf(a), ib = categoryOrder.indexOf(b); 
+        if(ia===-1 && ib===-1) return a.localeCompare(b); 
+        if(ia===-1) return 1; 
+        if(ib===-1) return -1; 
+        return ia-ib; 
+    }); 
+    
+    for(const cat of sortedCats){ 
+        html += '<div class="order-cat">'+cat+'</div>'; 
+        for(const item of groups[cat]) {
+            html += `<div class="order-item-print">
+                <span class="name">${escapeHtml(item.name)}</span>
+                <span class="qty">${escapeHtml(item.qty)}</span>
+            </div>`; 
+        }
+    } 
+    
+    html += '<div class="print-footer">'+CAFE_NAME+' · '+dateStr+'</div>'; 
+    container.innerHTML = html; 
+    
     document.getElementById('orderImageModal').classList.add('open'); 
   }
-  function closeOrderImageModal(){ document.getElementById('orderImageModal').classList.remove('open'); }
+  
+  function closeOrderImageModal(){ 
+    document.getElementById('orderImageModal').classList.remove('open');
+    // Reset style paper
+    const paper = document.getElementById('orderImagePaper');
+    paper.style.maxHeight = '70vh';
+    paper.style.overflow = 'auto';
+    paper.style.height = '';
+  }
   
   async function saveOrderImageNow(){ 
-    const paper=document.getElementById('orderImagePaper'); 
+    const paper = document.getElementById('orderImagePaper');
+    const container = document.getElementById('orderImageContent');
+    
     showToast('Preparing…',''); 
     try { 
-      await new Promise(r=>setTimeout(r,200)); 
-      const canvas=await html2canvas(paper,{scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false,allowTaint:true,width:paper.scrollWidth,height:paper.scrollHeight}); 
-      const link=document.createElement('a'); 
-      const now=new Date(); 
-      const dateStr=now.toISOString().slice(0,10); 
-      link.download='order_'+CAFE_NAME.replace(/[^a-zA-Z0-9]/g,'_')+'_'+dateStr+'.png'; 
-      link.href=canvas.toDataURL('image/png'); 
-      link.click(); 
-      showToast('Saved','success'); 
-      closeOrderImageModal(); 
-    } catch(err){ console.error(err); showToast('Error.','error'); } 
+        // Simpan style asli
+        const originalMaxHeight = paper.style.maxHeight;
+        const originalOverflow = paper.style.overflow;
+        const originalHeight = paper.style.height;
+        
+        // Pastikan konten full terlihat
+        paper.style.maxHeight = 'none';
+        paper.style.overflow = 'visible';
+        paper.style.height = 'auto';
+        
+        // Tunggu reflow
+        await new Promise(r => setTimeout(r, 300));
+        
+        // Hitung total tinggi konten
+        const contentHeight = container.scrollHeight || container.offsetHeight;
+        const paperWidth = paper.scrollWidth || paper.offsetWidth || 400;
+        
+        // Capture dengan ukuran penuh
+        const canvas = await html2canvas(paper, {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#ffffff',
+            logging: false,
+            allowTaint: true,
+            width: paperWidth,
+            height: Math.max(contentHeight + 40, 300),
+            windowHeight: Math.max(contentHeight + 40, 300),
+            windowWidth: paperWidth,
+            onclone: function(clonedDoc, clonedElement) {
+                const clonedPaper = clonedElement;
+                if (clonedPaper) {
+                    clonedPaper.style.maxHeight = 'none';
+                    clonedPaper.style.overflow = 'visible';
+                    clonedPaper.style.height = 'auto';
+                }
+            }
+        });
+        
+        // Kembalikan style
+        paper.style.maxHeight = originalMaxHeight || '70vh';
+        paper.style.overflow = originalOverflow || 'auto';
+        paper.style.height = originalHeight || '';
+        
+        // Download
+        const link = document.createElement('a'); 
+        const now = new Date(); 
+        const dateStr = now.toISOString().slice(0,10); 
+        link.download = 'order_'+CAFE_NAME.replace(/[^a-zA-Z0-9]/g,'_')+'_'+dateStr+'.png'; 
+        link.href = canvas.toDataURL('image/png'); 
+        link.click(); 
+        
+        showToast('Saved','success'); 
+        closeOrderImageModal(); 
+    } catch(err){ 
+        console.error(err); 
+        showToast('Error: ' + err.message, 'error');
+        // Reset style jika error
+        paper.style.maxHeight = '70vh';
+        paper.style.overflow = 'auto';
+        paper.style.height = '';
+    } 
   }
-  function saveOrderAsImage(){ const items=getOrderItems(); if(!items.length){ showToast('No order items.','error'); return; } openOrderImageModal(); }
+  
+  function saveOrderAsImage(){ 
+    const items = getOrderItems(); 
+    if(!items.length){ 
+        showToast('No order items.','error'); 
+        return; 
+    } 
+    openOrderImageModal(); 
+  }
 
   // ================================================================
-  // STOCK VIEW & PRINT IMAGE MODAL (Dikembalikan)
+  // STOCK VIEW & PRINT IMAGE MODAL
   // ================================================================
   let stockCurrentSlide=0, stockTotalSlides=0, stockSlideData=[];
   
@@ -1749,7 +1834,7 @@ loadEmptyItems(); loadEmptyRestoreValues(); loadPriorityItems();
   }
 
   // ================================================================
-  // JSONBIN BACKUP & RESTORE (Menggunakan Bin ID Tetap)
+  // JSONBIN BACKUP & RESTORE
   // ================================================================
   async function backupToBin(){
     const stock = getStock();
@@ -1767,7 +1852,6 @@ loadEmptyItems(); loadEmptyRestoreValues(); loadPriorityItems();
     };
 
     try {
-        // Gunakan Bin ID yang sudah ditentukan
         const url = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
         const response = await fetch(url, {
             method: 'PUT',
@@ -1858,7 +1942,6 @@ loadEmptyItems(); loadEmptyRestoreValues(); loadPriorityItems();
     document.getElementById('confirmDeleteBtn').addEventListener('click', executeDelete);
     document.getElementById('resetStockConfirmBtn').addEventListener('click', executeResetStock);
 
-    // Default view
     navigateTo('stock');
   });
 
